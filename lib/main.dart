@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fe_rpl/feature/detail_kelas/presentation/page/detail_kelas_page.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/page/home_page_view.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/page/my_class_page.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/page/sign_in_page.dart';
@@ -30,13 +31,9 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title),
-      ),
+    return const Scaffold(
       body:
-          SignInPage(), // This trailing comma makes auto-formatting nicer for build methods.
+          DetailKelasPage(), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

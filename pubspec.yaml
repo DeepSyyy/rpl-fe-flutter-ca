@@ -13,6 +13,8 @@ dependencies:
   flutter_svg: ^2.0.9
   carousel_slider: ^4.2.1
   fluentui_icons: ^1.0.0
+  video_player: ^2.8.1
+  youtube_player_flutter: ^8.1.2
 
 dev_dependencies:
   flutter_test:
