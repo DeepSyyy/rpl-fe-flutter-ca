@@ -3,6 +3,12 @@ import 'package:flutter_fe_rpl/feature/detail_kelas/presentation/page/detail_kel
 import 'package:flutter_fe_rpl/feature/home/presentation/page/home_page_view.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/page/my_class_page.dart';
 import 'package:flutter_fe_rpl/feature/lowongan/presentation/page/lowongan_page.dart';
+import 'package:flutter_fe_rpl/feature/payment/presentation/page/payment_page.dart';
+import 'package:flutter_fe_rpl/feature/payment/presentation/widget/card_course_info.dart';
+import 'package:flutter_fe_rpl/feature/payment/presentation/widget/card_payment.dart';
+import 'package:flutter_fe_rpl/feature/payment/presentation/widget/card_payment_detail.dart';
+import 'package:flutter_fe_rpl/feature/payment/presentation/widget/payment_choice_card.dart';
+import 'package:flutter_fe_rpl/feature/payment/presentation/widget/payment_component.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/page/sign_in_page.dart';
 
 void main() {
@@ -34,7 +40,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body:
-          HomePageView(), // This trailing comma makes auto-formatting nicer for build methods.
+          SignInPage(), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

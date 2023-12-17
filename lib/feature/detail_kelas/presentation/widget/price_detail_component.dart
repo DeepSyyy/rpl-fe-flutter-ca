@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/utils/button_customs.dart';
+import 'package:flutter_fe_rpl/feature/payment/presentation/page/payment_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PriceComponent extends StatelessWidget {
@@ -19,7 +20,17 @@ class PriceComponent extends StatelessWidget {
         ),
         Expanded(
           // height: 50,
-          child: ButtonCustom(label: "Beli", onTap: () => {}, isExpand: false),
+          child: ButtonCustom(
+              label: "Beli",
+              onTap: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PaymentPage(),
+                      ),
+                    ),
+                  },
+              isExpand: false),
         )
       ]),
     );

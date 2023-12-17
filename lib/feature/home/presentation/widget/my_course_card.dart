@@ -12,7 +12,7 @@ class MyCourseCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 24),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             width: 110,
@@ -25,7 +25,7 @@ class MyCourseCard extends StatelessWidget {
           SizedBox(
             width: 8,
           ),
-          Flexible(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

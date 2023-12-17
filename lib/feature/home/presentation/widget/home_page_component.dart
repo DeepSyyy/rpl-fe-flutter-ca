@@ -208,10 +208,13 @@ class _HomePageState extends State<HomePage> {
           ),
           ListView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
             itemCount: 5,
             itemBuilder: (context, index) {
-              return MyCourseCard();
+              return const Padding(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                child: MyCourseCard(),
+              );
             },
           ),
           Container(
