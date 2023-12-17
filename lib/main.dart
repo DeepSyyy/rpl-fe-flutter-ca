@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/feature/detail_kelas/presentation/page/detail_kelas_page.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/page/home_page_view.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/page/my_class_page.dart';
+import 'package:flutter_fe_rpl/feature/lowongan/presentation/page/lowongan_page.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/page/sign_in_page.dart';
 
 void main() {
@@ -33,7 +34,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body:
-          DetailKelasPage(), // This trailing comma makes auto-formatting nicer for build methods.
+          HomePageView(), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

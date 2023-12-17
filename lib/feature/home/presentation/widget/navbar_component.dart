@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/widget/home_page_component.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/page/my_class_page.dart';
+import 'package:flutter_fe_rpl/feature/lowongan/presentation/page/lowongan_page.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,7 +25,7 @@ class _NavigationBarComponentState extends State<NavigationBarComponent> {
     return Scaffold(
       body: [
         HomePage(),
-        const Text('Loker'),
+        LowonganPage(),
         MyClassPage(),
         const Text('Profil'),
       ].elementAt(_selectedIndex),
