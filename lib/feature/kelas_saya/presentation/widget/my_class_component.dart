@@ -22,7 +22,7 @@ class _MyClassComponentState extends State<MyClassComponent> {
             toolbarHeight: 80,
             elevation: 0,
             backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
+            automaticallyImplyLeading: false,
             title: Text(
               "Kelas Saya",
               style: GoogleFonts.poppins(
