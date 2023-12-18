@@ -31,6 +31,9 @@ class LowonganComponent extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: [
+          const SizedBox(
+            height: 12,
+          ),
           const SearchComponent(),
           const SizedBox(
             height: 20,

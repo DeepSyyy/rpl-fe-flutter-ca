@@ -108,16 +108,16 @@ class LowonganContainer extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CategoryContainer(
-                      colorCategory: Color(0xFFCD2C2C),
+                      colorCategory: Color(0xFFF69C9C),
                       categoryData: "UI/UX",
-                      fontColor: Color(0xFFF69C9C)),
+                      fontColor: Color(0xFFCD2C2C)),
                   SizedBox(
                     width: 8,
                   ),
                   CategoryContainer(
-                      colorCategory: Color(0xFFCD702C),
+                      colorCategory: Color(0xFFF6D79C),
                       categoryData: "Mobile Deveolpment",
-                      fontColor: Color(0xFFF6D79C)),
+                      fontColor: Color(0xFFCD702C)),
                 ],
               ),
             ],

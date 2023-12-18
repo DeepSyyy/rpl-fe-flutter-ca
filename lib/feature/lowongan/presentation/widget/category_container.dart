@@ -16,6 +16,7 @@ class CategoryContainer extends StatelessWidget {
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
         decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
           color: colorCategory,
         ),
         child: Text(
