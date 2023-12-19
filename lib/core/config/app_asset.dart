@@ -4,7 +4,7 @@ class AppAsset {
   static const onboarding3 = 'assets/images/onboarding3.png';
   static const iconGoogle = 'assets/images/Icon_Google.png';
   static const iconApple = 'assets/images/Apple.png';
-  static const iconMidtrans = 'assets/images/midtrans.png';
+  static const iconMidtrans = 'assets/images/Icon_Midtrans.png';
 
   static const iconArrowwRight = 'assets/svg/arrow_right.svg';
   static const iconAccessTime = 'assets/svg/access_time.svg';

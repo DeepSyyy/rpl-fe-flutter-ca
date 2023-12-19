@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/config/app_color.dart';
+import 'package:flutter_fe_rpl/feature/transaksi/presentation/page/transaksi_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ListingFeature extends StatelessWidget {
@@ -27,12 +28,12 @@ class ListingFeature extends StatelessWidget {
               endIndent: 16,
             ),
             listingProfile(context, "Transaksi", () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => TransactionView(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TransaksiPage(),
+                ),
+              );
             }),
             const Divider(
               color: Color(0xFFD9D9D9),
