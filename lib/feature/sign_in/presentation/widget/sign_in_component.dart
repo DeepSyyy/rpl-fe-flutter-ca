@@ -1,14 +1,8 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/config/app_color.dart';
-import 'package:flutter_fe_rpl/core/errors/failure.dart';
-import 'package:flutter_fe_rpl/core/params/user_params.dart';
 import 'package:flutter_fe_rpl/core/utils/button_customs.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/page/home_page_view.dart';
-import 'package:flutter_fe_rpl/feature/sign_in/business/entities/main_entities/user_response_entity.dart';
-import 'package:flutter_fe_rpl/feature/sign_in/data/datasource/user_remote_data_source.dart';
-import 'package:flutter_fe_rpl/feature/sign_in/data/repository/user_repository_impl.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/provider/user_sigIn_provider.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/widget/input_email.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/widget/input_password.dart';
@@ -27,66 +21,9 @@ class _SignInViewState extends State<SignInView> {
   final controllerEmail = TextEditingController();
   bool isPasswordHidden = true;
   final controllerPassword = TextEditingController();
-  Future<int> _signIn(BuildContext context) async {
-    final email = controllerEmail.text;
-    final pass = controllerPassword.text;
-    if (email.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Email tidak boleh kosong'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    } else {
-      final res = await UserRepositoryImpl(
-        userRemoteDataSource: UserRemoteDataSourceImpl(
-          dio: Dio(),
-        ),
-      ).signIn(
-        userParamsLogin: UserParamsLogin(
-          email: email,
-          password: pass,
-        ),
-      );
-
-      res.fold((failure) {
-        if (failure is ClientFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Email atau Password salah'),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
-      }, (userResponse) {
-        if (userResponse.status == 200) {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => HomePageView()));
-          return 200;
-        } else if (userResponse.status == 404) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Email atau Password salah'),
-              backgroundColor: Colors.red,
-            ),
-          );
-          return 404;
-        }
-      });
-    }
-    return 0;
-  }
 
   @override
   Widget build(BuildContext context) {
-    UserResponseEntity? userResponse = Provider.of<UserResponseProvider>(
-      context,
-      listen: false,
-    ).userResponse;
-    Failure? failure = Provider.of<UserResponseProvider>(
-      context,
-      listen: false,
-    ).failure;
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
@@ -137,15 +74,28 @@ class _SignInViewState extends State<SignInView> {
                 const SizedBox(
                   height: 24,
                 ),
-                ButtonCustom(
-                  label: "Login sekarang",
-                  onTap: () async {
-                    await _signIn(context);
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => HomePageView()));
-                  },
-                  isExpand: true,
-                ),
+                Consumer<UserResponseProvider>(builder: (context, state, _) {
+                  return ButtonCustom(
+                    label: "Login sekarang",
+                    onTap: () async {
+                      await state.signIn(
+                        email: controllerEmail.text,
+                        password: controllerPassword.text,
+                      );
+                      if (state.message != null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(state.message!),
+                          ),
+                        );
+                      } else {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const HomePageView()));
+                      }
+                    },
+                    isExpand: true,
+                  );
+                }),
                 const SizedBox(
                   height: 16,
                 ),

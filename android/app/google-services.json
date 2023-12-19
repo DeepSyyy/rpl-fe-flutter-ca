@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "375614378782",
+    "project_id": "course-courze",
+    "storage_bucket": "course-courze.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375614378782:android:e2322fae1625ccca276f0f",
+        "android_client_info": {
+          "package_name": "com.example.flutter_fe_rpl"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALPrubvUbjSoyGV_BII3NZRCOQMTTTYAA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

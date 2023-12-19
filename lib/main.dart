@@ -1,7 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_fe_rpl/feature/sign_in/data/datasource/user_remote_data_source.dart';
+import 'package:flutter_fe_rpl/feature/sign_in/data/repository/user_repository_impl.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/provider/user_sigIn_provider.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/widget/sign_in_component.dart';
+import 'package:flutter_fe_rpl/feature/sign_up/data/repository/sign_up_repository_impl.dart';
+import 'package:flutter_fe_rpl/feature/sign_up/presentation/provider/sign_up_user_provider.dart';
+import 'package:flutter_fe_rpl/feature/sign_up/presentation/widget/sign_up_component.dart';
+import 'package:flutter_fe_rpl/feature/sign_up/data/datasource/sign_up_remote_datasource.dart';
+import 'package:flutter_fe_rpl/firebase_options.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_fe_rpl/feature/detail_kelas/presentation/page/detail_kelas_page.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/page/home_page_view.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/page/my_class_page.dart';
@@ -14,18 +23,38 @@ import 'package:flutter_fe_rpl/feature/payment/presentation/widget/payment_choic
 import 'package:flutter_fe_rpl/feature/payment/presentation/widget/payment_component.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/page/sign_in_page.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({
+    super.key,
+  });
+
+  final UserRepositoryImpl userRepo = UserRepositoryImpl(
+    userRemoteDataSource: UserRemoteDataSourceImpl(),
+  );
+
+  final SignUpRepositoryImpl signUpRepo = SignUpRepositoryImpl(
+    signUpRemoteDataSource: SignUpRemoteDataSourceImpl(),
+  );
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => UserResponseProvider()),
+        ChangeNotifierProvider(
+            create: (context) =>
+                UserResponseProvider(userRepositoryImpl: userRepo)),
+        ChangeNotifierProvider(
+            create: (context) =>
+                SignUpUserProvider(signUpRepositoryImpl: signUpRepo)),
       ],
       child: MaterialApp(
         home: MyHomePage(title: 'Flutter Demo Home Page'),

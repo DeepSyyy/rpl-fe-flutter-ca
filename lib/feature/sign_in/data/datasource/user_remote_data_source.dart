@@ -1,39 +1,60 @@
-import 'package:dio/dio.dart';
-import 'package:flutter_fe_rpl/core/const/constant.dart';
+import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_fe_rpl/core/errors/failure.dart';
 import 'package:flutter_fe_rpl/core/params/user_params.dart';
-import 'package:flutter_fe_rpl/feature/sign_in/data/model/main_model/user_response_model.dart';
 
 abstract class UserRemoteDataSource {
-  Future<UserResponseModel> signIn({required UserParamsLogin userParamsLogin});
+  Future<Either<Failure, void>> signIn(
+      {required UserParamsLogin userParamsLogin});
+  Future<void> signUp({required UserParamsRegister userParamsRegister});
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
-  UserRemoteDataSourceImpl({required this.dio});
-  final Dio dio;
   @override
-  Future<UserResponseModel> signIn({
-    required UserParamsLogin userParamsLogin,
+  Future<void> signUp({
+    required UserParamsRegister userParamsRegister,
   }) async {
-    // final response =
-    // if (response.statusCode == 200) {
-    //   return UserResponseModel.fromJson(response.data);
-    // } else if (response.statusCode == 404) {
-    //   return UserResponseModel.fromJson(response.data);
-    // } else {
-    //   throw Exception();
-    // }
-
     try {
-      final response = await dio.post('$baseurl/api/courze/user/login',
-          data: userParamsLogin.toJson());
-      if (response.statusCode == 200) {
-        return UserResponseModel.fromJson(response.data);
-      } else if (response.statusCode == 404) {
-        return UserResponseModel.fromJson(response.data);
+      final credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: userParamsRegister.email,
+        password: userParamsRegister.password,
+      );
+      credential.user!.updateDisplayName(userParamsRegister.name);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
       }
     } catch (e) {
-      throw Exception();
+      print(e);
     }
-    throw Exception();
+  }
+
+  @override
+  Future<Either<Failure, void>> signIn({
+    required UserParamsLogin userParamsLogin,
+  }) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: userParamsLogin.email,
+        password: userParamsLogin.password,
+      );
+
+      return Right(null);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        return Left(ServerFailure(errorMessage: 'user-not-found'));
+      } else if (e.code == 'wrong-password') {
+        return Left(ServerFailure(errorMessage: 'wrong-password'));
+      } else if (e.code == 'invalid-email') {
+        return Left(ServerFailure(errorMessage: 'invalid-email'));
+      } else {
+        return Left(ServerFailure(errorMessage: 'Lost Connection'));
+      }
+    } catch (e) {
+      return Left(ServerFailure(errorMessage: 'Error'));
+    }
   }
 }
