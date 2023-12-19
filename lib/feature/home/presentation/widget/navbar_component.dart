@@ -3,6 +3,7 @@ import 'package:flutter_fe_rpl/core/config/app_asset.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/widget/home_page_component.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/page/my_class_page.dart';
 import 'package:flutter_fe_rpl/feature/lowongan/presentation/page/lowongan_page.dart';
+import 'package:flutter_fe_rpl/feature/profile/presentation/page/profile_page.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -28,7 +29,7 @@ class _NavigationBarComponentState extends State<NavigationBarComponent> {
         HomePage(),
         LowonganPage(),
         MyClassPage(),
-        const Text('Profil'),
+        ProfilePage(),
       ].elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
