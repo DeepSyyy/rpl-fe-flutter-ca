@@ -39,7 +39,10 @@ class ProfileComponent extends StatelessWidget {
           const SizedBox(
             height: 32,
           ),
-          ButtonLogout(label: "Logout", onTap: () {}, isExpand: true)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: ButtonLogout(label: "Logout", onTap: () {}, isExpand: true),
+          )
         ],
       ),
     );
