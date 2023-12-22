@@ -7,7 +7,15 @@ import 'package:google_fonts/google_fonts.dart';
 class CourseCard extends StatefulWidget {
   const CourseCard({
     super.key,
+    required this.imageUrl,
+    required this.courseName,
+    required this.mentorName,
+    required this.price,
   });
+  final String imageUrl;
+  final String courseName;
+  final String mentorName;
+  final String price;
 
   @override
   State<CourseCard> createState() => _CourseCardState();
@@ -44,9 +52,22 @@ class _CourseCardState extends State<CourseCard> {
           child: Stack(
             alignment: AlignmentDirectional.topEnd,
             children: [
-              Image.network(
-                "https://picsum.photos/280/147",
-                fit: BoxFit.cover,
+              SizedBox(
+                height: 147,
+                width: 280,
+                child: Image.network(
+                  widget.imageUrl,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Center(
+                      child: Icon(
+                        Icons.error_outline,
+                        color: Colors.red,
+                        size: 48,
+                      ),
+                    );
+                  },
+                ),
               ),
               IconButton(
                   onPressed: toggleFavorite,
@@ -79,12 +100,14 @@ class _CourseCardState extends State<CourseCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Nama Course",
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
+                  Expanded(
+                    child: Text(
+                      widget.courseName,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                   Container(
@@ -107,7 +130,7 @@ class _CourseCardState extends State<CourseCard> {
                 height: 4,
               ),
               Text(
-                "Nama Mentor",
+                widget.mentorName,
                 style: GoogleFonts.poppins(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
@@ -120,7 +143,7 @@ class _CourseCardState extends State<CourseCard> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Rp. 100.000",
+                    Text("Rp. ${widget.price}",
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.poppins(
                           fontSize: 14,

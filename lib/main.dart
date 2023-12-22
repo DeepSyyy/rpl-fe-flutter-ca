@@ -9,6 +9,7 @@ import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_add_cours
 import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_add_loker.dart';
 import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_component.dart';
 import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_loker_component.dart';
+import 'package:flutter_fe_rpl/feature/home/presentation/provider/course_user_provider.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/data/datasource/user_remote_data_source.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/data/repository/user_repository_impl.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/provider/user_sigIn_provider.dart';
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget {
                 SignUpUserProvider(signUpRepositoryImpl: signUpRepo)),
         ChangeNotifierProvider(create: (context) => AdminCourseProvider()),
         ChangeNotifierProvider(create: (context) => AdminLokerProvider()),
+        ChangeNotifierProvider(create: (context) => CourseUserProvider()),
       ],
       child: MaterialApp(
         home: MyHomePage(title: 'Flutter Demo Home Page'),
@@ -87,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body:
-          AdminPage(), // This trailing comma makes auto-formatting nicer for build methods.
+          HomePageView(), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
