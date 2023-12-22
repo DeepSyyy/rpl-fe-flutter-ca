@@ -12,7 +12,8 @@ class CourseAdminRepositoryImpl implements CourseRepository {
   Future<Either<Failure, void>> addCourse(
       {required CourseParams course}) async {
     try {
-      return await courseRemoteDataSource.addCourse(course: course);
+      await courseRemoteDataSource.addCourse(course: course);
+      return Right(null);
     } catch (e) {
       return Left(
           ServerFailure(errorMessage: 'Gagal ditambahkan di repo impl, $e'));
@@ -32,10 +33,11 @@ class CourseAdminRepositoryImpl implements CourseRepository {
   @override
   Future<Either<Failure, List<CourseModel>>> getCourses() async {
     try {
-      return await courseRemoteDataSource.getCourses();
+      final remoteData = await courseRemoteDataSource.getCourses();
+      return Right(remoteData);
     } catch (e) {
-      return Left(
-          ServerFailure(errorMessage: 'Gagal diambil di repo impl, $e'));
+      print(e);
+      return Left(ServerFailure(errorMessage: 'Gagal mengambil data'));
     }
   }
 
@@ -54,7 +56,8 @@ class CourseAdminRepositoryImpl implements CourseRepository {
       {required CourseParams course}) async {
     try {
       return await courseRemoteDataSource.updateCourse(
-          course: CourseModel.fromParams(course));
+        course: course,
+      );
     } catch (e) {
       return Left(
           ServerFailure(errorMessage: 'Gagal diupdate di repo impl, $e'));

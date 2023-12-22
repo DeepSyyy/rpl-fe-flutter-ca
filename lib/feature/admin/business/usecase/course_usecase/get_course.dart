@@ -8,7 +8,7 @@ class GetCourse {
 
   GetCourse(this.courseRepository);
 
-  Future<Either<Failure, CourseEntity>> execute(String id) async {
+  Future<Either<Failure, CourseEntity>> call(String id) async {
     return await courseRepository.getCourse(id: id);
   }
 }

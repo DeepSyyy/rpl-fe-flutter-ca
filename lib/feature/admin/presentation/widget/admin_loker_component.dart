@@ -1,35 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/errors/failure.dart';
-import 'package:flutter_fe_rpl/feature/admin/business/entity/course_entity.dart';
-import 'package:flutter_fe_rpl/feature/admin/presentation/provider/admin_course_provider.dart';
-import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_add_course_component.dart';
-import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_course_detail_component.dart';
+import 'package:flutter_fe_rpl/feature/admin/business/entity/loker_entity.dart';
+import 'package:flutter_fe_rpl/feature/admin/presentation/provider/admin_loker_provider.dart';
+import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_add_loker.dart';
+import 'package:flutter_fe_rpl/feature/admin/presentation/widget/loker_details.dart';
 import 'package:provider/provider.dart';
 
-class AdminCourseComponent extends StatefulWidget {
-  const AdminCourseComponent({super.key});
+class AdminLokerComponent extends StatefulWidget {
+  const AdminLokerComponent({super.key});
 
   @override
-  State<AdminCourseComponent> createState() => _AdminCourseComponentState();
+  State<AdminLokerComponent> createState() => _AdminLokerComponentState();
 }
 
-class _AdminCourseComponentState extends State<AdminCourseComponent> {
+class _AdminLokerComponentState extends State<AdminLokerComponent> {
   void initState() {
     super.initState();
-    Provider.of<AdminCourseProvider>(context, listen: false).getCourses();
+    Provider.of<AdminLokerProvider>(context, listen: false).getLokers();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<CourseEntity>? courseEntity =
-        Provider.of<AdminCourseProvider>(context).courses;
-
-    Failure? failure = Provider.of<AdminCourseProvider>(context).failure;
+    List<LokerEntity>? lokerEntity =
+        Provider.of<AdminLokerProvider>(context).lokers;
+    Failure? failure = Provider.of<AdminLokerProvider>(context).failure;
     late Widget widget;
-    if (courseEntity != null) {
+    if (lokerEntity != null) {
       widget = Scaffold(
         appBar: AppBar(
-          title: Text('Admin Course'),
+          title: Text('Admin Loker'),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -37,7 +36,7 @@ class _AdminCourseComponentState extends State<AdminCourseComponent> {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return const AddCoursePage();
+                  return const AddLokerWidget();
                 },
               ),
             );
@@ -45,7 +44,7 @@ class _AdminCourseComponentState extends State<AdminCourseComponent> {
           child: const Icon(Icons.add),
         ),
         body: ListView.builder(
-          itemCount: courseEntity.length,
+          itemCount: lokerEntity.length,
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
@@ -53,24 +52,20 @@ class _AdminCourseComponentState extends State<AdminCourseComponent> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return AdminCourseDetailComponent(
-                        id: courseEntity[index].id!,
+                      return LokerAdminDetail(
+                        id: lokerEntity[index].id!,
                       );
                     },
                     settings: RouteSettings(
-                      arguments: courseEntity[index].id!,
+                      arguments: lokerEntity[index].id,
                     ),
                   ),
                 );
               },
-              child: ListTile(
-                title: Text("ID Course: ${courseEntity[index].id!.toString()}"),
-                subtitle:
-                    Text("Nama course: ${courseEntity[index].name.toString()}"),
-                trailing: IconButton(
-                    icon: Icon(Icons.delete),
+              child: Card(
+                child: ListTile(
+                  trailing: IconButton(
                     onPressed: () async {
-                      // Show CircularProgressIndicator
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -87,10 +82,10 @@ class _AdminCourseComponentState extends State<AdminCourseComponent> {
                               TextButton(
                                 onPressed: () async {
                                   try {
-                                    await Provider.of<AdminCourseProvider>(
+                                    await Provider.of<AdminLokerProvider>(
                                       context,
                                       listen: false,
-                                    ).deleteCourse(id: courseEntity[index].id!);
+                                    ).deleteLoker(id: lokerEntity[index].id!);
 
                                     Navigator.pop(context);
 
@@ -117,16 +112,36 @@ class _AdminCourseComponentState extends State<AdminCourseComponent> {
                           );
                         },
                       );
-                    }),
+                    },
+                    icon: Icon(Icons.delete),
+                  ),
+                  title: Text(
+                      "Nama Perusahaan: ${lokerEntity[index].id!.toString()}"),
+                  subtitle: Text(lokerEntity[index].description),
+                ),
               ),
             );
           },
         ),
       );
     } else if (failure != null) {
-      widget = Text(failure.toString());
+      widget = Scaffold(
+        appBar: AppBar(
+          title: Text('Admin Loker'),
+        ),
+        body: Center(
+          child: Text(failure.errorMessage),
+        ),
+      );
     } else {
-      widget = const CircularProgressIndicator();
+      widget = Scaffold(
+        appBar: AppBar(
+          title: Text('Admin Loker'),
+        ),
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
     }
     return widget;
   }

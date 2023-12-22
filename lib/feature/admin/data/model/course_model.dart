@@ -1,8 +1,7 @@
-import 'package:flutter_fe_rpl/core/params/course_params.dart';
 import 'package:flutter_fe_rpl/feature/admin/business/entity/course_entity.dart';
 
 class CourseModel extends CourseEntity {
-  final String id;
+  String? id;
   final String name;
   final String rating;
   final String description;
@@ -11,36 +10,39 @@ class CourseModel extends CourseEntity {
   final String level;
   final String price;
   final String videoUrl;
-  final String createAt;
-  final String updateAt;
-  final String mentorName;
+  List<String>? keyPoints;
+  final String createdAt;
+  final String updatedAt;
+  final String mentor;
 
   CourseModel({
-    required this.id,
+    this.id,
     required this.name,
     required this.description,
     required this.rating,
-    required this.mentorName,
+    required this.mentor,
     required this.imageUrl,
     required this.category,
     required this.level,
     required this.price,
     required this.videoUrl,
-    required this.createAt,
-    required this.updateAt,
+    this.keyPoints,
+    required this.createdAt,
+    required this.updatedAt,
   }) : super(
           id: id,
           name: name,
           description: description,
           rating: rating,
-          mentorName: mentorName,
+          mentor: mentor,
           imageUrl: imageUrl,
           category: category,
           level: level,
           price: price,
           videoUrl: videoUrl,
-          createAt: createAt,
-          updateAt: updateAt,
+          keyPoints: keyPoints,
+          createAt: createdAt,
+          updateAt: updatedAt,
         );
 
   factory CourseModel.fromJson(Map<String, dynamic> json) {
@@ -49,14 +51,17 @@ class CourseModel extends CourseEntity {
       name: json['name'],
       description: json['description'],
       rating: json['rating'],
-      mentorName: json['mentorName'],
+      mentor: json['mentor'],
       imageUrl: json['imageUrl'],
       category: json['category'],
       level: json['level'],
       price: json['price'],
       videoUrl: json['videoUrl'],
-      createAt: json['createdAt'],
-      updateAt: json['updatedAt'],
+      keyPoints: json['keyPoints'] != null
+          ? List<String>.from(json['keyPoints'])
+          : null,
+      createdAt: json['createdAt'],
+      updatedAt: json['updatedAt'],
     );
   }
 
@@ -66,31 +71,15 @@ class CourseModel extends CourseEntity {
       'name': name,
       'description': description,
       'rating': rating,
-      'mentor': mentorName,
+      'mentor': mentor,
       'imageUrl': imageUrl,
       'category': category,
       'level': level,
       'price': price,
       'videoUrl': videoUrl,
-      'createdAt': createAt,
-      'updatedAt': updateAt,
+      'keyPoints': keyPoints,
+      'createdAt': createdAt,
+      'updatedAt': updatedAt,
     };
-  }
-
-  static fromParams(CourseParams course) {
-    return CourseModel(
-      id: course.id,
-      name: course.name,
-      description: course.description,
-      rating: course.rating,
-      mentorName: course.mentorName,
-      imageUrl: course.imageUrl,
-      category: course.category,
-      level: course.level,
-      price: course.price,
-      videoUrl: course.videoUrl,
-      createAt: course.createAt,
-      updateAt: course.updateAt,
-    );
   }
 }

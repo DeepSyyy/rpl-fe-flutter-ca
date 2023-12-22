@@ -2,9 +2,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/feature/admin/data/datasource/course_admin_remote_data_source.dart';
 import 'package:flutter_fe_rpl/feature/admin/data/repository/course_admin_repository_impl.dart';
+import 'package:flutter_fe_rpl/feature/admin/presentation/page/admin_page.dart';
 import 'package:flutter_fe_rpl/feature/admin/presentation/provider/admin_course_provider.dart';
+import 'package:flutter_fe_rpl/feature/admin/presentation/provider/admin_loker_provider.dart';
 import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_add_course_component.dart';
+import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_add_loker.dart';
 import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_component.dart';
+import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_loker_component.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/data/datasource/user_remote_data_source.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/data/repository/user_repository_impl.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/provider/user_sigIn_provider.dart';
@@ -61,6 +65,7 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 SignUpUserProvider(signUpRepositoryImpl: signUpRepo)),
         ChangeNotifierProvider(create: (context) => AdminCourseProvider()),
+        ChangeNotifierProvider(create: (context) => AdminLokerProvider()),
       ],
       child: MaterialApp(
         home: MyHomePage(title: 'Flutter Demo Home Page'),
@@ -82,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body:
-          AdminCourseComponent(), // This trailing comma makes auto-formatting nicer for build methods.
+          AdminPage(), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

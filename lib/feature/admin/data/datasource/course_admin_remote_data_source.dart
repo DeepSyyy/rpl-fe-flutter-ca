@@ -5,61 +5,57 @@ import 'package:flutter_fe_rpl/feature/admin/data/model/course_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class CourseRemoteDataSource {
-  Future<Either<Failure, List<CourseModel>>> getCourses();
+  Future<List<CourseModel>> getCourses();
   Future<Either<Failure, CourseModel>> getCourse({required String id});
-  Future<Either<Failure, void>> addCourse({required CourseParams course});
+  Future<void> addCourse({required CourseParams course});
   Future<Either<Failure, void>> deleteCourse({required String id});
   Future<Either<Failure, void>> updateCourse({required CourseParams course});
 }
 
 class CourseRemoteDataSourceImpl implements CourseRemoteDataSource {
   @override
-  Future<Either<Failure, void>> addCourse({required CourseParams course}) {
+  Future<void> addCourse({required CourseParams course}) async {
     CollectionReference courses =
-        FirebaseFirestore.instance.collection('courses');
-    try {
-      CourseModel c = CourseModel.fromParams(course);
-      courses.add(c.toJson());
-      return Future.value(Right(null));
-    } catch (e) {
-      return Future.value(
-          Left(ServerFailure(errorMessage: 'Data gagal ditambahkan, $e')));
-    }
+        FirebaseFirestore.instance.collection('course');
+    CourseModel c = CourseModel.fromJson(course.toJson());
+    await courses.add(c.toJson());
   }
 
   @override
-  Future<Either<Failure, List<CourseModel>>> getCourses() async {
+  Future<List<CourseModel>> getCourses() async {
     CollectionReference courses =
-        FirebaseFirestore.instance.collection('courses');
-    try {
-      final data = await courses.get();
-      final coursesData = data.docs
-          .map((e) => CourseModel.fromJson(e.data() as Map<String, dynamic>))
-          .toList();
-      return Right(coursesData);
-    } catch (e) {
-      return Left(ServerFailure(errorMessage: 'Data gagal diambil, $e'));
+        FirebaseFirestore.instance.collection('course');
+
+    final data = await courses.get();
+    if (data.docs.isNotEmpty) {
+      return data.docs.map((e) {
+        final data = e.data() as Map<String, dynamic>;
+        data['id'] = e.id;
+        return CourseModel.fromJson(data);
+      }).toList();
+    } else {
+      throw Exception('Data Kosong');
     }
   }
 
   @override
   Future<Either<Failure, CourseModel>> getCourse({required String id}) async {
     CollectionReference courses =
-        FirebaseFirestore.instance.collection('courses');
-    try {
-      final data = await courses.doc(id).get();
-      final courseData =
-          CourseModel.fromJson(data.data() as Map<String, dynamic>);
-      return Right(courseData);
-    } catch (e) {
-      return Left(ServerFailure(errorMessage: 'Data gagal diambil, $e'));
+        FirebaseFirestore.instance.collection('course');
+    final data = await courses.doc(id).get();
+    if (data.exists) {
+      final e = data.data() as Map<String, dynamic>;
+      e['id'] = id;
+      return Right(CourseModel.fromJson(e));
+    } else {
+      return Left(ServerFailure(errorMessage: 'Data tidak ditemukan'));
     }
   }
 
   @override
   Future<Either<Failure, void>> deleteCourse({required String id}) async {
     CollectionReference courses =
-        FirebaseFirestore.instance.collection('courses');
+        FirebaseFirestore.instance.collection('course');
     try {
       await courses.doc(id).delete();
       return Right(null);
@@ -71,10 +67,10 @@ class CourseRemoteDataSourceImpl implements CourseRemoteDataSource {
   @override
   Future<Either<Failure, void>> updateCourse({required CourseParams course}) {
     CollectionReference courses =
-        FirebaseFirestore.instance.collection('courses');
+        FirebaseFirestore.instance.collection('course');
     try {
-      CourseModel c = CourseModel.fromParams(course);
-      courses.doc(course.id).update(c.toJson());
+      CourseModel c = CourseModel.fromJson(course.toJson());
+      courses.doc(c.id).update(c.toJson());
       return Future.value(Right(null));
     } catch (e) {
       return Future.value(

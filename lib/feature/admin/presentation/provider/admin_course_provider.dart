@@ -1,11 +1,12 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/errors/failure.dart';
 import 'package:flutter_fe_rpl/core/params/course_params.dart';
 import 'package:flutter_fe_rpl/feature/admin/business/entity/course_entity.dart';
-import 'package:flutter_fe_rpl/feature/admin/business/usecase/add_course.dart';
-import 'package:flutter_fe_rpl/feature/admin/business/usecase/delete_course.dart';
-import 'package:flutter_fe_rpl/feature/admin/business/usecase/update_course.dart';
+import 'package:flutter_fe_rpl/feature/admin/business/usecase/course_usecase/add_course.dart';
+import 'package:flutter_fe_rpl/feature/admin/business/usecase/course_usecase/delete_course.dart';
+import 'package:flutter_fe_rpl/feature/admin/business/usecase/course_usecase/get_course.dart';
+import 'package:flutter_fe_rpl/feature/admin/business/usecase/course_usecase/get_courses.dart';
+import 'package:flutter_fe_rpl/feature/admin/business/usecase/course_usecase/update_course.dart';
 import 'package:flutter_fe_rpl/feature/admin/data/datasource/course_admin_remote_data_source.dart';
 import 'package:flutter_fe_rpl/feature/admin/data/repository/course_admin_repository_impl.dart';
 
@@ -20,7 +21,7 @@ class AdminCourseProvider extends ChangeNotifier {
     this.failure,
   });
 
-  Future<Either<Failure, void>> deleteCourse(String id) async {
+  Future<void> deleteCourse({required String id}) async {
     try {
       CourseAdminRepositoryImpl adminCourseRepository =
           CourseAdminRepositoryImpl(
@@ -30,25 +31,25 @@ class AdminCourseProvider extends ChangeNotifier {
           await DeleteCourse(adminCourseRepository).call(id);
       failureOrSucces.fold(
         (failure) {
-          message = failure.errorMessage;
+          courses = null;
+          failure = failure;
           notifyListeners();
         },
         (voidValue) {
+          courses = null;
           message = null;
+          getCourses();
           notifyListeners();
         },
       );
       notifyListeners();
-      return failureOrSucces;
     } catch (e) {
       message = e.toString();
       notifyListeners();
-      return Left(ServerFailure(errorMessage: e.toString()));
     }
   }
 
-  Future<void> addCourse({
-    required String id,
+  void addCourse({
     required String name,
     required String rating,
     required String description,
@@ -57,6 +58,7 @@ class AdminCourseProvider extends ChangeNotifier {
     required String level,
     required String price,
     required String videoUrl,
+    List<String>? keyPoints,
     required String createAt,
     required String updateAt,
     required String mentorName,
@@ -66,28 +68,30 @@ class AdminCourseProvider extends ChangeNotifier {
           CourseAdminRepositoryImpl(
               courseRemoteDataSource: CourseRemoteDataSourceImpl());
       final failureOrSucces = await AddCourse(adminCourseRepository).call(
-          course: CourseParams(
-        id: id,
-        name: name,
-        rating: rating,
-        description: description,
-        imageUrl: imageUrl,
-        category: category,
-        level: level,
-        price: price,
-        videoUrl: videoUrl,
-        createAt: createAt,
-        updateAt: updateAt,
-        mentorName: mentorName,
-      ));
+        course: CourseParams(
+            name: name,
+            description: description,
+            rating: rating,
+            mentorName: mentorName,
+            imageUrl: imageUrl,
+            category: category,
+            level: level,
+            price: price,
+            videoUrl: videoUrl,
+            keyPoints: keyPoints,
+            createAt: createAt,
+            updateAt: updateAt),
+      );
 
       failureOrSucces.fold(
-        (failure) {
-          message = failure.errorMessage;
+        (newFailure) {
+          failure = newFailure;
+          courses = [];
           notifyListeners();
         },
         (voidValue) {
-          message = null;
+          failure = null;
+          getCourses();
           notifyListeners();
         },
       );
@@ -98,7 +102,7 @@ class AdminCourseProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> updateCourse({
+  void updateCourse({
     required String id,
     required String name,
     required String rating,
@@ -150,56 +154,42 @@ class AdminCourseProvider extends ChangeNotifier {
     }
   }
 
-  Future<Either<Failure, CourseEntity>> getCourses() async {
-    try {
-      CourseAdminRepositoryImpl adminCourseRepository =
-          CourseAdminRepositoryImpl(
-              courseRemoteDataSource: CourseRemoteDataSourceImpl());
-      final failureOrSucces = await adminCourseRepository.getCourses();
+  void getCourses() async {
+    CourseAdminRepositoryImpl adminCourseRepository = CourseAdminRepositoryImpl(
+        courseRemoteDataSource: CourseRemoteDataSourceImpl());
+    final failureOrSucces = await GetCourses(adminCourseRepository).call();
 
-      failureOrSucces.fold(
-        (newfailure) {
-          failure = newfailure;
-          message = newfailure.errorMessage;
-          notifyListeners();
-          return Left(ServerFailure(errorMessage: newfailure.errorMessage));
-        },
-        (newCourse) {
-          courses = newCourse;
-          message = null;
-          notifyListeners();
-          return Right(newCourse);
-        },
-      );
-      notifyListeners();
-    } catch (e) {
-      message = e.toString();
-      notifyListeners();
-    }
-    return Left(ServerFailure(errorMessage: 'Gagal mengambil data'));
+    failureOrSucces.fold(
+      (newfailure) {
+        courses = null;
+        failure = newfailure;
+        notifyListeners();
+      },
+      (newCourse) {
+        courses = newCourse;
+        failure = null;
+
+        notifyListeners();
+      },
+    );
+    notifyListeners();
   }
 
   Future<void> getCourse(String id) async {
-    try {
-      CourseAdminRepositoryImpl adminCourseRepository =
-          CourseAdminRepositoryImpl(
-              courseRemoteDataSource: CourseRemoteDataSourceImpl());
-      final failureOrSucces = await adminCourseRepository.getCourse(id: id);
-
-      failureOrSucces.fold(
-        (failure) {
-          message = failure.errorMessage;
-          notifyListeners();
-        },
-        (voidValue) {
-          message = null;
-          notifyListeners();
-        },
-      );
-      notifyListeners();
-    } catch (e) {
-      message = e.toString();
-      notifyListeners();
-    }
+    CourseAdminRepositoryImpl adminCourseRepository = CourseAdminRepositoryImpl(
+        courseRemoteDataSource: CourseRemoteDataSourceImpl());
+    final failureOrSucces = await GetCourse(adminCourseRepository).call(id);
+    failureOrSucces.fold(
+      (failure) {
+        message = failure.errorMessage;
+        notifyListeners();
+      },
+      (newCourse) {
+        course = newCourse;
+        message = null;
+        notifyListeners();
+      },
+    );
+    notifyListeners();
   }
 }
