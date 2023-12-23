@@ -3,20 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/config/app_color.dart';
 import 'package:flutter_fe_rpl/core/utils/button_customs.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/page/home_page_view.dart';
+import 'package:flutter_fe_rpl/feature/sign_in/presentation/provider/user_sigIn_provider.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/widget/input_email.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/widget/input_password.dart';
 import 'package:flutter_fe_rpl/feature/sign_up/presentation/page/sign_up_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-class SignInView extends StatelessWidget {
+class SignInView extends StatefulWidget {
   const SignInView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    bool isPasswordHidden = true;
-    final controllerEmail = TextEditingController();
+  State<SignInView> createState() => _SignInViewState();
+}
 
-    final controllerPassword = TextEditingController();
+class _SignInViewState extends State<SignInView> {
+  final controllerEmail = TextEditingController();
+  bool isPasswordHidden = true;
+  final controllerPassword = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
@@ -67,12 +74,28 @@ class SignInView extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                ButtonCustom(
-                  label: "Login sekarang",
-                  onTap: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomePageView())),
-                  isExpand: true,
-                ),
+                Consumer<UserResponseProvider>(builder: (context, state, _) {
+                  return ButtonCustom(
+                    label: "Login sekarang",
+                    onTap: () async {
+                      await state.signIn(
+                        email: controllerEmail.text,
+                        password: controllerPassword.text,
+                      );
+                      if (state.message != null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(state.message!),
+                          ),
+                        );
+                      } else {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const HomePageView()));
+                      }
+                    },
+                    isExpand: true,
+                  );
+                }),
                 const SizedBox(
                   height: 16,
                 ),

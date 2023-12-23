@@ -1,42 +1,103 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_fe_rpl/feature/admin/data/datasource/course_admin_remote_data_source.dart';
+import 'package:flutter_fe_rpl/feature/admin/data/repository/course_admin_repository_impl.dart';
+import 'package:flutter_fe_rpl/feature/admin/presentation/page/admin_page.dart';
+import 'package:flutter_fe_rpl/feature/admin/presentation/provider/admin_course_provider.dart';
+import 'package:flutter_fe_rpl/feature/admin/presentation/provider/admin_loker_provider.dart';
+import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_add_course_component.dart';
+import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_add_loker.dart';
+import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_component.dart';
+import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_loker_component.dart';
+import 'package:flutter_fe_rpl/feature/detail_kelas/presentation/provider/detail_course_provider.dart';
+import 'package:flutter_fe_rpl/feature/detail_lowongan/presentation/provider/detail_lowongan_provider.dart';
+import 'package:flutter_fe_rpl/feature/detail_lowongan/presentation/widget/detail_lowongan_widget.dart';
+import 'package:flutter_fe_rpl/feature/home/presentation/provider/course_user_provider.dart';
+import 'package:flutter_fe_rpl/feature/home/presentation/widget/home_page_component.dart';
+import 'package:flutter_fe_rpl/feature/lowongan/presentation/provider/lowongan_provider.dart';
+import 'package:flutter_fe_rpl/feature/sign_in/data/datasource/user_remote_data_source.dart';
+import 'package:flutter_fe_rpl/feature/sign_in/data/repository/user_repository_impl.dart';
+import 'package:flutter_fe_rpl/feature/sign_in/presentation/provider/user_sigIn_provider.dart';
+import 'package:flutter_fe_rpl/feature/sign_in/presentation/widget/sign_in_component.dart';
+import 'package:flutter_fe_rpl/feature/sign_up/data/repository/sign_up_repository_impl.dart';
+import 'package:flutter_fe_rpl/feature/sign_up/presentation/provider/sign_up_user_provider.dart';
+import 'package:flutter_fe_rpl/feature/sign_up/presentation/widget/sign_up_component.dart';
+import 'package:flutter_fe_rpl/feature/sign_up/data/datasource/sign_up_remote_datasource.dart';
+import 'package:flutter_fe_rpl/firebase_options.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_fe_rpl/feature/detail_kelas/presentation/page/detail_kelas_page.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/page/home_page_view.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/page/my_class_page.dart';
+import 'package:flutter_fe_rpl/feature/lowongan/presentation/page/lowongan_page.dart';
+import 'package:flutter_fe_rpl/feature/payment/presentation/page/payment_page.dart';
+import 'package:flutter_fe_rpl/feature/payment/presentation/widget/card_course_info.dart';
+import 'package:flutter_fe_rpl/feature/payment/presentation/widget/card_payment.dart';
+import 'package:flutter_fe_rpl/feature/payment/presentation/widget/card_payment_detail.dart';
+import 'package:flutter_fe_rpl/feature/payment/presentation/widget/payment_choice_card.dart';
+import 'package:flutter_fe_rpl/feature/payment/presentation/widget/payment_component.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/page/sign_in_page.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({
+    super.key,
+  });
 
-  // This widget is the root of your application.
+  final UserRepositoryImpl userRepo = UserRepositoryImpl(
+    userRemoteDataSource: UserRemoteDataSourceImpl(),
+  );
+
+  final SignUpRepositoryImpl signUpRepo = SignUpRepositoryImpl(
+    signUpRemoteDataSource: SignUpRemoteDataSourceImpl(),
+  );
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (context) =>
+                UserResponseProvider(userRepositoryImpl: userRepo)),
+        ChangeNotifierProvider(
+            create: (context) =>
+                SignUpUserProvider(signUpRepositoryImpl: signUpRepo)),
+        ChangeNotifierProvider(create: (context) => AdminCourseProvider()),
+        ChangeNotifierProvider(create: (context) => AdminLokerProvider()),
+        ChangeNotifierProvider(create: (context) => CourseUserProvider()),
+        ChangeNotifierProvider(create: (context) => DetailCourseProvider()),
+        ChangeNotifierProvider(create: (context) => LowonganProvider()),
+        ChangeNotifierProvider(create: (context) => DetailLowonganProvider()),
+      ],
+      child: MaterialApp(
+        home: MyHomePage(title: 'Flutter Demo Home Page'),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
 
   @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title),
-      ),
+    return const Scaffold(
       body:
-          SignInPage(), // This trailing comma makes auto-formatting nicer for build methods.
+          HomePageView(), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

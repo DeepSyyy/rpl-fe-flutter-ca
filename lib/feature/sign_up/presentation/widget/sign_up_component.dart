@@ -3,8 +3,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/config/app_color.dart';
 import 'package:flutter_fe_rpl/core/utils/button_customs.dart';
+import 'package:flutter_fe_rpl/feature/home/presentation/page/home_page_view.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/page/sign_in_page.dart';
+import 'package:flutter_fe_rpl/feature/sign_up/presentation/provider/sign_up_user_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SignUp extends StatefulWidget {
   SignUp({super.key});
@@ -170,11 +173,34 @@ class _SignUpState extends State<SignUp> {
                 const SizedBox(
                   height: 24,
                 ),
-                ButtonCustom(
-                  label: "Daftar sekarang",
-                  onTap: () => {},
-                  isExpand: true,
-                ),
+                Consumer<SignUpUserProvider>(builder: (context, state, _) {
+                  return ButtonCustom(
+                    label: "Daftar sekarang",
+                    onTap: () async {
+                      await state.signUp(
+                        email: controllerEmail.text,
+                        password: controllerPassword.text,
+                        name: controllerConfirmPassword.text,
+                      );
+                      if (state.message != null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(state.message!),
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Sign Up Berhasil"),
+                          ),
+                        );
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const HomePageView()));
+                      }
+                    },
+                    isExpand: true,
+                  );
+                }),
                 const SizedBox(
                   height: 16,
                 ),
