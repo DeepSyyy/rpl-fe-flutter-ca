@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_fe_rpl/core/errors/failure.dart';
@@ -20,6 +21,14 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         email: userParamsRegister.email,
         password: userParamsRegister.password,
       );
+      final CollectionReference users =
+          FirebaseFirestore.instance.collection('users');
+      users.doc(credential.user!.uid).set({
+        'name': userParamsRegister.name,
+        'email': userParamsRegister.email,
+        'role': userParamsRegister.role,
+        'uid': credential.user!.uid,
+      });
       credential.user!.updateDisplayName(userParamsRegister.name);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

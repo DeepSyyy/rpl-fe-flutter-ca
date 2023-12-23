@@ -11,7 +11,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class SignInView extends StatefulWidget {
-  const SignInView({super.key});
+  const SignInView({
+    super.key,
+  });
 
   @override
   State<SignInView> createState() => _SignInViewState();
@@ -90,7 +92,7 @@ class _SignInViewState extends State<SignInView> {
                         );
                       } else {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const HomePageView()));
+                            builder: (context) => HomePageView()));
                       }
                     },
                     isExpand: true,

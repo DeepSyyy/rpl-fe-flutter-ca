@@ -3,7 +3,6 @@ import 'package:flutter_fe_rpl/feature/sign_up/presentation/widget/sign_up_compo
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return SignUp();
