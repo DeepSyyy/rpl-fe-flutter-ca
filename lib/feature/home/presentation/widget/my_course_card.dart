@@ -10,7 +10,7 @@ class MyCourseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -22,7 +22,7 @@ class MyCourseCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 8,
           ),
           Expanded(
@@ -37,7 +37,7 @@ class MyCourseCard extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 4,
                 ),
                 Text(
@@ -45,9 +45,9 @@ class MyCourseCard extends StatelessWidget {
                   style: GoogleFonts.poppins(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xFF7B8CB5)),
+                      color: const Color(0xFF7B8CB5)),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
@@ -61,10 +61,10 @@ class MyCourseCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 16,
           ),
-          Icon(
+          const Icon(
             Icons.arrow_forward_ios_rounded,
             size: 24,
           )

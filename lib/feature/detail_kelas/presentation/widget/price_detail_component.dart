@@ -4,7 +4,8 @@ import 'package:flutter_fe_rpl/feature/payment/presentation/page/payment_page.da
 import 'package:google_fonts/google_fonts.dart';
 
 class PriceComponent extends StatelessWidget {
-  const PriceComponent({super.key});
+  const PriceComponent({super.key, required this.price});
+  final String price;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class PriceComponent extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
-          "Rp400.000",
+          "Rp. ${price}",
           style: GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.w600),
         ),
         SizedBox(

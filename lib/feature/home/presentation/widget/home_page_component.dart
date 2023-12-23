@@ -140,15 +140,16 @@ class _HomePageState extends State<HomePage> {
               height: 12,
             ),
             SizedBox(
-              height: 300,
+              height: 250,
               child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemCount: courses.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: CourseCard(
+                      id: courses[index].id!,
                       imageUrl: courses[index].imageUrl,
                       courseName: courses[index].name,
                       mentorName: courses[index].mentor,
@@ -187,15 +188,18 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 12,
             ),
-            ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  child: MyCourseCard(),
-                );
-              },
+            SizedBox(
+              height: 300,
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8),
+                    child: MyCourseCard(),
+                  );
+                },
+              ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -224,14 +228,16 @@ class _HomePageState extends State<HomePage> {
               height: 12,
             ),
             SizedBox(
+              height: 250,
               child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemCount: courses.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: CourseCard(
+                      id: courses[index].id!,
                       imageUrl: courses[index].imageUrl,
                       courseName: courses[index].name,
                       mentorName: courses[index].mentor,
@@ -270,21 +276,25 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 12,
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: courses.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: CourseCard(
-                    imageUrl: courses[index].imageUrl,
-                    courseName: courses[index].name,
-                    mentorName: courses[index].mentor,
-                    price: courses[index].price,
-                  ),
-                );
-              },
+            SizedBox(
+              height: 250,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: courses.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: CourseCard(
+                      id: courses[index].id!,
+                      imageUrl: courses[index].imageUrl,
+                      courseName: courses[index].name,
+                      mentorName: courses[index].mentor,
+                      price: courses[index].price,
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),

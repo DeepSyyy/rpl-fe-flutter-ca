@@ -12,12 +12,14 @@ class CourseCard extends StatefulWidget {
     required this.mentorName,
     required this.price,
     required this.id,
+    required this.rating,
   });
   final String imageUrl;
   final String courseName;
   final String mentorName;
   final String price;
   final String id;
+  final String rating;
 
   @override
   State<CourseCard> createState() => _CourseCardState();
@@ -118,9 +120,9 @@ class _CourseCardState extends State<CourseCard> {
                     ),
                   ),
                   Container(
-                    child: const Row(
+                    child: Row(
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(right: 0.5),
                           child: Icon(
                             Icons.star,
@@ -128,7 +130,12 @@ class _CourseCardState extends State<CourseCard> {
                             size: 20,
                           ),
                         ),
-                        Text("4.5"),
+                        Text(widget.rating,
+                            style: GoogleFonts.poppins(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: AppColor.textSecondary,
+                            )),
                       ],
                     ),
                   )

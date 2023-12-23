@@ -9,6 +9,7 @@ import 'package:flutter_fe_rpl/feature/home/data/repository/course_user_reposito
 
 class CourseUserProvider extends ChangeNotifier {
   List<CourseEntity>? courses;
+  List<CourseEntity>? searchCourses;
   Failure? failure;
 
   CourseUserProvider({
@@ -29,51 +30,51 @@ class CourseUserProvider extends ChangeNotifier {
         notifyListeners();
       },
       (course) {
+        courses = null;
         courses = course;
         failure = null;
         notifyListeners();
       },
     );
+  }
 
-    void getCoursesByName({required String name}) async {
-      CourseRepositoryUserImpl courseRepositoryUserImpl =
-          CourseRepositoryUserImpl(
-              courseUserRemoteDataSource: CourseUserRemoteDataSourceImpl());
-      final failureOrSucces =
-          await GetCourseByName(courseRepositoryUserImpl).call(name: name);
-      failureOrSucces.fold(
-        (failure) {
-          courses = null;
-          failure = failure;
-          notifyListeners();
-        },
-        (course) {
-          courses = course;
-          failure = null;
-          notifyListeners();
-        },
-      );
-    }
+  void getCoursesByName({required String name}) async {
+    CourseRepositoryUserImpl courseRepositoryUserImpl =
+        CourseRepositoryUserImpl(
+            courseUserRemoteDataSource: CourseUserRemoteDataSourceImpl());
+    final failureOrSucces =
+        await GetCourseByName(courseRepositoryUserImpl).call(name: name);
+    failureOrSucces.fold(
+      (failure) {
+        courses = null;
+        failure = failure;
+        notifyListeners();
+      },
+      (course) {
+        courses = course;
+        failure = null;
+        notifyListeners();
+      },
+    );
+  }
 
-    void getCoursesByCategory({required String category}) async {
-      CourseRepositoryUserImpl courseRepositoryUserImpl =
-          CourseRepositoryUserImpl(
-              courseUserRemoteDataSource: CourseUserRemoteDataSourceImpl());
-      final failureOrSucces =
-          await GetCourseByCategory(courseRepositoryUserImpl)
-              .call(category: category);
-      failureOrSucces.fold(
-        (failure) {
-          courses = null;
-          failure = failure;
-          notifyListeners();
-        },
-        (course) {
-          courses = course;
-          failure = null;
-          notifyListeners();
-        },
-      );
-    }
+  void getCoursesByCategory({required String category}) async {
+    CourseRepositoryUserImpl courseRepositoryUserImpl =
+        CourseRepositoryUserImpl(
+            courseUserRemoteDataSource: CourseUserRemoteDataSourceImpl());
+    final failureOrSucces = await GetCourseByCategory(courseRepositoryUserImpl)
+        .call(category: category);
+    failureOrSucces.fold(
+      (failure) {
+        courses = null;
+        failure = failure;
+        notifyListeners();
+      },
+      (course) {
+        searchCourses = course;
+        failure = null;
+        notifyListeners();
+      },
+    );
   }
 }

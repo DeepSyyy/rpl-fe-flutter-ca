@@ -9,7 +9,12 @@ import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_add_cours
 import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_add_loker.dart';
 import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_component.dart';
 import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_loker_component.dart';
+import 'package:flutter_fe_rpl/feature/detail_kelas/presentation/provider/detail_course_provider.dart';
+import 'package:flutter_fe_rpl/feature/detail_lowongan/presentation/provider/detail_lowongan_provider.dart';
+import 'package:flutter_fe_rpl/feature/detail_lowongan/presentation/widget/detail_lowongan_widget.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/provider/course_user_provider.dart';
+import 'package:flutter_fe_rpl/feature/home/presentation/widget/home_page_component.dart';
+import 'package:flutter_fe_rpl/feature/lowongan/presentation/provider/lowongan_provider.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/data/datasource/user_remote_data_source.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/data/repository/user_repository_impl.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/provider/user_sigIn_provider.dart';
@@ -68,6 +73,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AdminCourseProvider()),
         ChangeNotifierProvider(create: (context) => AdminLokerProvider()),
         ChangeNotifierProvider(create: (context) => CourseUserProvider()),
+        ChangeNotifierProvider(create: (context) => DetailCourseProvider()),
+        ChangeNotifierProvider(create: (context) => LowonganProvider()),
+        ChangeNotifierProvider(create: (context) => DetailLowonganProvider()),
       ],
       child: MaterialApp(
         home: MyHomePage(title: 'Flutter Demo Home Page'),

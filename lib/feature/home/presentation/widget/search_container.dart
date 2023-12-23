@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_fe_rpl/feature/home/presentation/widget/search_view_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SearchContainer extends StatelessWidget {
@@ -19,11 +18,7 @@ class SearchContainer extends StatelessWidget {
                 Border.all(color: Color(0xFF7B8CB5).withOpacity(0.5), width: 1),
             borderRadius: BorderRadius.circular(16)),
         child: TextField(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const SearchViewWidget();
-            }));
-          },
+          onTap: () {},
           controller: textController,
           decoration: InputDecoration(
             hintText: "Mau Belajar Apa Hari Ini?",

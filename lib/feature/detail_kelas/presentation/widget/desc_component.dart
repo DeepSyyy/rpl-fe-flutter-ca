@@ -8,7 +8,6 @@ class DescCourseComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(desc,
-        textAlign: TextAlign.justify,
         overflow: TextOverflow.clip,
         style: GoogleFonts.poppins(
           fontWeight: FontWeight.w600,
