@@ -15,12 +15,14 @@ class SignUpUserProvider extends ChangeNotifier {
     required String email,
     required String password,
     required String name,
+    required String role,
   }) async {
     try {
       UserParamsRegister userParamsRegister = UserParamsRegister(
         email: email,
         password: password,
         name: name,
+        role: role,
       );
       final failureOrVoid = await SignUp(signUpRepositoryImpl)(
           userParamsRegister: userParamsRegister);

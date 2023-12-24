@@ -9,9 +9,22 @@ import 'package:flutter_fe_rpl/feature/sign_up/presentation/provider/sign_up_use
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+List<String> role = [
+  "UI/UX Designer",
+  "Frontend Developer",
+  "Backend Developer",
+  "Mobile Developer",
+  "Data Scientist",
+  "Data Analyst",
+  "Product Manager",
+  "Project Manager",
+  "Business Analyst",
+  "Digital Marketing",
+  "Content Creator",
+];
+
 class SignUp extends StatefulWidget {
   SignUp({super.key});
-
   @override
   State<SignUp> createState() => _SignUpState();
 }
@@ -20,6 +33,8 @@ class _SignUpState extends State<SignUp> {
   final controllerEmail = TextEditingController();
   final controllerPassword = TextEditingController();
   final controllerConfirmPassword = TextEditingController();
+  final controllerName = TextEditingController();
+  String selectedRole = role[0];
   bool isPasswordHidden = true;
 
   @override
@@ -46,6 +61,36 @@ class _SignUpState extends State<SignUp> {
                 ),
                 const SizedBox(
                   height: 20,
+                ),
+                TextFormField(
+                  controller: controllerName,
+                  validator: (value) =>
+                      value == "" ? "Masukan, jangan kosong!" : null,
+                  decoration: InputDecoration(
+                      isDense: true,
+                      filled: true,
+                      fillColor: const Color(0xFFF1F1F1),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 16),
+                      hintText: "Masukkan Nama Lengkap",
+                      hintStyle: GoogleFonts.poppins(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFF7A7A7A),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: AppColor.primary),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none)),
+                ),
+                const SizedBox(
+                  height: 16,
                 ),
                 TextFormField(
                   controller: controllerEmail,
@@ -171,6 +216,45 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 const SizedBox(
+                  height: 16,
+                ),
+                DropdownButtonFormField(
+                  decoration: InputDecoration(
+                    isDense: true,
+                    filled: true,
+                    fillColor: const Color(0xFFF1F1F1),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 16),
+                    hintText: "Pilih Role",
+                    hintStyle: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF7A7A7A),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: AppColor.primary),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide.none),
+                  ),
+                  items: role.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      selectedRole = value.toString();
+                    });
+                  },
+                ),
+                const SizedBox(
                   height: 24,
                 ),
                 Consumer<SignUpUserProvider>(builder: (context, state, _) {
@@ -178,9 +262,10 @@ class _SignUpState extends State<SignUp> {
                     label: "Daftar sekarang",
                     onTap: () async {
                       await state.signUp(
-                        email: controllerEmail.text,
+                        email: controllerEmail.text.toLowerCase(),
                         password: controllerPassword.text,
-                        name: controllerConfirmPassword.text,
+                        name: controllerName.text,
+                        role: selectedRole,
                       );
                       if (state.message != null) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -194,8 +279,14 @@ class _SignUpState extends State<SignUp> {
                             content: Text("Sign Up Berhasil"),
                           ),
                         );
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const HomePageView()));
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => HomePageView(),
+                            settings: RouteSettings(
+                              arguments: controllerName.text,
+                            ),
+                          ),
+                        );
                       }
                     },
                     isExpand: true,
