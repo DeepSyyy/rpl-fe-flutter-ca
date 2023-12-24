@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_fe_rpl/core/auth/users.dart';
 import 'package:flutter_fe_rpl/feature/admin/data/datasource/course_admin_remote_data_source.dart';
 import 'package:flutter_fe_rpl/feature/admin/data/repository/course_admin_repository_impl.dart';
 import 'package:flutter_fe_rpl/feature/admin/presentation/page/admin_page.dart';
@@ -20,6 +21,7 @@ import 'package:flutter_fe_rpl/feature/sign_in/data/repository/user_repository_i
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/provider/user_sigIn_provider.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/widget/sign_in_component.dart';
 import 'package:flutter_fe_rpl/feature/sign_up/data/repository/sign_up_repository_impl.dart';
+import 'package:flutter_fe_rpl/feature/sign_up/presentation/page/sign_up_page.dart';
 import 'package:flutter_fe_rpl/feature/sign_up/presentation/provider/sign_up_user_provider.dart';
 import 'package:flutter_fe_rpl/feature/sign_up/presentation/widget/sign_up_component.dart';
 import 'package:flutter_fe_rpl/feature/sign_up/data/datasource/sign_up_remote_datasource.dart';
@@ -75,29 +77,26 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => CourseUserProvider()),
         ChangeNotifierProvider(create: (context) => DetailCourseProvider()),
         ChangeNotifierProvider(create: (context) => LowonganProvider()),
-        ChangeNotifierProvider(create: (context) => DetailLowonganProvider()),
+        ChangeNotifierProvider(
+          create: (context) => DetailLowonganProvider(),
+        ),
+        ChangeNotifierProvider(create: (context) => AuthUserProvider()),
       ],
-      child: MaterialApp(
-        home: MyHomePage(title: 'Flutter Demo Home Page'),
+      child: SafeArea(
+        child: MaterialApp(
+          home: StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, AsyncSnapshot<User?> snapshot) {
+              if (snapshot.hasData) {
+                return HomePageView();
+              } else if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              return SignInPage();
+            },
+          ),
+        ),
       ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body:
-          HomePageView(), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

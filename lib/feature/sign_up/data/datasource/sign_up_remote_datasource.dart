@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_fe_rpl/core/errors/failure.dart';
@@ -18,6 +19,15 @@ class SignUpRemoteDataSourceImpl implements SignUpRemoteDataSource {
         email: userParamsRegister.email,
         password: userParamsRegister.password,
       );
+      final CollectionReference users =
+          FirebaseFirestore.instance.collection('users');
+      users.doc(credential.user!.uid).set({
+        'password': userParamsRegister.password, // tambahin password
+        'name': userParamsRegister.name,
+        'email': userParamsRegister.email,
+        'role': userParamsRegister.role,
+        'uid': credential.user!.uid,
+      });
       credential.user!.updateDisplayName(userParamsRegister.name);
       return Right(null);
     } on FirebaseAuthException catch (e) {

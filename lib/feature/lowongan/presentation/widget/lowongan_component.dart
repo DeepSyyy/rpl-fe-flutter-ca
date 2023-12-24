@@ -31,6 +31,7 @@ class _LowonganComponentState extends State<LowonganComponent> {
     if (lowongan != null) {
       widget = Scaffold(
         appBar: AppBar(
+          leading: null,
           toolbarHeight: 80,
           elevation: 0,
           backgroundColor: Colors.transparent,

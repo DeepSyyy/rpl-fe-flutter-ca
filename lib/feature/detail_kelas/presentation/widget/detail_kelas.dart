@@ -67,6 +67,7 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
             children: [
               Expanded(
                 child: ListView(
+                  clipBehavior: Clip.none,
                   children: [
                     const SizedBox(
                       height: 20,
@@ -118,7 +119,9 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
                       height: 8,
                     ),
                     Container(
+                      clipBehavior: Clip.none,
                       child: SingleChildScrollView(
+                        clipBehavior: Clip.none,
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
