@@ -25,6 +25,7 @@ import 'package:flutter_fe_rpl/feature/sign_up/presentation/page/sign_up_page.da
 import 'package:flutter_fe_rpl/feature/sign_up/presentation/provider/sign_up_user_provider.dart';
 import 'package:flutter_fe_rpl/feature/sign_up/presentation/widget/sign_up_component.dart';
 import 'package:flutter_fe_rpl/feature/sign_up/data/datasource/sign_up_remote_datasource.dart';
+import 'package:flutter_fe_rpl/feature/wishlist/presentation/provider/wishlist_provider.dart';
 import 'package:flutter_fe_rpl/firebase_options.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -81,6 +82,7 @@ class MyApp extends StatelessWidget {
           create: (context) => DetailLowonganProvider(),
         ),
         ChangeNotifierProvider(create: (context) => AuthUserProvider()),
+        ChangeNotifierProvider(create: (context) => WishlistProvider()),
       ],
       child: SafeArea(
         child: MaterialApp(
