@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/errors/failure.dart';
 import 'package:flutter_fe_rpl/feature/wishlist/business/entity/course_wislist.dart';
+import 'package:flutter_fe_rpl/feature/wishlist/business/usecase/get_wishlist.dart';
 import 'package:flutter_fe_rpl/feature/wishlist/data/datasource/wishlits_remote_data_source.dart';
 import 'package:flutter_fe_rpl/feature/wishlist/data/repository/wishlist_repository_impl.dart';
 
@@ -28,7 +29,7 @@ class WishlistProvider extends ChangeNotifier {
     });
   }
 
-  void deleteWishlist(
+  Future<void> deleteWishlist(
       {required String idCourse, required String idUser}) async {
     WishlistRepositoryImpl repo = WishlistRepositoryImpl(
         wishlistRemoteDataSource: WishlistRemoteDataSourceImpl());
@@ -44,10 +45,10 @@ class WishlistProvider extends ChangeNotifier {
     });
   }
 
-  void getWishlist({required String idUser}) async {
+  Future<void> getWishlist({required String idUser}) async {
     WishlistRepositoryImpl repo = WishlistRepositoryImpl(
         wishlistRemoteDataSource: WishlistRemoteDataSourceImpl());
-    final failureOrSuccess = await repo.getWishlist(idUser: idUser);
+    final failureOrSuccess = await GetWishlist(repo).call(idUser: idUser);
 
     failureOrSuccess.fold((newFailure) {
       failure = newFailure;
