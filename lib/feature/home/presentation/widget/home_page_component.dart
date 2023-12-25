@@ -54,8 +54,10 @@ class _HomePageState extends State<HomePage> {
         Provider.of<CourseUserProvider>(context).courses;
     String? role = Provider.of<AuthUserProvider>(context).role;
     String? name = Provider.of<AuthUserProvider>(context).name;
+    String? uid = Provider.of<AuthUserProvider>(context).uid;
     Failure? failure = Provider.of<CourseUserProvider>(context).failure;
     late Widget component;
+    print(uid);
     if (courses != null) {
       component = SafeArea(
         child: Scaffold(
@@ -106,7 +108,9 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const WishlistPage(),
+                              builder: (context) => WishlistPage(
+                                idUser: uid!,
+                              ),
                             ),
                           );
                         })
@@ -163,6 +167,7 @@ class _HomePageState extends State<HomePage> {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: CourseCard(
+                        idUser: uid!,
                         id: courses[index].id!,
                         imageUrl: courses[index].imageUrl,
                         courseName: courses[index].name,
@@ -251,6 +256,7 @@ class _HomePageState extends State<HomePage> {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: CourseCard(
+                        idUser: uid!,
                         id: courses[index].id!,
                         imageUrl: courses[index].imageUrl,
                         courseName: courses[index].name,
@@ -300,6 +306,7 @@ class _HomePageState extends State<HomePage> {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: CourseCard(
+                        idUser: uid!,
                         id: courses[index].id!,
                         imageUrl: courses[index].imageUrl,
                         courseName: courses[index].name,

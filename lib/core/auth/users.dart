@@ -66,7 +66,9 @@ class AuthUserProvider extends ChangeNotifier {
     this.email,
     this.uid,
     this.errorMessage,
-  });
+  }) {
+    getUser();
+  }
 
   void getUser() async {
     final user = FirebaseAuth.instance.currentUser;
@@ -80,6 +82,7 @@ class AuthUserProvider extends ChangeNotifier {
       name = data['name'];
       role = data['role'];
       email = data['email'];
+      this.uid = uid;
       errorMessage = null;
       notifyListeners();
     } else {
