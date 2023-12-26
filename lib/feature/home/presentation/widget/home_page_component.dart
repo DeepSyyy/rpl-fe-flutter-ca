@@ -103,7 +103,10 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     IconButton(
-                        icon: const Icon(Icons.favorite),
+                        icon: const Icon(
+                          Icons.favorite,
+                          color: AppColor.textSecondary,
+                        ),
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -123,7 +126,7 @@ class _HomePageState extends State<HomePage> {
               CarouselAds(),
               IndicatorCarousel(controller: _controller, current: _current),
               const SizedBox(
-                height: 20,
+                height: 16,
               ),
               SearchContainer(
                 textController: _textController,
@@ -157,25 +160,28 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 12,
               ),
-              SizedBox(
-                height: 250,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: courses.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: CourseCard(
-                        idUser: uid!,
-                        id: courses[index].id!,
-                        imageUrl: courses[index].imageUrl,
-                        courseName: courses[index].name,
-                        mentorName: courses[index].mentor,
-                        price: courses[index].price,
-                      ),
-                    );
-                  },
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SizedBox(
+                  height: 250,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: courses.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: CourseCard(
+                          idUser: uid!,
+                          id: courses[index].id!,
+                          imageUrl: courses[index].imageUrl,
+                          courseName: courses[index].name,
+                          mentorName: courses[index].mentor,
+                          price: courses[index].price,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
               const SizedBox(
@@ -220,6 +226,9 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
+              const SizedBox(
+                height: 20,
+              ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Row(
@@ -246,25 +255,28 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 12,
               ),
-              SizedBox(
-                height: 250,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: courses.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: CourseCard(
-                        idUser: uid!,
-                        id: courses[index].id!,
-                        imageUrl: courses[index].imageUrl,
-                        courseName: courses[index].name,
-                        mentorName: courses[index].mentor,
-                        price: courses[index].price,
-                      ),
-                    );
-                  },
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SizedBox(
+                  height: 250,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: courses.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: CourseCard(
+                          idUser: uid!,
+                          id: courses[index].id!,
+                          imageUrl: courses[index].imageUrl,
+                          courseName: courses[index].name,
+                          mentorName: courses[index].mentor,
+                          price: courses[index].price,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
               const SizedBox(
@@ -296,25 +308,28 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 12,
               ),
-              SizedBox(
-                height: 250,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: courses.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: CourseCard(
-                        idUser: uid!,
-                        id: courses[index].id!,
-                        imageUrl: courses[index].imageUrl,
-                        courseName: courses[index].name,
-                        mentorName: courses[index].mentor,
-                        price: courses[index].price,
-                      ),
-                    );
-                  },
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SizedBox(
+                  height: 250,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: courses.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: CourseCard(
+                          idUser: uid!,
+                          id: courses[index].id!,
+                          imageUrl: courses[index].imageUrl,
+                          courseName: courses[index].name,
+                          mentorName: courses[index].mentor,
+                          price: courses[index].price,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
             ],

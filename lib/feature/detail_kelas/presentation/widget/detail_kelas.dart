@@ -150,16 +150,8 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
                     const SizedBox(
                       height: 8,
                     ),
-                    const Divider(
-                      color: Colors.grey,
-                      height: 1,
-                    ),
                     const SizedBox(
                       height: 8,
-                    ),
-                    const Divider(
-                      color: Colors.grey,
-                      height: 1,
                     ),
                     const SizedBox(
                       height: 8,
@@ -186,10 +178,6 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
                     ),
                     const SizedBox(
                       height: 8,
-                    ),
-                    const Divider(
-                      color: Colors.grey,
-                      height: 1,
                     ),
                     const SizedBox(
                       height: 8,

@@ -130,9 +130,9 @@ class _CourseCardState extends State<CourseCard> {
                     ),
                   ),
                   Container(
-                    child: const Row(
+                    child: Row(
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(right: 0.5),
                           child: Icon(
                             Icons.star,
@@ -140,7 +140,14 @@ class _CourseCardState extends State<CourseCard> {
                             size: 20,
                           ),
                         ),
-                        Text("4.5"),
+                        Text(
+                          "4.5",
+                          style: GoogleFonts.poppins(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: AppColor.textPrimary,
+                          ),
+                        ),
                       ],
                     ),
                   )
