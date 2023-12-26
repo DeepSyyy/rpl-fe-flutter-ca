@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fe_rpl/core/auth/users.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/widget/home_page_component.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/page/my_class_page.dart';
 import 'package:flutter_fe_rpl/feature/lowongan/presentation/page/lowongan_page.dart';
 import 'package:flutter_fe_rpl/feature/profile/feature/user_profile/presentation/page/profile_page.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class NavigationBarComponent extends StatefulWidget {
   const NavigationBarComponent({super.key, this.name});
@@ -23,15 +25,23 @@ class _NavigationBarComponentState extends State<NavigationBarComponent> {
     });
   }
 
+  void initState() {
+    super.initState();
+    Provider.of<AuthUserProvider>(context, listen: false).getUser();
+  }
+
   @override
   Widget build(BuildContext context) {
+    String? idUser = Provider.of<AuthUserProvider>(context).uid;
     return Scaffold(
       body: [
         HomePage(
           name: widget.name,
         ),
         LowonganPage(),
-        MyClassPage(),
+        MyClassPage(
+          idUser: idUser,
+        ),
         ProfilePage(),
       ].elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(

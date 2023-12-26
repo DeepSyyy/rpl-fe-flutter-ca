@@ -13,6 +13,7 @@ class CourseCard extends StatefulWidget {
     required this.price,
     required this.id,
     required this.rating,
+    required this.idUser,
   });
   final String imageUrl;
   final String courseName;
@@ -20,6 +21,7 @@ class CourseCard extends StatefulWidget {
   final String price;
   final String id;
   final String rating;
+  final String idUser;
 
   @override
   State<CourseCard> createState() => _CourseCardState();
@@ -41,8 +43,12 @@ class _CourseCardState extends State<CourseCard> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailKelasPage(id: widget.id),
-            settings: RouteSettings(arguments: widget.id),
+            builder: (context) =>
+                DetailKelasPage(id: widget.id, idUser: widget.idUser),
+            settings: RouteSettings(arguments: {
+              "id": widget.id,
+              "idUser": widget.idUser,
+            }),
           ),
         );
       },

@@ -3,9 +3,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CardCourseInfo extends StatelessWidget {
   const CardCourseInfo(
-      {super.key, required this.judulCourse, required this.namaAuthor});
+      {super.key,
+      required this.judulCourse,
+      required this.namaAuthor,
+      required this.imageUrl});
   final String judulCourse;
   final String namaAuthor;
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +29,10 @@ class CardCourseInfo extends StatelessWidget {
               height: 70,
               margin: const EdgeInsets.only(right: 12),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Colors.deepPurple),
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.deepPurple,
+              ),
+              child: Image.asset(imageUrl),
             ),
             const SizedBox(
               width: 8,

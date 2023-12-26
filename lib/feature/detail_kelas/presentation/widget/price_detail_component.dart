@@ -4,8 +4,20 @@ import 'package:flutter_fe_rpl/feature/payment/presentation/page/payment_page.da
 import 'package:google_fonts/google_fonts.dart';
 
 class PriceComponent extends StatelessWidget {
-  const PriceComponent({super.key, required this.price});
+  const PriceComponent(
+      {super.key,
+      required this.price,
+      required this.imageUrl,
+      required this.courseName,
+      required this.mentorName,
+      required this.idCourse,
+      required this.idUser});
   final String price;
+  final String imageUrl;
+  final String courseName;
+  final String mentorName;
+  final String idUser;
+  final String idCourse;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +39,21 @@ class PriceComponent extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PaymentPage(),
+                        builder: (context) => PaymentPage(
+                          imageUrl: imageUrl,
+                          courseName: courseName,
+                          mentorName: mentorName,
+                          idUser: idUser,
+                          idCourse: idCourse,
+                        ),
+                        settings: RouteSettings(arguments: {
+                          "imageUrl": imageUrl,
+                          "courseName": courseName,
+                          "mentorName": mentorName,
+                          "idUser": idUser,
+                          "price": price,
+                          "idCourse": idCourse,
+                        }),
                       ),
                     ),
                   },
