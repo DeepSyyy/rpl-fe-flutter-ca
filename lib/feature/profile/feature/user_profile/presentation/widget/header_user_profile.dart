@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/auth/users.dart';
 import 'package:flutter_fe_rpl/core/config/app_color.dart';
+import 'package:flutter_fe_rpl/feature/edit_profile/presentation/page/edit_profile_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -25,11 +26,11 @@ class _HeaderProfileState extends State<HeaderProfile> {
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: InkWell(
         onTap: () {
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (context) => EditProfilePage(),
-          //     ));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EditProfilePage(),
+              ));
         },
         child: Container(
           decoration: BoxDecoration(
