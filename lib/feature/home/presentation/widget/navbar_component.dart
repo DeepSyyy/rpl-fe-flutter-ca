@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/auth/users.dart';
+import 'package:flutter_fe_rpl/core/config/app_asset.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/widget/home_page_component.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/page/my_class_page.dart';
 import 'package:flutter_fe_rpl/feature/lowongan/presentation/page/lowongan_page.dart';
@@ -45,6 +46,7 @@ class _NavigationBarComponentState extends State<NavigationBarComponent> {
         ProfilePage(),
       ].elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
               icon: SvgPicture.asset(
@@ -56,10 +58,10 @@ class _NavigationBarComponentState extends State<NavigationBarComponent> {
               tooltip: "Beranda",
               label: 'Beranda'),
           BottomNavigationBarItem(
-              icon: SvgPicture.asset("assets/svg/bot-icon.svg"),
-              activeIcon: SvgPicture.asset("assets/svg/bot-icon-filled.svg"),
-              tooltip: "Ze AI",
-              label: 'Ze AI'),
+              icon: SvgPicture.asset(AppAsset.iconLoker),
+              activeIcon: SvgPicture.asset(AppAsset.iconLokerFilled),
+              tooltip: "Lowongan",
+              label: 'Lowongan'),
           BottomNavigationBarItem(
               icon: SvgPicture.asset("assets/svg/book-icon.svg"),
               activeIcon: SvgPicture.asset("assets/svg/book-icon-filled.svg"),
