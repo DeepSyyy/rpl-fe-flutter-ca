@@ -5,4 +5,6 @@ import 'package:flutter_fe_rpl/core/params/user_params.dart';
 abstract class UserRepository {
   Future<Either<Failure, void>> signIn(
       {required UserParamsLogin userParamsLogin});
+
+  Future<Either<Failure, void>> resetPassword({required String email});
 }

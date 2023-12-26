@@ -4,20 +4,19 @@ import 'package:flutter_fe_rpl/core/config/app_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class InputPassword extends StatefulWidget {
-  const InputPassword({super.key});
+  const InputPassword({super.key, required this.controllerPassword});
+  final TextEditingController controllerPassword;
 
   @override
   State<InputPassword> createState() => _InputPasswordState();
 }
 
 class _InputPasswordState extends State<InputPassword> {
-  final controllerPassword = TextEditingController();
-
   bool isPasswordHidden = true;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controllerPassword,
+      controller: widget.controllerPassword,
       obscureText: isPasswordHidden,
       decoration: InputDecoration(
         isDense: true,

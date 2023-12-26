@@ -8,6 +8,7 @@ abstract class UserRemoteDataSource {
   Future<Either<Failure, void>> signIn(
       {required UserParamsLogin userParamsLogin});
   Future<void> signUp({required UserParamsRegister userParamsRegister});
+  Future<Either<Failure, void>> resetPassword({required String email});
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -51,6 +52,15 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         password: userParamsLogin.password,
       );
 
+      var update = await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: userParamsLogin.email)
+          .get();
+
+      update.docs.forEach((element) {
+        element.reference.update({'password': userParamsLogin.password});
+      });
+
       return Right(null);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -62,6 +72,16 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       } else {
         return Left(ServerFailure(errorMessage: 'Lost Connection'));
       }
+    } catch (e) {
+      return Left(ServerFailure(errorMessage: 'Error'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> resetPassword({required String email}) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      return Right(null);
     } catch (e) {
       return Left(ServerFailure(errorMessage: 'Error'));
     }

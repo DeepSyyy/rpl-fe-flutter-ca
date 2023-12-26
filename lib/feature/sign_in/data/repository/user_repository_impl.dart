@@ -19,4 +19,13 @@ class UserRepositoryImpl implements UserRepository {
       return Left(ServerFailure(errorMessage: 'Server Failure'));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> resetPassword({required String email}) async {
+    try {
+      return await userRemoteDataSource.resetPassword(email: email);
+    } catch (e) {
+      return Left(ServerFailure(errorMessage: 'Server Failure'));
+    }
+  }
 }
