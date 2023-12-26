@@ -56,6 +56,15 @@ class CourzeCardWishlist extends StatelessWidget {
                         fit: BoxFit.cover,
                         width: 124,
                         height: 92,
+                        errorBuilder: (context, error, stackTrace) {
+                          return const Center(
+                            child: Icon(
+                              Icons.error_outline,
+                              color: Colors.red,
+                              size: 48,
+                            ),
+                          );
+                        },
                       ),
                     ),
                     const SizedBox(

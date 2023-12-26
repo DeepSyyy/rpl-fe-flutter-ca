@@ -44,7 +44,7 @@ class _CourseCardState extends State<CourseCard> {
           context,
           MaterialPageRoute(
             builder: (context) =>
-                DetailKelasPage(id: widget.id, idUser: widget.idUser),
+                DetailKelasPage(id: widget.id, idUser: widget.idUser!),
             settings: RouteSettings(arguments: {
               "id": widget.id,
               "idUser": widget.idUser,
@@ -126,9 +126,9 @@ class _CourseCardState extends State<CourseCard> {
                     ),
                   ),
                   Container(
-                    child: Row(
+                    child: const Row(
                       children: [
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.only(right: 0.5),
                           child: Icon(
                             Icons.star,
@@ -136,12 +136,7 @@ class _CourseCardState extends State<CourseCard> {
                             size: 20,
                           ),
                         ),
-                        Text(widget.rating,
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: AppColor.textSecondary,
-                            )),
+                        Text("4.5"),
                       ],
                     ),
                   )
