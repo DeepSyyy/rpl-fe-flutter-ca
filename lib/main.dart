@@ -15,6 +15,7 @@ import 'package:flutter_fe_rpl/feature/detail_lowongan/presentation/provider/det
 import 'package:flutter_fe_rpl/feature/detail_lowongan/presentation/widget/detail_lowongan_widget.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/provider/course_user_provider.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/widget/home_page_component.dart';
+import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/provider/my_course_provider.dart';
 import 'package:flutter_fe_rpl/feature/lowongan/presentation/provider/lowongan_provider.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/data/datasource/user_remote_data_source.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/data/repository/user_repository_impl.dart';
@@ -83,6 +84,7 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(create: (context) => AuthUserProvider()),
         ChangeNotifierProvider(create: (context) => WishlistProvider()),
+        ChangeNotifierProvider(create: (context) => MyCourseProvider()),
       ],
       child: SafeArea(
         child: MaterialApp(

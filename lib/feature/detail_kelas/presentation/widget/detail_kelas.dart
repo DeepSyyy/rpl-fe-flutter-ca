@@ -14,8 +14,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class DetailKelasComponent extends StatefulWidget {
-  const DetailKelasComponent({super.key, required this.id});
+  const DetailKelasComponent(
+      {super.key, required this.id, required this.idUser});
   final String id;
+  final String idUser;
 
   @override
   State<DetailKelasComponent> createState() => _DetailKelasComponentState();
@@ -34,9 +36,9 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
     CourseEntityDetailCourse? course =
         Provider.of<DetailCourseProvider>(context).course;
     Failure? failure = Provider.of<DetailCourseProvider>(context).failure;
-    late Widget widget;
+    late Widget component;
     if (course != null) {
-      widget = Scaffold(
+      component = Scaffold(
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
@@ -232,6 +234,11 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
               ),
               PriceComponent(
                 price: course.price,
+                imageUrl: course.imageUrl,
+                courseName: course.name,
+                mentorName: course.mentor,
+                idUser: widget.idUser,
+                idCourse: widget.id,
               ),
             ],
           ),
@@ -239,17 +246,17 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
       );
     } else if (failure != null) {
       print(failure.errorMessage);
-      widget = Scaffold(
+      component = Scaffold(
         body: Center(
           child: Text(failure.errorMessage),
         ),
       );
     } else {
-      widget = const Center(
+      component = const Center(
         child: CircularProgressIndicator(),
       );
     }
     print("failure: $failure, course: $course");
-    return widget;
+    return component;
   }
 }

@@ -47,8 +47,12 @@ class _CourseCardState extends State<CourseCard> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailKelasPage(id: widget.id),
-            settings: RouteSettings(arguments: widget.id),
+            builder: (context) =>
+                DetailKelasPage(id: widget.id, idUser: widget.idUser!),
+            settings: RouteSettings(arguments: {
+              "id": widget.id,
+              "idUser": widget.idUser,
+            }),
           ),
         );
       },

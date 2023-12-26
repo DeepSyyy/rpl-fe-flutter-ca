@@ -1,7 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dartz/dartz.dart';
-import 'package:flutter_fe_rpl/core/errors/failure.dart';
-import 'package:flutter_fe_rpl/feature/detail_kelas/data/model/course_detail_model.dart';
 import 'package:flutter_fe_rpl/feature/wishlist/data/model/course_wishlist_model.dart';
 
 abstract class WishlistRemoteDataSource {
