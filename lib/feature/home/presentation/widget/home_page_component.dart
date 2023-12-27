@@ -339,7 +339,11 @@ class _HomePageState extends State<HomePage> {
 
   CarouselSlider CarouselAds() {
     return CarouselSlider(
-      items: [1, 2, 3, 4]
+      items: [
+        "assets/images/ads_1.png",
+        "assets/images/ads_2.png",
+        "assets/images/ads_3.png"
+      ]
           .map((i) => Builder(builder: (BuildContext context) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(
@@ -351,9 +355,9 @@ class _HomePageState extends State<HomePage> {
                     decoration: BoxDecoration(
                         color: AppColor.primary,
                         borderRadius: BorderRadius.circular(16)),
-                    child: Text(
-                      "text $i",
-                      style: const TextStyle(fontSize: 16),
+                    child: Image.asset(
+                      i,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 );

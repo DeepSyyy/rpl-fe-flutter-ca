@@ -94,7 +94,18 @@ class LowonganContainer extends StatelessWidget {
                   ),
                   const Spacer(),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailLowonganPage(
+                              id: id,
+                              category: category,
+                            ),
+                            settings: RouteSettings(arguments: id),
+                          ),
+                        );
+                      },
                       icon: const Icon(
                         Icons.arrow_circle_right_outlined,
                         color: AppColor.primary,

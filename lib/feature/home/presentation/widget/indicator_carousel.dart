@@ -22,7 +22,7 @@ class _IndicatorCarouselState extends State<IndicatorCarousel> {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [1, 2, 3, 4].map((entry) {
+      children: [1, 2, 3].map((entry) {
         return GestureDetector(
           onTap: () => widget._controller.animateToPage(entry - 1),
           child: widget._current == entry - 1

@@ -98,8 +98,10 @@ class _SignInViewState extends State<SignInView> {
                           ),
                         );
                       } else {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => HomePageView()));
+                        Navigator.pushAndRemoveUntil(context,
+                            MaterialPageRoute(builder: (context) {
+                          return HomePageView();
+                        }), (route) => false);
                       }
                     },
                     isExpand: true,

@@ -63,6 +63,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
       return Right(null);
     } on FirebaseAuthException catch (e) {
+      print(e.code);
       if (e.code == 'user-not-found') {
         return Left(ServerFailure(errorMessage: 'user-not-found'));
       } else if (e.code == 'wrong-password') {
@@ -70,7 +71,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       } else if (e.code == 'invalid-email') {
         return Left(ServerFailure(errorMessage: 'invalid-email'));
       } else {
-        return Left(ServerFailure(errorMessage: 'Lost Connection'));
+        return Left(ServerFailure(errorMessage: 'invalid email or password'));
       }
     } catch (e) {
       return Left(ServerFailure(errorMessage: 'Error'));
