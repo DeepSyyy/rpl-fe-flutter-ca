@@ -46,6 +46,8 @@ class _NavigationBarComponentState extends State<NavigationBarComponent> {
         ProfilePage(),
       ].elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(

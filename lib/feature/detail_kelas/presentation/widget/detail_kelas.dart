@@ -83,30 +83,37 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
                     const SizedBox(
                       height: 16,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          course.name,
-                          style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 20,
-                              color: Colors.black),
-                        ),
-                        IconButton(
-                          onPressed: () async {
-                            bool? isWishlist =
-                                await Provider.of<WishlistProvider>(context,
-                                        listen: false)
-                                    .isWishlist;
-                            setState(() {
-                              isFavorite = isWishlist!;
-                            });
-                          },
-                          icon: Icon(
-                            Icons.favorite,
-                            color: isFavorite ? Colors.red : Colors.grey,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              course.name,
+                              style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20,
+                                  color: Colors.black),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                            ),
+                            IconButton(
+                              onPressed: () async {
+                                bool? isWishlist =
+                                    await Provider.of<WishlistProvider>(context,
+                                            listen: false)
+                                        .isWishlist;
+                                setState(() {
+                                  isFavorite = isWishlist!;
+                                });
+                              },
+                              icon: Icon(
+                                Icons.favorite,
+                                color: isFavorite ? Colors.red : Colors.grey,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

@@ -139,14 +139,6 @@ class _SignInViewState extends State<SignInView> {
                 const SizedBox(
                   height: 24,
                 ),
-                Text(
-                  "Atau",
-                  style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF444444),
-                  ),
-                ),
               ],
             ),
           ),

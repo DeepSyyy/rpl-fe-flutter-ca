@@ -42,10 +42,13 @@ class _DetaiLowonganWidgetState extends State<DetaiLowonganWidget> {
         title: Text(
           "Detail Lowongan",
           style: GoogleFonts.poppins(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+            color: Colors.black,
           ),
         ),
+        centerTitle: true,
+        elevation: 0,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -72,13 +75,14 @@ class _DetaiLowonganWidgetState extends State<DetaiLowonganWidget> {
     if (lowonganEntity != null) {
       widget = Scaffold(
         appBar: AppBar(
-          title: Center(
-            child: Text(
-              "Detail Lowongan",
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
+          backgroundColor: Colors.white,
+          centerTitle: true,
+          elevation: 0,
+          title: Text(
+            "Detail Lowongan",
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w700,
+              fontSize: 16,
             ),
           ),
           leading: IconButton(

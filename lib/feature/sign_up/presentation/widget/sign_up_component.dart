@@ -5,6 +5,7 @@ import 'package:flutter_fe_rpl/core/config/app_color.dart';
 import 'package:flutter_fe_rpl/core/utils/button_customs.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/page/home_page_view.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/page/sign_in_page.dart';
+import 'package:flutter_fe_rpl/feature/sign_in/presentation/widget/sign_in_component.dart';
 import 'package:flutter_fe_rpl/feature/sign_up/presentation/provider/sign_up_user_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -225,7 +226,7 @@ class _SignUpState extends State<SignUp> {
                     fillColor: const Color(0xFFF1F1F1),
                     contentPadding: const EdgeInsets.symmetric(
                         horizontal: 16, vertical: 16),
-                    hintText: "Pilih Role",
+                    hintText: "Pilih Tujuan Karir",
                     hintStyle: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -314,8 +315,11 @@ class _SignUpState extends State<SignUp> {
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => SignInPage()));
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => SignInView(),
+                              ),
+                            );
                           },
                       ),
                     ],
