@@ -13,6 +13,9 @@ import 'package:flutter_fe_rpl/feature/admin/presentation/widget/admin_loker_com
 import 'package:flutter_fe_rpl/feature/detail_kelas/presentation/provider/detail_course_provider.dart';
 import 'package:flutter_fe_rpl/feature/detail_lowongan/presentation/provider/detail_lowongan_provider.dart';
 import 'package:flutter_fe_rpl/feature/detail_lowongan/presentation/widget/detail_lowongan_widget.dart';
+import 'package:flutter_fe_rpl/feature/edit_profile/data/datasource/edit_user_profile_remote_data_source.dart';
+import 'package:flutter_fe_rpl/feature/edit_profile/data/repository/edit_profile_user_repository_impl.dart';
+import 'package:flutter_fe_rpl/feature/edit_profile/presentation/provider/edit_profile_provider.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/provider/course_user_provider.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/widget/home_page_component.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/provider/my_course_provider.dart';
@@ -47,6 +50,9 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseAuth.instance.setSettings(
+    appVerificationDisabledForTesting: true,
+  );
 
   runApp(MyApp());
 }
@@ -62,6 +68,10 @@ class MyApp extends StatelessWidget {
 
   final SignUpRepositoryImpl signUpRepo = SignUpRepositoryImpl(
     signUpRemoteDataSource: SignUpRemoteDataSourceImpl(),
+  );
+  final EditProfileUserRepositoryImpl editProfileRepositryImpl =
+      EditProfileUserRepositoryImpl(
+    editProfileUserDataSource: EditProfileUserRemoteDataSourceImpl(),
   );
 
   @override
@@ -85,6 +95,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AuthUserProvider()),
         ChangeNotifierProvider(create: (context) => WishlistProvider()),
         ChangeNotifierProvider(create: (context) => MyCourseProvider()),
+        ChangeNotifierProvider(
+            create: (context) => EditProfileProvider(
+                editProfileUserRepositoryImpl: editProfileRepositryImpl)),
       ],
       child: SafeArea(
         child: MaterialApp(

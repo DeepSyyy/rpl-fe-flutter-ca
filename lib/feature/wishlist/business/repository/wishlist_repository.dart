@@ -11,4 +11,6 @@ abstract class WishlistRepository {
       {required String idCourse, required String idUser});
   Future<Either<Failure, CourseWishlist>> getCoursesById(
       {required String idCourse});
+  Future<Either<Failure, bool>> checkWishlist(
+      {required String idCourse, required String idUser});
 }

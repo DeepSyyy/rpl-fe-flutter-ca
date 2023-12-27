@@ -10,6 +10,7 @@ import 'package:flutter_fe_rpl/feature/detail_kelas/presentation/widget/key_poin
 import 'package:flutter_fe_rpl/feature/detail_kelas/presentation/widget/point_course_component.dart';
 import 'package:flutter_fe_rpl/feature/detail_kelas/presentation/widget/price_detail_component.dart';
 import 'package:flutter_fe_rpl/feature/detail_kelas/presentation/widget/rating_component.dart';
+import 'package:flutter_fe_rpl/feature/wishlist/presentation/provider/wishlist_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -29,6 +30,8 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
     super.initState();
     Provider.of<DetailCourseProvider>(context, listen: false)
         .getCourseDetail(id: widget.id);
+    Provider.of<WishlistProvider>(context, listen: false)
+        .checkWishlist(idCourse: widget.id, idUser: widget.idUser);
   }
 
   @override
@@ -91,9 +94,13 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
                               color: Colors.black),
                         ),
                         IconButton(
-                          onPressed: () {
+                          onPressed: () async {
+                            bool? isWishlist =
+                                await Provider.of<WishlistProvider>(context,
+                                        listen: false)
+                                    .isWishlist;
                             setState(() {
-                              isFavorite = !isFavorite;
+                              isFavorite = isWishlist!;
                             });
                           },
                           icon: Icon(

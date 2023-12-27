@@ -44,7 +44,7 @@ class _CourseCardState extends State<CourseCard> {
           context,
           MaterialPageRoute(
             builder: (context) =>
-                DetailKelasPage(id: widget.id, idUser: widget.idUser!),
+                DetailKelasPage(id: widget.id, idUser: widget.idUser),
             settings: RouteSettings(arguments: {
               "id": widget.id,
               "idUser": widget.idUser,

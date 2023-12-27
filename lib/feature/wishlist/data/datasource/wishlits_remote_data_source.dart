@@ -7,6 +7,8 @@ abstract class WishlistRemoteDataSource {
   Future<bool> deleteWishlist(
       {required String idCourse, required String idUser});
   Future<CourseWishlistModel> getCoursesById({required String idCourse});
+  Future<bool> checkWishlist(
+      {required String idCourse, required String idUser});
 }
 
 class WishlistRemoteDataSourceImpl implements WishlistRemoteDataSource {
@@ -103,5 +105,21 @@ class WishlistRemoteDataSourceImpl implements WishlistRemoteDataSource {
       });
     });
     return true;
+  }
+
+  @override
+  Future<bool> checkWishlist(
+      {required String idCourse, required String idUser}) async {
+    final data = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(idUser)
+        .collection('wishlist')
+        .where('idCourse', isEqualTo: idCourse)
+        .get();
+    if (data.docs.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

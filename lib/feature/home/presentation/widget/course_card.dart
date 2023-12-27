@@ -30,13 +30,20 @@ class CourseCard extends StatefulWidget {
 class _CourseCardState extends State<CourseCard> {
   bool isFavorite = false;
 
+  void initState() {
+    super.initState();
+    Provider.of<WishlistProvider>(context, listen: false)
+        .checkWishlist(idCourse: widget.id, idUser: widget.idUser!);
+  }
+
   void toggleFavorite() async {
     await Provider.of<WishlistProvider>(context, listen: false)
         .addWishlist(idCourse: widget.id, idUser: widget.idUser!);
+
     bool? isWishlist =
         await Provider.of<WishlistProvider>(context, listen: false).isWishlist;
     setState(() {
-      isFavorite = !isWishlist!;
+      isFavorite = isWishlist!;
     });
   }
 

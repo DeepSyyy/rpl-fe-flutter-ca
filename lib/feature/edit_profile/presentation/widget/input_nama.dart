@@ -2,15 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/config/app_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class InputNama extends StatefulWidget {
-  const InputNama({super.key});
+class InputNama extends StatelessWidget {
+  const InputNama({super.key, required this.controllerNama});
 
-  @override
-  State<InputNama> createState() => _InputNamaState();
-}
-
-class _InputNamaState extends State<InputNama> {
-  final controllerNama = TextEditingController();
+  final TextEditingController controllerNama;
 
   @override
   Widget build(BuildContext context) {

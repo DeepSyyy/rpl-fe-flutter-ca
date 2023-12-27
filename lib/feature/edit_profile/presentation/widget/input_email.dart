@@ -2,15 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/config/app_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class InputEmail extends StatefulWidget {
-  const InputEmail({super.key});
+class InputEmail extends StatelessWidget {
+  const InputEmail({super.key, required this.controllerEmail});
 
-  @override
-  State<InputEmail> createState() => _InputEmailState();
-}
-
-class _InputEmailState extends State<InputEmail> {
-  final controllerEmail = TextEditingController();
+  final TextEditingController controllerEmail;
 
   @override
   Widget build(BuildContext context) {

@@ -72,17 +72,16 @@ class AuthUserProvider extends ChangeNotifier {
 
   void getUser() async {
     final user = FirebaseAuth.instance.currentUser;
-    final uid = user!.uid;
     final data = await FirebaseFirestore.instance
         .collection('users')
-        .doc(uid)
+        .doc(user!.uid)
         .get()
         .then((value) => value.data());
     if (data != null) {
       name = data['name'];
       role = data['role'];
       email = data['email'];
-      this.uid = uid;
+      this.uid = user.uid;
       errorMessage = null;
       notifyListeners();
     } else {

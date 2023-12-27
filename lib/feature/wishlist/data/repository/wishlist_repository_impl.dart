@@ -72,4 +72,18 @@ class WishlistRepositoryImpl implements WishlistRepository {
       return Left(ServerFailure(errorMessage: 'eror wishlist'));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> checkWishlist(
+      {required String idCourse, required String idUser}) async {
+    try {
+      final result = await wishlistRemoteDataSource.checkWishlist(
+        idCourse: idCourse,
+        idUser: idUser,
+      );
+      return Right(result);
+    } catch (e) {
+      return Left(ServerFailure(errorMessage: 'eror wishlist'));
+    }
+  }
 }
