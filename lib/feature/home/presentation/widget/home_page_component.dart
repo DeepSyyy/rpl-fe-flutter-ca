@@ -82,13 +82,19 @@ class _HomePageState extends State<HomePage> {
                           width: 12,
                         ),
                         Container(
+                          width: 200,
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Hi, $name",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700)),
+                                Text(
+                                  "Hi, $name",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColor.textPrimary,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                                 const SizedBox(
                                   height: 6,
                                 ),

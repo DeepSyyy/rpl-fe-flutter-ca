@@ -85,35 +85,42 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              course.name,
-                              style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 20,
-                                  color: Colors.black),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                            ),
-                            IconButton(
-                              onPressed: () async {
-                                bool? isWishlist =
-                                    await Provider.of<WishlistProvider>(context,
-                                            listen: false)
-                                        .isWishlist;
-                                setState(() {
-                                  isFavorite = isWishlist!;
-                                });
-                              },
-                              icon: Icon(
-                                Icons.favorite,
-                                color: isFavorite ? Colors.red : Colors.grey,
+                        Flexible(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  course.name,
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
                               ),
-                            ),
-                          ],
+                              IconButton(
+                                onPressed: () async {
+                                  bool? isWishlist =
+                                      await Provider.of<WishlistProvider>(
+                                              context,
+                                              listen: false)
+                                          .isWishlist;
+                                  setState(() {
+                                    isFavorite = isWishlist!;
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.favorite,
+                                  color: isFavorite ? Colors.red : Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
