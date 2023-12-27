@@ -355,9 +355,9 @@ class _HomePageState extends State<HomePage> {
   CarouselSlider CarouselAds() {
     return CarouselSlider(
       items: [
-        "assets/images/ads_1.png",
-        "assets/images/ads_2.png",
-        "assets/images/ads_3.png"
+        "assets/images/Ads_1.png",
+        "assets/images/Ads_2.png",
+        "assets/images/Ads_3.png",
       ]
           .map((i) => Builder(builder: (BuildContext context) {
                 return Padding(
