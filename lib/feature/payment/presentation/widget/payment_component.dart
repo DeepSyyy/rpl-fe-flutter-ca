@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/utils/button_customs.dart';
+import 'package:flutter_fe_rpl/feature/history_transaction/presentation/provider/transaction_provider.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/page/home_page_view.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/provider/my_course_provider.dart';
 import 'package:flutter_fe_rpl/feature/payment/presentation/widget/card_course_info.dart';
@@ -63,12 +64,16 @@ class PaymentComponent extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Consumer<MyCourseProvider>(builder: (context, state, _) {
+            child: Consumer2<MyCourseProvider, TransactionProvider>(
+                builder: (context, myCourseProvider, transactionProvider, _) {
               return ButtonCustom(
                   isExpand: true,
                   label: "Bayar",
                   onTap: () async {
-                    await state.addMyCourse(idUser: idUser, idCourse: idCourse);
+                    await myCourseProvider.addMyCourse(
+                        idUser: idUser, idCourse: idCourse);
+                    await transactionProvider.addTransaction(
+                        idUser: idUser!, idCourse: idCourse);
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => HomePageView()),

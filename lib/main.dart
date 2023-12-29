@@ -16,6 +16,7 @@ import 'package:flutter_fe_rpl/feature/detail_lowongan/presentation/widget/detai
 import 'package:flutter_fe_rpl/feature/edit_profile/data/datasource/edit_user_profile_remote_data_source.dart';
 import 'package:flutter_fe_rpl/feature/edit_profile/data/repository/edit_profile_user_repository_impl.dart';
 import 'package:flutter_fe_rpl/feature/edit_profile/presentation/provider/edit_profile_provider.dart';
+import 'package:flutter_fe_rpl/feature/history_transaction/presentation/provider/transaction_provider.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/provider/course_user_provider.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/widget/home_page_component.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/provider/my_course_provider.dart';
@@ -98,6 +99,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (context) => EditProfileProvider(
                 editProfileUserRepositoryImpl: editProfileRepositryImpl)),
+        ChangeNotifierProvider(create: (context) => TransactionProvider()),
       ],
       child: SafeArea(
         child: MaterialApp(
