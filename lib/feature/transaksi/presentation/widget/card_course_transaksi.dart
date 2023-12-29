@@ -27,7 +27,7 @@ class CourseCardTransaksi extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: IntrinsicHeight(
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
@@ -57,6 +57,7 @@ class CourseCardTransaksi extends StatelessWidget {
                       height: 8,
                     ),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
