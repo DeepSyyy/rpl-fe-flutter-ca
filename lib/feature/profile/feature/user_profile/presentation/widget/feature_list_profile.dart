@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fe_rpl/core/auth/users.dart';
 import 'package:flutter_fe_rpl/core/config/app_color.dart';
 import 'package:flutter_fe_rpl/feature/transaksi/presentation/page/transaksi_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class ListingFeature extends StatelessWidget {
-  const ListingFeature({super.key});
+  const ListingFeature({super.key, required this.idUser});
+  final String idUser;
 
   @override
   Widget build(BuildContext context) {
+    String? uid = Provider.of<AuthUserProvider>(context).uid;
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -34,7 +38,9 @@ class ListingFeature extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => TransaksiPage(),
+                        builder: (context) => TransaksiPage(
+                          idUser: uid!,
+                        ),
                       ),
                     );
                   }),

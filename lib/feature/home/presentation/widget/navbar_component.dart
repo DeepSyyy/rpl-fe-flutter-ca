@@ -43,7 +43,9 @@ class _NavigationBarComponentState extends State<NavigationBarComponent> {
         MyClassPage(
           idUser: idUser,
         ),
-        ProfilePage(),
+        ProfilePage(
+          idUser: idUser!,
+        ),
       ].elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,

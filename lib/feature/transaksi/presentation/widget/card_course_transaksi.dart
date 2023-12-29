@@ -4,7 +4,17 @@ import 'package:flutter_fe_rpl/feature/detail_transaksi/presentation/page/detail
 import 'package:google_fonts/google_fonts.dart';
 
 class CourseCardTransaksi extends StatelessWidget {
-  const CourseCardTransaksi({super.key});
+  const CourseCardTransaksi({
+    super.key,
+    required this.name,
+    required this.price,
+    required this.imageUrl,
+    required this.idUser,
+  });
+  final String name;
+  final String imageUrl;
+  final String price;
+  final String? idUser;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +42,7 @@ class CourseCardTransaksi extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.network(
-                  "https://picsum.photos/200/300",
+                  imageUrl,
                   fit: BoxFit.cover,
                   height: 70,
                   width: 90,
@@ -45,7 +55,7 @@ class CourseCardTransaksi extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Nama Course",
+                      name,
                       style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
@@ -61,7 +71,7 @@ class CourseCardTransaksi extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "RP Harga ",
+                          "Rp. ${price}",
                           style: GoogleFonts.poppins(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
