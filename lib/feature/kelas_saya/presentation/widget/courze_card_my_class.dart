@@ -32,6 +32,15 @@ class CourzeCardMyClass extends StatelessWidget {
                 fit: BoxFit.cover,
                 width: 120,
                 height: 90,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Center(
+                    child: Icon(
+                      Icons.error_outline,
+                      color: Colors.red,
+                      size: 80,
+                    ),
+                  );
+                },
               ),
             ),
             const SizedBox(

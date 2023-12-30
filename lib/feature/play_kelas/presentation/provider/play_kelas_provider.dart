@@ -5,11 +5,11 @@ import 'package:flutter_fe_rpl/feature/play_kelas/business/usecase/get_play_kela
 import 'package:flutter_fe_rpl/feature/play_kelas/data/datasource/play_kelas_data_source.dart';
 import 'package:flutter_fe_rpl/feature/play_kelas/data/repository/play_kelas_repository_impl.dart';
 
-class DetailCourseProvider extends ChangeNotifier {
+class PlayKelasProvider extends ChangeNotifier {
   PlayKelas? course;
   Failure? failure;
 
-  DetailCourseProvider({
+  PlayKelasProvider({
     this.course,
     this.failure,
   });
