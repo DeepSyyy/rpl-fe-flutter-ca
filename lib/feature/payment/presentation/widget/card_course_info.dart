@@ -32,7 +32,19 @@ class CardCourseInfo extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 color: Colors.deepPurple,
               ),
-              child: Image.asset(imageUrl),
+              child: Image.network(
+                imageUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Center(
+                    child: Icon(
+                      Icons.error_outline,
+                      color: Colors.red,
+                      size: 48,
+                    ),
+                  );
+                },
+              ),
             ),
             const SizedBox(
               width: 8,
