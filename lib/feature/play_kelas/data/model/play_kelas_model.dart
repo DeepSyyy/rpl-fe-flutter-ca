@@ -1,6 +1,6 @@
-import 'package:flutter_fe_rpl/feature/detail_kelas/business/entity/course_entity_detail_course.dart';
+import 'package:flutter_fe_rpl/feature/play_kelas/business/entity/play_kelas_entity.dart';
 
-class PlayKelasModel extends CourseEntityDetailCourse {
+class PlayKelasModel extends PlayKelas {
   String? id;
   final String name;
   final String rating;

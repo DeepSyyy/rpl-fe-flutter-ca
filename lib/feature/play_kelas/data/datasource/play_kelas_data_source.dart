@@ -1,23 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_fe_rpl/core/errors/failure.dart';
-import 'package:flutter_fe_rpl/feature/detail_kelas/data/model/course_detail_model.dart';
+import 'package:flutter_fe_rpl/feature/play_kelas/data/model/play_kelas_model.dart';
 
-abstract class CourseDetailRemoteDataSource {
-  Future<Either<Failure, PlayKelasModel>> getCourseDetail({required String id});
+abstract class PlayKelasDataSource {
+  Future<Either<Failure, PlayKelasModel>> getKelas({required String id});
 }
 
-class CourseDetailRemoteDataSourceImpl implements CourseDetailRemoteDataSource {
+class PlayKelasDataSourceImpl implements PlayKelasDataSource {
   @override
-  Future<Either<Failure, PlayKelasModel>> getCourseDetail(
-      {required String id}) async {
+  Future<Either<Failure, PlayKelasModel>> getKelas({required String id}) async {
     CollectionReference courses =
         FirebaseFirestore.instance.collection('course');
     final data = await courses.doc(id).get();
     if (data.exists) {
       final e = data.data() as Map<String, dynamic>;
       e['id'] = id;
-      // print("${CourseModelDetailCourse.fromJson(e)}");
+      print("${PlayKelasModel.fromJson(e)}");
       return Right(PlayKelasModel.fromJson(e));
     } else {
       return Left(ServerFailure(errorMessage: 'Data tidak ditemukan'));
