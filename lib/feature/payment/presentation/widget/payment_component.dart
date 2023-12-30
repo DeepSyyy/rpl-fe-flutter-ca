@@ -15,12 +15,14 @@ class PaymentComponent extends StatelessWidget {
       required this.courseName,
       required this.mentorName,
       required this.idCourse,
+      required this.price,
       this.idUser});
   final String imageUrl;
   final String courseName;
   final String mentorName;
   final String? idUser;
   final String idCourse;
+  final String price;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,9 @@ class PaymentComponent extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                CardPaymentDetail(),
+                CardPaymentDetail(
+                  price: price,
+                ),
                 const SizedBox(
                   height: 20,
                 ),

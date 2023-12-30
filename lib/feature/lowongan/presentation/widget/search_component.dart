@@ -19,7 +19,7 @@ class SearchComponent extends StatelessWidget {
           child: TextField(
             onTap: () {},
             decoration: InputDecoration(
-              hintText: 'Cari Pekerjaan',
+              hintText: 'Cari pekerjaan',
               hintStyle: GoogleFonts.poppins(
                 fontWeight: FontWeight.w400,
                 fontSize: 14,

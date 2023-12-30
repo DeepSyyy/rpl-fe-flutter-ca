@@ -3,10 +3,15 @@ import 'package:flutter_fe_rpl/core/config/app_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyCourseCard extends StatelessWidget {
-  const MyCourseCard({
-    super.key,
-  });
+  const MyCourseCard(
+      {super.key,
+      required this.courseName,
+      required this.mentorName,
+      required this.imageUrl});
 
+  final String courseName;
+  final String mentorName;
+  final String imageUrl;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,12 +20,14 @@ class MyCourseCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
+            clipBehavior: Clip.antiAlias,
             width: 110,
             height: 86,
             decoration: BoxDecoration(
               color: AppColor.primary,
               borderRadius: BorderRadius.circular(16),
             ),
+            child: Image.network(imageUrl),
           ),
           const SizedBox(
             width: 8,
@@ -30,7 +37,7 @@ class MyCourseCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "User Experience Design Essentials - Adobe XD UI UX Design",
+                  courseName,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.poppins(
                     fontSize: 12,
@@ -41,7 +48,7 @@ class MyCourseCard extends StatelessWidget {
                   height: 4,
                 ),
                 Text(
-                  "Nama Mentor",
+                  mentorName,
                   style: GoogleFonts.poppins(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
@@ -49,14 +56,6 @@ class MyCourseCard extends StatelessWidget {
                 ),
                 const SizedBox(
                   height: 10,
-                ),
-                Text(
-                  "60%",
-                  style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: AppColor.primary,
-                  ),
                 ),
               ],
             ),

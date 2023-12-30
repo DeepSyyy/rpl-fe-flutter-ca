@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/data/model/my_course_model.dart';
 
 abstract class MyCourseRemoteDataSource {
-  Future<List<MyCourseModel>> getMyCourse({required String idUser});
+  Future<List<MyCourseModel>> getMyCourse({required String? idUser});
   Future<MyCourseModel> getCourseById({required String idCourse});
   Future<void> addMyCourse({required String? idUser, required String idCourse});
 }
