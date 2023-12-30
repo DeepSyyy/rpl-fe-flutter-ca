@@ -10,11 +10,10 @@ import 'package:provider/provider.dart';
 
 class ProfileComponent extends StatelessWidget {
   const ProfileComponent({super.key, required this.userId});
-  final String userId;
+  final String? userId;
 
   @override
   Widget build(BuildContext context) {
-    String? uid = Provider.of<AuthUserProvider>(context).uid;
     return Scaffold(
       backgroundColor: const Color(0xFFF6F6F6),
       appBar: AppBar(
@@ -41,7 +40,7 @@ class ProfileComponent extends StatelessWidget {
             height: 24,
           ),
           ListingFeature(
-            idUser: userId,
+            idUser: userId!,
           ),
           const SizedBox(
             height: 32,

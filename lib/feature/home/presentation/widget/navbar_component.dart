@@ -44,7 +44,7 @@ class _NavigationBarComponentState extends State<NavigationBarComponent> {
           idUser: idUser,
         ),
         ProfilePage(
-          idUser: idUser!,
+          idUser: idUser,
         ),
       ].elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(

@@ -25,7 +25,7 @@ class _TransaksiComponentState extends State<TransaksiComponent> {
     super.initState();
     if (widget.idUser != null) {
       Provider.of<TransactionProvider>(context, listen: false)
-          .getTransaction(idUser: widget.idUser!);
+          .getTransaction(idUser: widget.idUser);
     }
     Provider.of<AuthUserProvider>(context, listen: false).getUser();
   }
@@ -34,7 +34,7 @@ class _TransaksiComponentState extends State<TransaksiComponent> {
   Widget build(BuildContext context) {
     String? idUser = Provider.of<AuthUserProvider>(context).uid;
     List<CourseDetailTransaction>? transactionId =
-        Provider.of<TransactionProvider>(context).transactionList ?? [];
+        Provider.of<TransactionProvider>(context).transactionList;
 
     print(transactionId);
     Failure? failure = Provider.of<TransactionProvider>(context).failure;
@@ -44,7 +44,7 @@ class _TransaksiComponentState extends State<TransaksiComponent> {
     } else {
       return Scaffold(
         body: Center(
-          child: CircularProgressIndicator(), // Menampilkan indikator loading
+          child: CircularProgressIndicator(),
         ),
       );
     }
@@ -56,12 +56,6 @@ class _TransaksiComponentState extends State<TransaksiComponent> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        shape: const Border(
-          bottom: BorderSide(
-            color: Colors.grey,
-            width: 1,
-          ),
-        ),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -84,16 +78,48 @@ class _TransaksiComponentState extends State<TransaksiComponent> {
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: ListView.builder(
-          itemCount: transactions.length,
-          itemBuilder: (context, index) {
-            return CourseCardTransaksi(
-              idUser: idUser,
-              imageUrl: transactions[index].imageUrl,
-              name: transactions[index].name,
-              price: transactions[index].price,
-            );
-          },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 24,
+            ),
+            Text(
+              "Transaksi kamu",
+              style: GoogleFonts.poppins(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: AppColor.textPrimary,
+              ),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Text(
+              "Riwayat Pembelian Kelas Premium Anda Membangun Landasan Menuju Karir yang Penuh Cahaya dan Masa Depan yang Berprestasi",
+              style: GoogleFonts.poppins(
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: AppColor.textSecondary,
+              ),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: transactions.length,
+                itemBuilder: (context, index) {
+                  return CourseCardTransaksi(
+                    idUser: idUser,
+                    imageUrl: transactions[index].imageUrl,
+                    name: transactions[index].name,
+                    price: transactions[index].price,
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );

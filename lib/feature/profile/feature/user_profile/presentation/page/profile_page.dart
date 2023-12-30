@@ -3,7 +3,7 @@ import 'package:flutter_fe_rpl/feature/profile/feature/user_profile/presentation
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key, required this.idUser});
-  final String idUser;
+  final String? idUser;
 
   @override
   Widget build(BuildContext context) {
