@@ -27,7 +27,11 @@ class MyCourseCard extends StatelessWidget {
               color: AppColor.primary,
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Image.network(imageUrl),
+            child: Image.network(
+              imageUrl,
+              width: 110,
+              height: 86,
+            ),
           ),
           const SizedBox(
             width: 8,

@@ -30,8 +30,8 @@ class CourzeCardMyClass extends StatelessWidget {
               child: Image.network(
                 imageUrl,
                 fit: BoxFit.cover,
-                width: 110,
-                height: 86,
+                width: 120,
+                height: 90,
               ),
             ),
             const SizedBox(

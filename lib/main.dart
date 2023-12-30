@@ -103,6 +103,7 @@ class MyApp extends StatelessWidget {
       ],
       child: SafeArea(
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           home: StreamBuilder<User?>(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, AsyncSnapshot<User?> snapshot) {

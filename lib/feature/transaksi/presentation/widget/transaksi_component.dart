@@ -96,7 +96,7 @@ class _TransaksiComponentState extends State<TransaksiComponent> {
               height: 8,
             ),
             Text(
-              "Riwayat Pembelian Kelas Premium Anda Membangun Landasan Menuju Karir yang Penuh Cahaya dan Masa Depan yang Berprestasi",
+              "Riwayat Pembelian Kelas Premium Anda, Menuju Karir yang dan Masa Depan yang Berprestasi",
               style: GoogleFonts.poppins(
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
@@ -109,12 +109,16 @@ class _TransaksiComponentState extends State<TransaksiComponent> {
             Expanded(
               child: ListView.builder(
                 itemCount: transactions.length,
+                scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
-                  return CourseCardTransaksi(
-                    idUser: idUser,
-                    imageUrl: transactions[index].imageUrl,
-                    name: transactions[index].name,
-                    price: transactions[index].price,
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: CourseCardTransaksi(
+                      idUser: idUser,
+                      imageUrl: transactions[index].imageUrl,
+                      name: transactions[index].name,
+                      price: transactions[index].price,
+                    ),
                   );
                 },
               ),
