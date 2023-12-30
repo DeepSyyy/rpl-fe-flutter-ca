@@ -57,16 +57,20 @@ class _MyClassComponentState extends State<MyClassComponent> {
               height: 20,
             ),
             ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                itemCount: myCourse.length,
-                itemBuilder: (context, index) {
-                  return CourzeCardMyClass(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              itemCount: myCourse.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: CourzeCardMyClass(
                     imageUrl: myCourse[index].imageUrl,
                     courseName: myCourse[index].name,
                     mentorName: myCourse[index].mentor,
-                  );
-                })
+                  ),
+                );
+              },
+            ),
           ],
         ),
       );

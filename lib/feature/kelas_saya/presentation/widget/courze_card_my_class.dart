@@ -66,7 +66,7 @@ class CourzeCardMyClass extends StatelessWidget {
             ),
             Container(
               decoration: BoxDecoration(
-                color: Colors.orange,
+                color: Color(0xFFB3F69C),
                 borderRadius: BorderRadius.circular(20),
               ),
               padding: const EdgeInsets.symmetric(
@@ -74,11 +74,11 @@ class CourzeCardMyClass extends StatelessWidget {
                 vertical: 2,
               ),
               child: Text(
-                "Progress",
+                "Mulai",
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                  fontSize: 10,
+                  color: Color(0xFF6ACD2C),
+                  fontSize: 12,
                 ),
               ),
             )
