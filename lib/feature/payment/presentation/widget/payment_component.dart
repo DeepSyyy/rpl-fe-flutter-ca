@@ -5,6 +5,7 @@ import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/provider/my_cours
 import 'package:flutter_fe_rpl/feature/payment/presentation/widget/card_course_info.dart';
 import 'package:flutter_fe_rpl/feature/payment/presentation/widget/card_payment_detail.dart';
 import 'package:flutter_fe_rpl/feature/payment/presentation/widget/payment_choice_card.dart';
+import 'package:flutter_fe_rpl/feature/payment_success/presentation/page/payment_succes_page.dart';
 import 'package:flutter_fe_rpl/feature/transaksi/presentation/provider/transaksi_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -80,7 +81,10 @@ class PaymentComponent extends StatelessWidget {
                         idCourse: idCourse, idUser: idUser!);
                     Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePageView()),
+                        MaterialPageRoute(
+                            builder: (context) => PaymentSuccesPage(
+                                  idUser: idUser!,
+                                )),
                         (route) => false);
                   });
             }),

@@ -3,7 +3,6 @@ import 'package:flutter_fe_rpl/core/auth/users.dart';
 import 'package:flutter_fe_rpl/core/config/app_color.dart';
 import 'package:flutter_fe_rpl/core/errors/failure.dart';
 import 'package:flutter_fe_rpl/feature/transaksi/business/entity/course_detail_transacttion.dart';
-import 'package:flutter_fe_rpl/feature/transaksi/business/entity/transaction_entity.dart';
 import 'package:flutter_fe_rpl/feature/transaksi/presentation/provider/transaksi_provider.dart';
 import 'package:flutter_fe_rpl/feature/transaksi/presentation/widget/card_course_transaksi.dart';
 import 'package:google_fonts/google_fonts.dart';
