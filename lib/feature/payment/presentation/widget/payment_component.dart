@@ -84,6 +84,7 @@ class PaymentComponent extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => PaymentSuccesPage(
                                   idUser: idUser!,
+                                  imageUrl: imageUrl,
                                 )),
                         (route) => false);
                   });
