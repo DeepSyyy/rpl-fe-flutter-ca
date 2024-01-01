@@ -34,12 +34,12 @@ class _VideoPlayState extends State<VideoPlay> {
           mute: false,
         ),
       );
-      print("Video initialization successful");
     } catch (e) {
-      print("Error initializing video: $e");
+      throw Exception(e);
     }
   }
 
+  @override
   void dispose() {
     super.dispose();
   }
@@ -50,9 +50,7 @@ class _VideoPlayState extends State<VideoPlay> {
       progressIndicatorColor: AppColor.primary,
       controller: _controller,
       showVideoProgressIndicator: true,
-      onReady: () {
-        print("Video is ready");
-      },
+      onReady: () {},
     );
   }
 }

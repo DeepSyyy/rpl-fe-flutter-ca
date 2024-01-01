@@ -13,8 +13,8 @@ class FeatureCourseContainer extends StatelessWidget {
     return Container(
       height: 66,
       width: 94,
-      margin: EdgeInsets.only(right: 12),
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+      margin: const EdgeInsets.only(right: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
       decoration: ShapeDecoration(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
@@ -34,7 +34,7 @@ class FeatureCourseContainer extends StatelessWidget {
             svgAsset,
             height: 24,
             width: 24,
-            color: Color(0xFFF4F46E5),
+            color: const Color(0xFFF4F46E5),
           ),
           const SizedBox(
             height: 4,
@@ -43,7 +43,7 @@ class FeatureCourseContainer extends StatelessWidget {
             title,
             overflow: TextOverflow.ellipsis,
             style: GoogleFonts.poppins(
-                color: Color(0xFF111111),
+                color: const Color(0xFF111111),
                 fontSize: 12,
                 fontWeight: FontWeight.w600),
           )

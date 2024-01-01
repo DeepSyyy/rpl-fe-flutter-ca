@@ -1,8 +1,11 @@
 import 'package:flutter_fe_rpl/feature/detail_lowongan/business/entity/sub_entity.dart';
 
 class KontakModelDetailLowongan extends KontakEntityDetailLowongan {
+  @override
   final String alamat;
+  @override
   final String nomor;
+  @override
   final String email;
 
   KontakModelDetailLowongan({

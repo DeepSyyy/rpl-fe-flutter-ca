@@ -62,7 +62,7 @@ class PaymentComponent extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                PaymentChoiceCard(),
+                const PaymentChoiceCard(),
               ],
             ),
           ),

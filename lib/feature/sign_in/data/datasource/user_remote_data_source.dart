@@ -33,12 +33,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       credential.user!.updateDisplayName(userParamsRegister.name);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
+      } else if (e.code == 'email-already-in-use') {}
     } catch (e) {
-      print(e);
+      throw Exception(e);
     }
   }
 
@@ -61,9 +58,8 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         element.reference.update({'password': userParamsLogin.password});
       });
 
-      return Right(null);
+      return const Right(null);
     } on FirebaseAuthException catch (e) {
-      print(e.code);
       if (e.code == 'user-not-found') {
         return Left(ServerFailure(errorMessage: 'user-not-found'));
       } else if (e.code == 'wrong-password') {
@@ -82,7 +78,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   Future<Either<Failure, void>> resetPassword({required String email}) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      return Right(null);
+      return const Right(null);
     } catch (e) {
       return Left(ServerFailure(errorMessage: 'Error'));
     }

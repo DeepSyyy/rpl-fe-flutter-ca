@@ -16,6 +16,7 @@ class PlayKelasComponent extends StatefulWidget {
 }
 
 class _PlayKelasComponentState extends State<PlayKelasComponent> {
+  @override
   void initState() {
     super.initState();
     Provider.of<PlayKelasProvider>(context, listen: false)

@@ -19,7 +19,7 @@ class MyCourseRepositoryImpl implements MyCourseRepository {
         idUser: idUser!,
         idCourse: idCourse,
       );
-      return Right(null);
+      return const Right(null);
     } catch (e) {
       return Left(ServerFailure(errorMessage: 'eror'));
     }

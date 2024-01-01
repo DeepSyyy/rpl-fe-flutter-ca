@@ -3,11 +3,17 @@ import 'dart:convert';
 import 'package:flutter_fe_rpl/feature/sign_in/business/entities/sub_entities/user_entity.dart';
 
 class UserModel extends UserEntity {
+  @override
   final String userId;
+  @override
   final String name;
+  @override
   final String email;
+  @override
   final String password;
+  @override
   final bool isVerified;
+  @override
   final DateTime createAt;
 
   UserModel({

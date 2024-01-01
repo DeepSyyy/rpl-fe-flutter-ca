@@ -13,6 +13,7 @@ class HeaderProfile extends StatefulWidget {
 }
 
 class _HeaderProfileState extends State<HeaderProfile> {
+  @override
   void initState() {
     super.initState();
     Provider.of<AuthUserProvider>(context, listen: false).getUser();
@@ -29,7 +30,7 @@ class _HeaderProfileState extends State<HeaderProfile> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => EditProfilePage(),
+                builder: (context) => const EditProfilePage(),
               ));
         },
         child: Container(
@@ -37,7 +38,7 @@ class _HeaderProfileState extends State<HeaderProfile> {
             borderRadius: BorderRadius.circular(10),
             color: Colors.white,
             border: Border.all(
-              color: Color(0xFF7A7A7A).withOpacity(0.2),
+              color: const Color(0xFF7A7A7A).withOpacity(0.2),
             ),
           ),
           padding: const EdgeInsets.all(10),

@@ -2,14 +2,23 @@ import 'package:flutter_fe_rpl/feature/admin/business/entity/loker_entity.dart';
 import 'package:flutter_fe_rpl/feature/admin/data/model/kontak_model.dart';
 
 class LokerModel extends LokerEntity {
+  @override
   String? id;
+  @override
   final String title;
+  @override
   final String kategori;
+  @override
   final String perusahaan;
+  @override
   final String lokasi;
+  @override
   final String tipe;
+  @override
   final String description;
+  @override
   final List<String> persyaratan;
+  @override
   final List<KontakModel>? kontak;
 
   LokerModel({

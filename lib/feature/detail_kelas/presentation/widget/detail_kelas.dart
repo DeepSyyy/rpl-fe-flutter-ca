@@ -26,6 +26,7 @@ class DetailKelasComponent extends StatefulWidget {
 
 class _DetailKelasComponentState extends State<DetailKelasComponent> {
   bool isFavorite = false;
+  @override
   void initState() {
     super.initState();
     Provider.of<DetailCourseProvider>(context, listen: false)
@@ -104,10 +105,9 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
                                 ),
                               ),
                               IconButton(
-                                onPressed: () async {
+                                onPressed: () {
                                   bool? isWishlist =
-                                      await Provider.of<WishlistProvider>(
-                                              context,
+                                      Provider.of<WishlistProvider>(context,
                                               listen: false)
                                           .isWishlist;
                                   setState(() {
@@ -254,7 +254,6 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
         ),
       );
     } else if (failure != null) {
-      print(failure.errorMessage);
       component = Scaffold(
         body: Center(
           child: Text(failure.errorMessage),
@@ -265,7 +264,6 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
         child: CircularProgressIndicator(),
       );
     }
-    print("failure: $failure, course: $course");
     return component;
   }
 }

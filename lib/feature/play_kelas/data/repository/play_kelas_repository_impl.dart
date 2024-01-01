@@ -15,7 +15,6 @@ class PlayKelasRepositoryImpl implements PlayKelasRepository {
     try {
       return await courseRemoteDataSource.getKelas(id: id);
     } catch (e) {
-      print(e);
       return Left(
           ServerFailure(errorMessage: 'Tidak dapat mengambil data detail'));
     }

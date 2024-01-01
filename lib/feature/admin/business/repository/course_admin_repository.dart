@@ -8,5 +8,6 @@ abstract class CourseRepository {
   Future<Either<Failure, CourseEntity>> getCourse({required String id});
   Future<Either<Failure, void>> addCourse({required CourseParams course});
   Future<Either<Failure, void>> deleteCourse({required String id});
-  Future<Either<Failure, void>> updateCourse({required CourseParams course});
+  Future<Either<Failure, void>> updateCourse(
+      {required CourseParams course, required String? id});
 }

@@ -25,11 +25,9 @@ class _PageNavbarState extends State<PageNavbar> {
         bottomNavigationBar: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(
-                icon: const Icon(Icons.book),
-                tooltip: "Course",
-                label: 'Course'),
+                icon: Icon(Icons.book), tooltip: "Course", label: 'Course'),
             BottomNavigationBarItem(
-                icon: const Icon(Icons.work), tooltip: "Loker", label: 'Loker'),
+                icon: Icon(Icons.work), tooltip: "Loker", label: 'Loker'),
           ],
           currentIndex: _selectedIndex,
           onTap: _itemTapped,

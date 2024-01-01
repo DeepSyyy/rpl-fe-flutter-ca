@@ -16,6 +16,7 @@ class EditProfileComponent extends StatefulWidget {
 }
 
 class _EditProfileComponentState extends State<EditProfileComponent> {
+  @override
   void initState() {
     super.initState();
     Provider.of<AuthUserProvider>(context, listen: false).getUser();
@@ -118,9 +119,9 @@ class _EditProfileComponentState extends State<EditProfileComponent> {
                           name: controllerNama.text,
                           password: controllerPassword.text);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text("Berhasil mengubah data"),
-                          duration: const Duration(seconds: 2),
+                          duration: Duration(seconds: 2),
                         ),
                       );
                     },

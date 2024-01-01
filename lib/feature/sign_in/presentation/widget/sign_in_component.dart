@@ -29,7 +29,7 @@ class _SignInViewState extends State<SignInView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           child: SafeArea(
             child: Column(
@@ -66,7 +66,7 @@ class _SignInViewState extends State<SignInView> {
                 InkWell(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ResetPasswordComponent()));
+                        builder: (context) => const ResetPasswordComponent()));
                   },
                   child: Align(
                     alignment: Alignment.centerRight,
@@ -98,10 +98,11 @@ class _SignInViewState extends State<SignInView> {
                           ),
                         );
                       } else {
-                        Navigator.pushAndRemoveUntil(context,
-                            MaterialPageRoute(builder: (context) {
-                          return HomePageView();
-                        }), (route) => false);
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                          builder: (context) {
+                            return const HomePageView();
+                          },
+                        ), (route) => false);
                       }
                     },
                     isExpand: true,
@@ -116,7 +117,7 @@ class _SignInViewState extends State<SignInView> {
                     style: GoogleFonts.poppins(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFFAFAFAF),
+                      color: const Color(0xFFAFAFAF),
                     ),
                     children: [
                       TextSpan(
@@ -130,7 +131,7 @@ class _SignInViewState extends State<SignInView> {
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => SignUpPage()));
+                                builder: (context) => const SignUpPage()));
                           },
                       ),
                     ],

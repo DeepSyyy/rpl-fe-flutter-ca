@@ -40,7 +40,8 @@ class CourzeCardWishlist extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Color(0xFF7A7A7A).withOpacity(0.2)),
+              border:
+                  Border.all(color: const Color(0xFF7A7A7A).withOpacity(0.2)),
             ),
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -158,7 +159,8 @@ class CourzeCardWishlist extends StatelessWidget {
                             print(e);
                           }
                         },
-                        icon: Icon(FluentSystemIcons.ic_fluent_delete_regular),
+                        icon: const Icon(
+                            FluentSystemIcons.ic_fluent_delete_regular),
                       );
                     }),
                     const SizedBox(

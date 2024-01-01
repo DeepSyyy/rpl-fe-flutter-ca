@@ -21,14 +21,14 @@ class InputEmail extends StatelessWidget {
           hintStyle: GoogleFonts.poppins(
             fontSize: 14,
             fontWeight: FontWeight.w400,
-            color: Color(0xFF7A7A7A),
+            color: const Color(0xFF7A7A7A),
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: AppColor.primary),
+            borderSide: const BorderSide(color: AppColor.primary),
           ),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),

@@ -75,11 +75,7 @@ class _AddLokerWidgetState extends State<AddLokerWidget> {
                   nomor: _nomorKontakController.text,
                 );
                 kontak.add(params);
-                for (var i = 0; i < kontak.length; i++) {
-                  print(kontak[i].alamat);
-                  print(kontak[i].email);
-                  print(kontak[i].nomor);
-                }
+
                 setState(() {
                   _alamatKontakController.clear();
                   _emailKontakController.clear();
@@ -110,7 +106,7 @@ class _AddLokerWidgetState extends State<AddLokerWidget> {
             TextButton(
               onPressed: () {
                 persyaratan.add(_persyaratanController.text);
-                print(_persyaratanController.text);
+
                 setState(() {});
                 Navigator.of(context).pop();
               },
@@ -132,7 +128,7 @@ class _AddLokerWidgetState extends State<AddLokerWidget> {
           onPressed: () {
             _showDialogKontak();
           },
-          child: SizedBox(
+          child: const SizedBox(
             width: 150,
             child: Row(
               children: [
@@ -178,7 +174,7 @@ class _AddLokerWidgetState extends State<AddLokerWidget> {
                 onPressed: () {
                   _showDialogPersyaratan();
                 },
-                child: SizedBox(
+                child: const SizedBox(
                   width: 150,
                   child: Row(
                     children: [

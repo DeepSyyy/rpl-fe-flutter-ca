@@ -2,14 +2,23 @@ import 'package:flutter_fe_rpl/feature/detail_lowongan/business/entity/lowongan_
 import 'package:flutter_fe_rpl/feature/detail_lowongan/data/model/sub_model.dart';
 
 class DetailLowonganModel extends DetailLowonganEntity {
+  @override
   String? id;
+  @override
   final String title;
+  @override
   final String kategori;
+  @override
   final String perusahaan;
+  @override
   final String lokasi;
+  @override
   final String tipe;
+  @override
   final String description;
+  @override
   final List<String> persyaratan;
+  @override
   final List<KontakModelDetailLowongan>? kontak;
 
   DetailLowonganModel({

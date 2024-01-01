@@ -30,6 +30,7 @@ class CourseCard extends StatefulWidget {
 class _CourseCardState extends State<CourseCard> {
   bool isFavorite = false;
 
+  @override
   void initState() {
     super.initState();
     Provider.of<WishlistProvider>(context, listen: false)

@@ -16,7 +16,6 @@ class PlayKelasDataSourceImpl implements PlayKelasDataSource {
     if (data.exists) {
       final e = data.data() as Map<String, dynamic>;
       e['id'] = id;
-      print("${PlayKelasModel.fromJson(e)}");
       return Right(PlayKelasModel.fromJson(e));
     } else {
       return Left(ServerFailure(errorMessage: 'Data tidak ditemukan'));

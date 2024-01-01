@@ -27,7 +27,7 @@ class LowonganContainer extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: Color(0xFF7A7A7A).withOpacity(0.2),
+            color: const Color(0xFF7A7A7A).withOpacity(0.2),
           ),
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
@@ -72,7 +72,7 @@ class LowonganContainer extends StatelessWidget {
                           style: GoogleFonts.poppins(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xFF7B8CB5),
+                            color: const Color(0xFF7B8CB5),
                           ),
                         ),
                         const SizedBox(
@@ -131,7 +131,7 @@ class LowonganContainer extends StatelessWidget {
                     style: GoogleFonts.poppins(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xFF7B8CB5),
+                      color: const Color(0xFF7B8CB5),
                     ),
                   )
                 ],

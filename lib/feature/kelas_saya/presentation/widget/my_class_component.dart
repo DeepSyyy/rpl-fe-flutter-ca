@@ -11,7 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class MyClassComponent extends StatefulWidget {
-  MyClassComponent({super.key, required this.idUser});
+  const MyClassComponent({super.key, required this.idUser});
   final String? idUser;
   @override
   _MyClassComponentState createState() => _MyClassComponentState();
@@ -19,6 +19,7 @@ class MyClassComponent extends StatefulWidget {
 
 class _MyClassComponentState extends State<MyClassComponent> {
   var select = 0;
+  @override
   void initState() {
     super.initState();
     Provider.of<MyCourseProvider>(context, listen: false)
@@ -53,7 +54,7 @@ class _MyClassComponentState extends State<MyClassComponent> {
             const SizedBox(
               height: 20,
             ),
-            CategoriesComponent(),
+            const CategoriesComponent(),
             const SizedBox(
               height: 20,
             ),
@@ -69,7 +70,7 @@ class _MyClassComponentState extends State<MyClassComponent> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => PlayKelasPage()),
+                            builder: (context) => const PlayKelasPage()),
                       );
                     },
                     child: CourzeCardMyClass(

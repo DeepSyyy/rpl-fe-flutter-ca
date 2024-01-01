@@ -112,17 +112,18 @@ class AdminCourseProvider extends ChangeNotifier {
     required String level,
     required String price,
     required String videoUrl,
-    required String createAt,
+    required List<String> keyPoints,
     required String updateAt,
     required String mentorName,
+    required String createAt,
   }) async {
     try {
       CourseAdminRepositoryImpl adminCourseRepository =
           CourseAdminRepositoryImpl(
               courseRemoteDataSource: CourseRemoteDataSourceImpl());
       final failureOrSucces = await UpdateCourse(adminCourseRepository).call(
+        id: id,
         course: CourseParams(
-          id: id,
           name: name,
           rating: rating,
           description: description,
@@ -131,7 +132,7 @@ class AdminCourseProvider extends ChangeNotifier {
           level: level,
           price: price,
           videoUrl: videoUrl,
-          createAt: createAt,
+          keyPoints: keyPoints,
           updateAt: updateAt,
           mentorName: mentorName,
         ),

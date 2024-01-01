@@ -23,7 +23,7 @@ class CourseCardTransaksi extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => DetailTransaksiPage(),
+              builder: (context) => const DetailTransaksiPage(),
             ));
       },
       child: Container(
@@ -31,7 +31,7 @@ class CourseCardTransaksi extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: Color(0xFF7A7A7A).withOpacity(0.2),
+            color: const Color(0xFF7A7A7A).withOpacity(0.2),
           ),
         ),
         padding: const EdgeInsets.all(16),
@@ -71,7 +71,7 @@ class CourseCardTransaksi extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Rp. ${price}",
+                          "Rp. $price",
                           style: GoogleFonts.poppins(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,

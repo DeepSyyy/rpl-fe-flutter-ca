@@ -41,6 +41,7 @@ Widget Atas(Widget widget) {
 }
 
 class _WishlistComponentState extends State<WishlistComponent> {
+  @override
   void initState() {
     super.initState();
     Provider.of<WishlistProvider>(context, listen: false)
@@ -53,7 +54,6 @@ class _WishlistComponentState extends State<WishlistComponent> {
     String? idUser = Provider.of<AuthUserProvider>(context).uid;
     List<CourseWishlist>? wishlistId =
         Provider.of<WishlistProvider>(context).wishlistId;
-    print(wishlistId);
     Failure? failure = Provider.of<WishlistProvider>(context).failure;
     if (wishlistId != null) {
       return Atas(

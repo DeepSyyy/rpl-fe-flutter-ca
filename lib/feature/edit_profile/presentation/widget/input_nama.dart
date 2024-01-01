@@ -21,7 +21,7 @@ class InputNama extends StatelessWidget {
         hintStyle: GoogleFonts.poppins(
           fontSize: 14,
           fontWeight: FontWeight.w400,
-          color: Color(0xFF7A7A7A),
+          color: const Color(0xFF7A7A7A),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

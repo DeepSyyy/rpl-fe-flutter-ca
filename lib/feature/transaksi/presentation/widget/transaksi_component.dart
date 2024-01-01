@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/auth/users.dart';
 import 'package:flutter_fe_rpl/core/config/app_color.dart';
-import 'package:flutter_fe_rpl/core/errors/failure.dart';
 import 'package:flutter_fe_rpl/feature/transaksi/business/entity/course_detail_transacttion.dart';
 import 'package:flutter_fe_rpl/feature/transaksi/presentation/provider/transaksi_provider.dart';
 import 'package:flutter_fe_rpl/feature/transaksi/presentation/widget/card_course_transaksi.dart';
@@ -34,9 +33,6 @@ class _TransaksiComponentState extends State<TransaksiComponent> {
     String? idUser = Provider.of<AuthUserProvider>(context).uid;
     List<CourseDetailTransaction>? transactionId =
         Provider.of<TransactionProvider>(context).transactionList;
-
-    print(transactionId);
-    Failure? failure = Provider.of<TransactionProvider>(context).failure;
 
     if (transactionId != null) {
       return header(context, transactionId, idUser);

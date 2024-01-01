@@ -26,6 +26,7 @@ class _NavigationBarComponentState extends State<NavigationBarComponent> {
     });
   }
 
+  @override
   void initState() {
     super.initState();
     Provider.of<AuthUserProvider>(context, listen: false).getUser();
@@ -39,7 +40,7 @@ class _NavigationBarComponentState extends State<NavigationBarComponent> {
         HomePage(
           name: widget.name,
         ),
-        LowonganPage(),
+        const LowonganPage(),
         MyClassPage(
           idUser: idUser,
         ),

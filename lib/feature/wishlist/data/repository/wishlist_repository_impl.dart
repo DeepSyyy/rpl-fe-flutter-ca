@@ -20,7 +20,7 @@ class WishlistRepositoryImpl implements WishlistRepository {
         idCourse: idCourse,
       );
       if (result == true) {
-        return Right(true);
+        return const Right(true);
       } else {
         return Left(ServerFailure(errorMessage: 'Error'));
       }
@@ -38,7 +38,7 @@ class WishlistRepositoryImpl implements WishlistRepository {
         idUser: idUser,
       );
       if (result == true) {
-        return Right(true);
+        return const Right(true);
       } else {
         return Left(ServerFailure(errorMessage: 'Error'));
       }

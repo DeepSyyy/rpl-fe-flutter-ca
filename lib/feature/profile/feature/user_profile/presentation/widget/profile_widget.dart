@@ -35,7 +35,7 @@ class ProfileComponent extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          HeaderProfile(),
+          const HeaderProfile(),
           const SizedBox(
             height: 24,
           ),

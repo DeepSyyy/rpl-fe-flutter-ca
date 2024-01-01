@@ -1,18 +1,29 @@
 import 'package:flutter_fe_rpl/feature/wishlist/business/entity/course_wislist.dart';
 
 class CourseWishlistModel extends CourseWishlist {
+  @override
   String? id;
+  @override
   final String name;
+  @override
   final String rating;
+  @override
   final String description;
+  @override
   final String imageUrl;
+  @override
   final String category;
+  @override
   final String level;
+  @override
   final String price;
+  @override
   final String videoUrl;
+  @override
   List<String>? keyPoints;
   final String createdAt;
   final String updatedAt;
+  @override
   final String mentor;
 
   CourseWishlistModel({

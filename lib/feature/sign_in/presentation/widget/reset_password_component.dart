@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class ResetPasswordComponent extends StatefulWidget {
-  ResetPasswordComponent({super.key});
+  const ResetPasswordComponent({super.key});
 
   @override
   State<ResetPasswordComponent> createState() => _ResetPasswordComponentState();
@@ -75,14 +75,14 @@ class _ResetPasswordComponentState extends State<ResetPasswordComponent> {
                 hintStyle: GoogleFonts.poppins(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
-                  color: Color(0xFF7A7A7A),
+                  color: const Color(0xFF7A7A7A),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: AppColor.primary),
+                  borderSide: const BorderSide(color: AppColor.primary),
                 ),
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -99,13 +99,13 @@ class _ResetPasswordComponentState extends State<ResetPasswordComponent> {
                       const SnackBar(
                         backgroundColor: Colors.green,
                         content: Text("Email berhasil dikirim"),
-                        duration: const Duration(seconds: 2),
+                        duration: Duration(seconds: 2),
                       ),
                     );
                     if (state.message == null) {
                       Navigator.pushAndRemoveUntil(context,
                           MaterialPageRoute(builder: (context) {
-                        return SignInView();
+                        return const SignInView();
                       }), (route) => false);
                     }
                   },

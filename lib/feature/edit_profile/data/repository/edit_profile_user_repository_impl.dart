@@ -14,7 +14,7 @@ class EditProfileUserRepositoryImpl implements EditProfileUserRepository {
   }) async {
     try {
       await editProfileUserDataSource.editProfile(name: name);
-      return Right(null);
+      return const Right(null);
     } catch (e) {
       return Left(ServerFailure(errorMessage: 'server failure'));
     }

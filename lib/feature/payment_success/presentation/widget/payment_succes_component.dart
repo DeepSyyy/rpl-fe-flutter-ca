@@ -13,7 +13,7 @@ class PaymentSuccessComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFFF6F6F6),
+      backgroundColor: const Color(0XFFF6F6F6),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -23,7 +23,7 @@ class PaymentSuccessComponent extends StatelessWidget {
               color: Colors.white,
               border: Border.all(
                 width: 6,
-                color: Color(0xFFFAFAFA),
+                color: const Color(0xFFFAFAFA),
               ),
               borderRadius: BorderRadius.circular(20),
             ),

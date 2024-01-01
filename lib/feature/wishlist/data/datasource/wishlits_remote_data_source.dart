@@ -1,3 +1,5 @@
+// ignore_for_file: empty_catches
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_fe_rpl/feature/wishlist/data/model/course_wishlist_model.dart';
 
@@ -62,16 +64,13 @@ class WishlistRemoteDataSourceImpl implements WishlistRemoteDataSource {
 
       for (final doc in wishlistSnapshot.docs) {
         final courseId = doc['idCourse'];
-        print(doc['idCourse']);
 
         try {
           final courseDetailResult = await getCoursesById(idCourse: courseId);
 
           final courseDetail = courseDetailResult;
           wishlist.add(courseDetail);
-        } catch (e) {
-          print('Error fetching course detail sini: ${e.toString()}');
-        }
+        } catch (e) {}
       }
 
       return wishlist;
@@ -91,6 +90,7 @@ class WishlistRemoteDataSourceImpl implements WishlistRemoteDataSource {
     return true;
   }
 
+  @override
   Future<bool> deleteWishlist(
       {required String idCourse, required String idUser}) async {
     await FirebaseFirestore.instance

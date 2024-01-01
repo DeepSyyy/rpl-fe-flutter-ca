@@ -49,7 +49,6 @@ final futureName = getName();
 String? getNameUser() {
   String? name;
   futureName.then((value) => name = value);
-  print(name);
   return name;
 }
 
@@ -81,7 +80,7 @@ class AuthUserProvider extends ChangeNotifier {
       name = data['name'];
       role = data['role'];
       email = data['email'];
-      this.uid = user.uid;
+      uid = user.uid;
       errorMessage = null;
       notifyListeners();
     } else {

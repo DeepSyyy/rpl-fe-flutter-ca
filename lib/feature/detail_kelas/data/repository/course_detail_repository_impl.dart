@@ -13,7 +13,6 @@ class CourseDetailRepositoryImpl implements CourseRepositoryDetailCourse {
     try {
       return await courseRemoteDataSource.getCourseDetail(id: id);
     } catch (e) {
-      print(e);
       return Left(
           ServerFailure(errorMessage: 'Tidak dapat mengambil data detail'));
     }

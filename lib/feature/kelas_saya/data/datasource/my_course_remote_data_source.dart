@@ -56,7 +56,7 @@ class MyCourseRemoteDataSourceImpl implements MyCourseRemoteDataSource {
           final courseDetail = courseDetailResult;
           myCourse.add(courseDetail);
         } catch (e) {
-          print('Error fetching course detail sini: ${e.toString()}');
+          throw Exception('Data Kosong');
         }
       }
 

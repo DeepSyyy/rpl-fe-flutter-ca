@@ -6,6 +6,6 @@ class PlayKelasPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PlayKelasComponent();
+    return const PlayKelasComponent();
   }
 }

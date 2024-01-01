@@ -18,7 +18,7 @@ class CardCourseInfo extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Color(0xFFE5E5E5)),
+          border: Border.all(color: const Color(0xFFE5E5E5)),
         ),
         padding: const EdgeInsets.all(8),
         child: Row(

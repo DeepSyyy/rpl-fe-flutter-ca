@@ -6,6 +6,6 @@ class DetailTransaksiPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DetailTransaksiComponent();
+    return const DetailTransaksiComponent();
   }
 }

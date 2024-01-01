@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/config/app_color.dart';
 import 'package:flutter_fe_rpl/core/utils/button_customs.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/page/home_page_view.dart';
-import 'package:flutter_fe_rpl/feature/sign_in/presentation/page/sign_in_page.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/widget/sign_in_component.dart';
 import 'package:flutter_fe_rpl/feature/sign_up/presentation/provider/sign_up_user_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,7 +24,7 @@ List<String> role = [
 ];
 
 class SignUp extends StatefulWidget {
-  SignUp({super.key});
+  const SignUp({super.key});
   @override
   State<SignUp> createState() => _SignUpState();
 }
@@ -42,7 +41,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           child: SafeArea(
             child: Column(
@@ -77,14 +76,14 @@ class _SignUpState extends State<SignUp> {
                       hintStyle: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xFF7A7A7A),
+                        color: const Color(0xFF7A7A7A),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: AppColor.primary),
+                        borderSide: const BorderSide(color: AppColor.primary),
                       ),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -107,14 +106,14 @@ class _SignUpState extends State<SignUp> {
                       hintStyle: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xFF7A7A7A),
+                        color: const Color(0xFF7A7A7A),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: AppColor.primary),
+                        borderSide: const BorderSide(color: AppColor.primary),
                       ),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -138,14 +137,14 @@ class _SignUpState extends State<SignUp> {
                     hintStyle: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFF7A7A7A),
+                      color: const Color(0xFF7A7A7A),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: AppColor.primary),
+                      borderSide: const BorderSide(color: AppColor.primary),
                     ),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -162,7 +161,7 @@ class _SignUpState extends State<SignUp> {
                           isPasswordHidden
                               ? FluentSystemIcons.ic_fluent_eye_hide_regular
                               : FluentSystemIcons.ic_fluent_eye_show_regular,
-                          color: Color(0xFFAEAECF),
+                          color: const Color(0xFFAEAECF),
                         ),
                       ),
                     ),
@@ -186,14 +185,14 @@ class _SignUpState extends State<SignUp> {
                     hintStyle: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFF7A7A7A),
+                      color: const Color(0xFF7A7A7A),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: AppColor.primary),
+                      borderSide: const BorderSide(color: AppColor.primary),
                     ),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -210,7 +209,7 @@ class _SignUpState extends State<SignUp> {
                           isPasswordHidden
                               ? FluentSystemIcons.ic_fluent_eye_hide_regular
                               : FluentSystemIcons.ic_fluent_eye_show_regular,
-                          color: Color(0xFFAEAECF),
+                          color: const Color(0xFFAEAECF),
                         ),
                       ),
                     ),
@@ -230,14 +229,14 @@ class _SignUpState extends State<SignUp> {
                     hintStyle: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFF7A7A7A),
+                      color: const Color(0xFF7A7A7A),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: AppColor.primary),
+                      borderSide: const BorderSide(color: AppColor.primary),
                     ),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -282,7 +281,7 @@ class _SignUpState extends State<SignUp> {
                         );
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => HomePageView(),
+                            builder: (context) => const HomePageView(),
                             settings: RouteSettings(
                               arguments: controllerName.text,
                             ),
@@ -302,7 +301,7 @@ class _SignUpState extends State<SignUp> {
                     style: GoogleFonts.poppins(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFFAFAFAF),
+                      color: const Color(0xFFAFAFAF),
                     ),
                     children: [
                       TextSpan(
@@ -317,7 +316,7 @@ class _SignUpState extends State<SignUp> {
                           ..onTap = () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => SignInView(),
+                                builder: (context) => const SignInView(),
                               ),
                             );
                           },

@@ -30,7 +30,6 @@ class DetailLowonganProvider extends ChangeNotifier {
         notifyListeners();
       },
       (detailLowongan) {
-        print(detailLowongan);
         detailLowonganEntity = detailLowongan;
         failure = null;
         notifyListeners();

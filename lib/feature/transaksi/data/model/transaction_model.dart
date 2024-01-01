@@ -1,9 +1,13 @@
 import 'package:flutter_fe_rpl/feature/transaksi/business/entity/transaction_entity.dart';
 
 class TransactionHistoryModel extends MyTransactonHistory {
+  @override
   String? id;
+  @override
   final String name;
+  @override
   final String imageUrl;
+  @override
   final String price;
 
   TransactionHistoryModel({

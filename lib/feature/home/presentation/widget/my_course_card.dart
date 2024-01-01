@@ -20,7 +20,7 @@ class MyCourseCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return PlayKelasComponent();
+            return const PlayKelasComponent();
           }));
         },
         child: Row(

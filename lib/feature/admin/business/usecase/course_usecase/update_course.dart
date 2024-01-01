@@ -8,7 +8,8 @@ class UpdateCourse {
 
   UpdateCourse(this.courseRepository);
 
-  Future<Either<Failure, void>> call({required CourseParams course}) async {
-    return await courseRepository.updateCourse(course: course);
+  Future<Either<Failure, void>> call(
+      {required CourseParams course, required String? id}) async {
+    return await courseRepository.updateCourse(course: course, id: id);
   }
 }

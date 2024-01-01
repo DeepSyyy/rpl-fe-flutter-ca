@@ -22,9 +22,8 @@ class EditProfileUserRemoteDataSourceImpl
           'name': name,
         });
       }
-      return Right(null);
+      return const Right(null);
     } catch (e) {
-      print(e);
       return Left(ServerFailure(errorMessage: 'Server Failure'));
     }
   }

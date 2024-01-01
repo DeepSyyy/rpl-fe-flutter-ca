@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +41,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  @override
   void initState() {
     super.initState();
     Provider.of<CourseUserProvider>(context, listen: false).getCourses();
@@ -62,7 +62,6 @@ class _HomePageState extends State<HomePage> {
     Provider.of<MyCourseProvider>(context).getMyCourse(idUser: uid);
     Failure? failure = Provider.of<CourseUserProvider>(context).failure;
     late Widget component;
-    print(uid);
     if (courses != null) {
       component = SafeArea(
         child: Scaffold(
@@ -86,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(
                           width: 12,
                         ),
-                        Container(
+                        SizedBox(
                           width: 200,
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

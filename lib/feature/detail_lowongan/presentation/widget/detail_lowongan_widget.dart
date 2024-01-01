@@ -26,6 +26,7 @@ class DetaiLowonganWidget extends StatefulWidget {
 }
 
 class _DetaiLowonganWidgetState extends State<DetaiLowonganWidget> {
+  @override
   void initState() {
     super.initState();
 
@@ -232,7 +233,7 @@ class _DetaiLowonganWidgetState extends State<DetaiLowonganWidget> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
           ),
         ),
         body: const Center(
@@ -240,7 +241,6 @@ class _DetaiLowonganWidgetState extends State<DetaiLowonganWidget> {
         ),
       );
     }
-    print("${lowonganEntity?.id}");
     return widget;
   }
 }

@@ -52,7 +52,7 @@ class _InputPasswordState extends State<InputPassword> {
               isPasswordHidden
                   ? FluentSystemIcons.ic_fluent_eye_hide_regular
                   : FluentSystemIcons.ic_fluent_eye_show_regular,
-              color: Color(0xFFAEAECF),
+              color: const Color(0xFFAEAECF),
             ),
           ),
         ),

@@ -25,7 +25,7 @@ class PriceComponent extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text(
-          "Rp. ${price}",
+          "Rp. $price",
           style: GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.w600),
         ),
         SizedBox(
