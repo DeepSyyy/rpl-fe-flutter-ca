@@ -8,6 +8,7 @@ abstract class UserRemoteDataSource {
   Future<Either<Failure, void>> signIn(
       {required UserParamsLogin userParamsLogin});
   Future<void> signUp({required UserParamsRegister userParamsRegister});
+  Future<Either<Failure, void>> resetPassword({required String email});
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -32,12 +33,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       credential.user!.updateDisplayName(userParamsRegister.name);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
+      } else if (e.code == 'email-already-in-use') {}
     } catch (e) {
-      print(e);
+      throw Exception(e);
     }
   }
 
@@ -51,7 +49,16 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         password: userParamsLogin.password,
       );
 
-      return Right(null);
+      var update = await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: userParamsLogin.email)
+          .get();
+
+      update.docs.forEach((element) {
+        element.reference.update({'password': userParamsLogin.password});
+      });
+
+      return const Right(null);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         return Left(ServerFailure(errorMessage: 'user-not-found'));
@@ -60,8 +67,18 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       } else if (e.code == 'invalid-email') {
         return Left(ServerFailure(errorMessage: 'invalid-email'));
       } else {
-        return Left(ServerFailure(errorMessage: 'Lost Connection'));
+        return Left(ServerFailure(errorMessage: 'invalid email or password'));
       }
+    } catch (e) {
+      return Left(ServerFailure(errorMessage: 'Error'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> resetPassword({required String email}) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      return const Right(null);
     } catch (e) {
       return Left(ServerFailure(errorMessage: 'Error'));
     }

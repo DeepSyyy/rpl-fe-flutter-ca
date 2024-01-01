@@ -1,19 +1,33 @@
-import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_fe_rpl/core/auth/users.dart';
 import 'package:flutter_fe_rpl/core/config/app_color.dart';
-import 'package:flutter_fe_rpl/core/utils/button_customs.dart';
-import 'package:flutter_fe_rpl/feature/home/presentation/widget/home_page_component.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_fe_rpl/core/errors/failure.dart';
+import 'package:flutter_fe_rpl/feature/wishlist/business/entity/course_wislist.dart';
+import 'package:flutter_fe_rpl/feature/wishlist/presentation/provider/wishlist_provider.dart';
+import 'package:flutter_fe_rpl/feature/wishlist/presentation/widget/courze_card_wishlist.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-class WishlistComponent extends StatelessWidget {
-  const WishlistComponent({super.key});
+class WishlistComponent extends StatefulWidget {
+  const WishlistComponent({super.key, required this.idUser});
+  final String? idUser;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  State<WishlistComponent> createState() => _WishlistComponentState();
+}
+
+Widget Atas(Widget widget) {
+  return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
+        leading: null,
+        title: Text(
+          "Wishlist",
+          style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w700,
+              color: AppColor.textPrimary,
+              fontSize: 16),
+        ),
         elevation: 0,
         foregroundColor: Colors.black,
         backgroundColor: Colors.transparent,
@@ -22,148 +36,51 @@ class WishlistComponent extends StatelessWidget {
             color: Colors.grey.shade300,
           ),
         ),
-        title: Text(
-          "Wishlist",
-          style: GoogleFonts.poppins(
-              fontWeight: FontWeight.w700,
-              color: AppColor.textPrimary,
-              fontSize: 16),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context, HomePage());
-            },
-            icon: const Icon(
-              FluentSystemIcons.ic_fluent_arrow_left_regular,
-              color: Colors.black,
-            )),
       ),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Color(0xFF7A7A7A).withOpacity(0.2)),
-              ),
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: Image.network(
-                          "https://picsum.photos/200/300",
-                          fit: BoxFit.cover,
-                          width: 124,
-                          height: 92,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Nama Course",
-                              style: GoogleFonts.poppins(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: AppColor.textPrimary,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            Text(
-                              "Nama Tutor",
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                color: AppColor.textSecondary,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.yellow,
-                                ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  "4.6",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: AppColor.textSecondary,
-                                  ),
-                                ),
-                                const Spacer(),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 20,
-                                    vertical: 2,
-                                  ),
-                                  child: SvgPicture.asset(
-                                    "assets/svg/level_bar.svg",
-                                    height: 24,
-                                    width: 24,
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Text(
-                    "Rp300.000", // Ganti dengan harga sesuai kebutuhan Anda
-                    style: GoogleFonts.poppins(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.textSecondary,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(FluentSystemIcons.ic_fluent_delete_regular),
-                      ),
-                      const SizedBox(
-                        width: 4, // Ubah nilai ini sesuai kebutuhan
-                      ),
-                      ButtonCustom(
-                          label: "Beli", onTap: () {}, isExpand: false),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+      body: widget);
+}
+
+class _WishlistComponentState extends State<WishlistComponent> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<WishlistProvider>(context, listen: false)
+        .getWishlist(idUser: widget.idUser!);
+    Provider.of<AuthUserProvider>(context, listen: false).getUser();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    String? idUser = Provider.of<AuthUserProvider>(context).uid;
+    List<CourseWishlist>? wishlistId =
+        Provider.of<WishlistProvider>(context).wishlistId;
+    Failure? failure = Provider.of<WishlistProvider>(context).failure;
+    if (wishlistId != null) {
+      return Atas(
+        ListView.builder(
+            itemCount: wishlistId.length,
+            itemBuilder: (context, index) {
+              return CourzeCardWishlist(
+                  idUser: idUser,
+                  id: wishlistId[index].id!,
+                  imageUrl: wishlistId[index].imageUrl,
+                  courseName: wishlistId[index].name,
+                  mentorName: wishlistId[index].mentor,
+                  rating: wishlistId[index].rating,
+                  price: wishlistId[index].price);
+            }),
+      );
+    }
+    if (failure != null) {
+      return Atas(
+        Center(
+          child: Text(failure.errorMessage),
+        ),
+      );
+    }
+    return Atas(
+      const Center(
+        child: CircularProgressIndicator(),
       ),
     );
   }

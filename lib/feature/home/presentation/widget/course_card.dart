@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/config/app_color.dart';
 import 'package:flutter_fe_rpl/feature/detail_kelas/presentation/page/detail_kelas_page.dart';
+import 'package:flutter_fe_rpl/feature/wishlist/presentation/provider/wishlist_provider.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class CourseCard extends StatefulWidget {
   const CourseCard({
@@ -12,12 +14,14 @@ class CourseCard extends StatefulWidget {
     required this.mentorName,
     required this.price,
     required this.id,
+    required this.idUser,
   });
   final String imageUrl;
   final String courseName;
   final String mentorName;
   final String price;
   final String id;
+  final String? idUser;
 
   @override
   State<CourseCard> createState() => _CourseCardState();
@@ -26,9 +30,21 @@ class CourseCard extends StatefulWidget {
 class _CourseCardState extends State<CourseCard> {
   bool isFavorite = false;
 
-  void toggleFavorite() {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<WishlistProvider>(context, listen: false)
+        .checkWishlist(idCourse: widget.id, idUser: widget.idUser!);
+  }
+
+  void toggleFavorite() async {
+    await Provider.of<WishlistProvider>(context, listen: false)
+        .addWishlist(idCourse: widget.id, idUser: widget.idUser!);
+
+    bool? isWishlist =
+        await Provider.of<WishlistProvider>(context, listen: false).isWishlist;
     setState(() {
-      isFavorite = !isFavorite;
+      isFavorite = isWishlist!;
     });
   }
 
@@ -39,8 +55,12 @@ class _CourseCardState extends State<CourseCard> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailKelasPage(id: widget.id),
-            settings: RouteSettings(arguments: widget.id),
+            builder: (context) =>
+                DetailKelasPage(id: widget.id, idUser: widget.idUser!),
+            settings: RouteSettings(arguments: {
+              "id": widget.id,
+              "idUser": widget.idUser,
+            }),
           ),
         );
       },
@@ -118,9 +138,9 @@ class _CourseCardState extends State<CourseCard> {
                     ),
                   ),
                   Container(
-                    child: const Row(
+                    child: Row(
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(right: 0.5),
                           child: Icon(
                             Icons.star,
@@ -128,7 +148,14 @@ class _CourseCardState extends State<CourseCard> {
                             size: 20,
                           ),
                         ),
-                        Text("4.5"),
+                        Text(
+                          "4.5",
+                          style: GoogleFonts.poppins(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: AppColor.textPrimary,
+                          ),
+                        ),
                       ],
                     ),
                   )

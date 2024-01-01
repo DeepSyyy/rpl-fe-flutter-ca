@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/params/user_params.dart';
+import 'package:flutter_fe_rpl/feature/sign_in/business/usecase/reset_password.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/business/usecase/user_sign_in.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/data/repository/user_repository_impl.dart';
 
@@ -22,6 +23,30 @@ class UserResponseProvider extends ChangeNotifier {
       );
       final failureOrVoid =
           await SignIn(userRepositoryImpl)(userParamsLogin: userParamsLogin);
+
+      failureOrVoid.fold(
+        (failure) {
+          message = failure.errorMessage;
+          notifyListeners();
+        },
+        (voidValue) {
+          message = null;
+          notifyListeners();
+        },
+      );
+    } catch (e) {
+      message = e.toString();
+      notifyListeners();
+    }
+  }
+
+  Future<void> resetPassword({
+    required String email,
+  }) async {
+    try {
+      final failureOrVoid = await ResetPassword(userRepositoryImpl)(
+        email: email,
+      );
 
       failureOrVoid.fold(
         (failure) {

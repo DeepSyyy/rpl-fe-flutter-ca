@@ -10,33 +10,40 @@ class SearchContainer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Container(
-        height: 48,
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-        decoration: BoxDecoration(
-            border:
-                Border.all(color: Color(0xFF7B8CB5).withOpacity(0.5), width: 1),
-            borderRadius: BorderRadius.circular(16)),
-        child: TextField(
-          onTap: () {},
-          controller: textController,
-          decoration: InputDecoration(
-            hintText: "Mau Belajar Apa Hari Ini?",
-            hintStyle: GoogleFonts.poppins(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: Color(0xFF7B8CB5)),
-            prefixIcon: Icon(Icons.search),
-            prefixIconColor: Color(0xFF7B8CB5).withOpacity(0.5),
-            border: InputBorder.none,
-            isCollapsed: true,
-            prefixIconConstraints: BoxConstraints(
-              minHeight: 12,
-              minWidth: 14,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: Colors.white,
+            border: Border.all(
+              color: const Color(0xFFF1F1F1),
             ),
           ),
-        ),
-      ),
+          child: TextField(
+            onTap: () {},
+            decoration: InputDecoration(
+              hintText: 'Mau belajar apa hari ini?',
+              hintStyle: GoogleFonts.poppins(
+                fontWeight: FontWeight.w400,
+                fontSize: 14,
+                color: const Color(0xFF7B8CB5),
+              ),
+              prefixIcon: const Padding(
+                padding: EdgeInsets.only(
+                  left: 14,
+                  right: 12,
+                ),
+                child: Icon(
+                  Icons.search,
+                  color: Color(0xFFBDBDBD),
+                ),
+              ),
+              prefixIconColor: const Color(0xFF7B8CB5).withOpacity(0.5),
+              border: InputBorder.none,
+              prefixIconConstraints: const BoxConstraints(
+                minWidth: 12,
+                minHeight: 14,
+              ),
+            ),
+          )),
     );
   }
 }

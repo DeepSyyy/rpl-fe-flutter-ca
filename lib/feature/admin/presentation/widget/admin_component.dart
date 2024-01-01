@@ -14,6 +14,7 @@ class AdminCourseComponent extends StatefulWidget {
 }
 
 class _AdminCourseComponentState extends State<AdminCourseComponent> {
+  @override
   void initState() {
     super.initState();
     Provider.of<AdminCourseProvider>(context, listen: false).getCourses();
@@ -29,7 +30,7 @@ class _AdminCourseComponentState extends State<AdminCourseComponent> {
     if (courseEntity != null) {
       widget = Scaffold(
         appBar: AppBar(
-          title: Text('Admin Course'),
+          title: const Text('Admin Course'),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -68,7 +69,7 @@ class _AdminCourseComponentState extends State<AdminCourseComponent> {
                 subtitle:
                     Text("Nama course: ${courseEntity[index].name.toString()}"),
                 trailing: IconButton(
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                     onPressed: () async {
                       // Show CircularProgressIndicator
                       showDialog(
@@ -82,7 +83,7 @@ class _AdminCourseComponentState extends State<AdminCourseComponent> {
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                child: Text("Tidak"),
+                                child: const Text("Tidak"),
                               ),
                               TextButton(
                                 onPressed: () async {
@@ -111,7 +112,7 @@ class _AdminCourseComponentState extends State<AdminCourseComponent> {
                                     );
                                   }
                                 },
-                                child: Text("Ya"),
+                                child: const Text("Ya"),
                               ),
                             ],
                           );

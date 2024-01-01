@@ -2,14 +2,23 @@ import 'package:flutter_fe_rpl/feature/lowongan/business/entity/lowongan_entity.
 import 'package:flutter_fe_rpl/feature/lowongan/data/model/sub_model.dart';
 
 class LowonganModel extends LowonganEntity {
+  @override
   String? id;
+  @override
   final String title;
+  @override
   final String kategori;
+  @override
   final String perusahaan;
+  @override
   final String lokasi;
+  @override
   final String tipe;
+  @override
   final String description;
+  @override
   final List<String> persyaratan;
+  @override
   final List<KontakModel>? kontak;
 
   LowonganModel({

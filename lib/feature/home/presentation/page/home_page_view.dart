@@ -7,6 +7,6 @@ class HomePageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NavigationBarComponent();
+    return const NavigationBarComponent();
   }
 }

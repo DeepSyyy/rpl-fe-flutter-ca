@@ -24,7 +24,6 @@ class LowonganRepositoryImpl implements LowonganRepository {
       final remoteData = await lowonganRemoteDataSource.getLowongans();
       return Right(remoteData);
     } catch (e) {
-      print(e);
       return Left(ServerFailure(errorMessage: 'Gagal mengambil data'));
     }
   }
@@ -37,7 +36,6 @@ class LowonganRepositoryImpl implements LowonganRepository {
           category: category);
       return Right(remoteData);
     } catch (e) {
-      print(e);
       return Left(ServerFailure(errorMessage: 'Gagal mengambil data'));
     }
   }
@@ -50,7 +48,6 @@ class LowonganRepositoryImpl implements LowonganRepository {
           await lowonganRemoteDataSource.getLowonganByName(nama: nama);
       return Right(remoteData);
     } catch (e) {
-      print(e);
       return Left(ServerFailure(errorMessage: 'Gagal mengambil data'));
     }
   }

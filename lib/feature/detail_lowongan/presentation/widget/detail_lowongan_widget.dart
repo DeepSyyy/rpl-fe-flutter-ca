@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fe_rpl/core/auth/users.dart';
 import 'package:flutter_fe_rpl/core/errors/failure.dart';
 import 'package:flutter_fe_rpl/feature/detail_lowongan/business/entity/course_entity_lowongan.dart';
 import 'package:flutter_fe_rpl/feature/detail_lowongan/business/entity/lowongan_detail_entity.dart';
@@ -25,6 +26,7 @@ class DetaiLowonganWidget extends StatefulWidget {
 }
 
 class _DetaiLowonganWidgetState extends State<DetaiLowonganWidget> {
+  @override
   void initState() {
     super.initState();
 
@@ -32,6 +34,7 @@ class _DetaiLowonganWidgetState extends State<DetaiLowonganWidget> {
         .getDetailLowongan(id: widget.id);
     Provider.of<DetailLowonganProvider>(context, listen: false)
         .getCoursesByCategory(category: widget.category);
+    Provider.of<AuthUserProvider>(context, listen: false).getUser();
   }
 
   Widget rootWidget(Widget widget) {
@@ -40,10 +43,13 @@ class _DetaiLowonganWidgetState extends State<DetaiLowonganWidget> {
         title: Text(
           "Detail Lowongan",
           style: GoogleFonts.poppins(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+            color: Colors.black,
           ),
         ),
+        centerTitle: true,
+        elevation: 0,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -65,17 +71,19 @@ class _DetaiLowonganWidgetState extends State<DetaiLowonganWidget> {
     Failure? failure = Provider.of<DetailLowonganProvider>(
       context,
     ).failure;
+    String? idUser = Provider.of<AuthUserProvider>(context).uid;
     late Widget widget;
     if (lowonganEntity != null) {
       widget = Scaffold(
         appBar: AppBar(
-          title: Center(
-            child: Text(
-              "Detail Lowongan",
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
+          backgroundColor: Colors.white,
+          centerTitle: true,
+          elevation: 0,
+          title: Text(
+            "Detail Lowongan",
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w700,
+              fontSize: 16,
             ),
           ),
           leading: IconButton(
@@ -194,6 +202,7 @@ class _DetaiLowonganWidgetState extends State<DetaiLowonganWidget> {
                   itemCount: courseEntityLowongan!.length,
                   itemBuilder: (context, index) {
                     return CourseCard(
+                      idUser: idUser!,
                       id: courseEntityLowongan[index].id!,
                       courseName: courseEntityLowongan[index].name,
                       mentorName: courseEntityLowongan[index].mentor,
@@ -224,7 +233,7 @@ class _DetaiLowonganWidgetState extends State<DetaiLowonganWidget> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
           ),
         ),
         body: const Center(
@@ -232,7 +241,6 @@ class _DetaiLowonganWidgetState extends State<DetaiLowonganWidget> {
         ),
       );
     }
-    print("${lowonganEntity?.id}");
     return widget;
   }
 }

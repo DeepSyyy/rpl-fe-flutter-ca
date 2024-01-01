@@ -16,6 +16,7 @@ class AdminCourseDetailComponent extends StatefulWidget {
 
 class _AdminCourseDetailComponentState
     extends State<AdminCourseDetailComponent> {
+  @override
   void initState() {
     super.initState();
     Provider.of<AdminCourseProvider>(context, listen: false)
@@ -85,7 +86,7 @@ class _AdminCourseDetailComponentState
     } else if (failure != null) {
       widget = Scaffold(
         appBar: AppBar(
-          title: Text('Error'),
+          title: const Text('Error'),
         ),
         body: Center(
           child: Text(failure.errorMessage),
@@ -94,9 +95,9 @@ class _AdminCourseDetailComponentState
     } else {
       widget = Scaffold(
         appBar: AppBar(
-          title: Text('Loading'),
+          title: const Text('Loading'),
         ),
-        body: Center(
+        body: const Center(
           child: CircularProgressIndicator(),
         ),
       );

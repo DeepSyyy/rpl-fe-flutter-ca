@@ -21,6 +21,7 @@ class AppAsset {
   static const iconPersonFilled = 'assets/svg/person-icon-filled.svg';
   static const iconPerson = 'assets/svg/person-icon.svg';
   static const iconLoker = 'assets/svg/Briefcase.svg';
+  static const iconLokerFilled = 'assets/svg/Briefcase_filled.svg';
   static const iconCompany = 'assets/svg/icon_gedung.svg';
   static const iconLocation = 'assets/svg/Location.svg';
   static const iconPromo = 'assets/svg/icon_promo.svg';

@@ -6,6 +6,7 @@ import 'package:flutter_fe_rpl/feature/home/presentation/page/home_page_view.dar
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/provider/user_sigIn_provider.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/widget/input_email.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/widget/input_password.dart';
+import 'package:flutter_fe_rpl/feature/sign_in/presentation/widget/reset_password_component.dart';
 import 'package:flutter_fe_rpl/feature/sign_up/presentation/page/sign_up_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +29,7 @@ class _SignInViewState extends State<SignInView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           child: SafeArea(
             child: Column(
@@ -62,15 +63,21 @@ class _SignInViewState extends State<SignInView> {
                 const SizedBox(
                   height: 16,
                 ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    "Lupa Password?",
-                    style: GoogleFonts.poppins(
-                        //decoration: TextDecoration.underline,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: AppColor.primary),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const ResetPasswordComponent()));
+                  },
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      "Lupa Password?",
+                      style: GoogleFonts.poppins(
+                          //decoration: TextDecoration.underline,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: AppColor.primary),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -91,8 +98,11 @@ class _SignInViewState extends State<SignInView> {
                           ),
                         );
                       } else {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => HomePageView()));
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                          builder: (context) {
+                            return const HomePageView();
+                          },
+                        ), (route) => false);
                       }
                     },
                     isExpand: true,
@@ -107,7 +117,7 @@ class _SignInViewState extends State<SignInView> {
                     style: GoogleFonts.poppins(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFFAFAFAF),
+                      color: const Color(0xFFAFAFAF),
                     ),
                     children: [
                       TextSpan(
@@ -121,7 +131,7 @@ class _SignInViewState extends State<SignInView> {
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => SignUpPage()));
+                                builder: (context) => const SignUpPage()));
                           },
                       ),
                     ],
@@ -129,14 +139,6 @@ class _SignInViewState extends State<SignInView> {
                 ),
                 const SizedBox(
                   height: 24,
-                ),
-                Text(
-                  "Atau",
-                  style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF444444),
-                  ),
                 ),
               ],
             ),

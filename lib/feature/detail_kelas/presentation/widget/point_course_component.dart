@@ -15,7 +15,7 @@ class PointOfCourseComponent extends StatelessWidget {
       children: [
         SvgPicture.asset(
           svgAsset,
-          color: Color(0xFF7B8CB5),
+          color: const Color(0xFF7B8CB5),
         ),
         const SizedBox(
           width: 8,

@@ -29,7 +29,7 @@ class SignUpRemoteDataSourceImpl implements SignUpRemoteDataSource {
         'uid': credential.user!.uid,
       });
       credential.user!.updateDisplayName(userParamsRegister.name);
-      return Right(null);
+      return const Right(null);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         return Left(
@@ -41,7 +41,6 @@ class SignUpRemoteDataSourceImpl implements SignUpRemoteDataSource {
         return Left(ServerFailure(errorMessage: 'Server Failure'));
       }
     } catch (e) {
-      print(e);
       return Left(ServerFailure(errorMessage: 'Server Failure'));
     }
   }

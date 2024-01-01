@@ -115,7 +115,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                       // Navigate to another page or perform an action when on the last page.
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => SignInView(),
+                          builder: (context) => const SignInView(),
                         ),
                       );
                     }

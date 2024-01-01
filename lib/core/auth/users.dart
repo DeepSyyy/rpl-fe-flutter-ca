@@ -49,7 +49,6 @@ final futureName = getName();
 String? getNameUser() {
   String? name;
   futureName.then((value) => name = value);
-  print(name);
   return name;
 }
 
@@ -66,20 +65,22 @@ class AuthUserProvider extends ChangeNotifier {
     this.email,
     this.uid,
     this.errorMessage,
-  });
+  }) {
+    getUser();
+  }
 
   void getUser() async {
     final user = FirebaseAuth.instance.currentUser;
-    final uid = user!.uid;
     final data = await FirebaseFirestore.instance
         .collection('users')
-        .doc(uid)
+        .doc(user!.uid)
         .get()
         .then((value) => value.data());
     if (data != null) {
       name = data['name'];
       role = data['role'];
       email = data['email'];
+      uid = user.uid;
       errorMessage = null;
       notifyListeners();
     } else {

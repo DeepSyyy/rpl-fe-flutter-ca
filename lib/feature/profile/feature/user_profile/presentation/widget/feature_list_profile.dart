@@ -1,62 +1,75 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fe_rpl/core/auth/users.dart';
 import 'package:flutter_fe_rpl/core/config/app_color.dart';
+import 'package:flutter_fe_rpl/feature/transaksi/presentation/page/transaksi_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class ListingFeature extends StatelessWidget {
-  const ListingFeature({super.key});
+  const ListingFeature({super.key, required this.idUser});
+  final String idUser;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: const Color(0xFF7A7A7A).withOpacity(0.2),
+    String? uid = Provider.of<AuthUserProvider>(context).uid;
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: const Color(0xFF7A7A7A).withOpacity(0.2),
+                ),
+              ),
+              child: Column(
+                children: [
+                  listingProfile(context, "Karir Tujuan", () {}),
+                  const Divider(
+                    color: Color(0xFFD9D9D9),
+                    thickness: 1,
+                    indent: 16,
+                    endIndent: 16,
+                  ),
+                  listingProfile(context, "Transaksi", () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TransaksiPage(
+                          idUser: uid!,
+                        ),
+                      ),
+                    );
+                  }),
+                  const Divider(
+                    color: Color(0xFFD9D9D9),
+                    thickness: 1,
+                    indent: 16,
+                    endIndent: 16,
+                  ),
+                  listingProfile(context, "Pengaturan", () {}),
+                  const Divider(
+                    color: Color(0xFFD9D9D9),
+                    thickness: 1,
+                    indent: 16,
+                    endIndent: 16,
+                  ),
+                  listingProfile(context, "Tentang Courze", () {}),
+                  const Divider(
+                    color: Color(0xFFD9D9D9),
+                    thickness: 1,
+                    indent: 16,
+                    endIndent: 16,
+                  ),
+                  listingProfile(context, "Bantuan dan Pendukung", () {}),
+                ],
+              ),
+            ),
           ),
-        ),
-        child: Column(
-          children: [
-            listingProfile(context, "Karir Tujuan", () {}),
-            const Divider(
-              color: Color(0xFFD9D9D9),
-              thickness: 1,
-              indent: 16,
-              endIndent: 16,
-            ),
-            listingProfile(context, "Transaksi", () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => TransaksiPage(),
-              //   ),
-              // );
-            }),
-            const Divider(
-              color: Color(0xFFD9D9D9),
-              thickness: 1,
-              indent: 16,
-              endIndent: 16,
-            ),
-            listingProfile(context, "Pengaturan", () {}),
-            const Divider(
-              color: Color(0xFFD9D9D9),
-              thickness: 1,
-              indent: 16,
-              endIndent: 16,
-            ),
-            listingProfile(context, "Tentang Courze", () {}),
-            const Divider(
-              color: Color(0xFFD9D9D9),
-              thickness: 1,
-              indent: 16,
-              endIndent: 16,
-            ),
-            listingProfile(context, "Bantuan dan Pendukung", () {}),
-          ],
-        ),
+        ],
       ),
     );
   }

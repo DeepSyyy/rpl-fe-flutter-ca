@@ -14,6 +14,7 @@ class AdminLokerComponent extends StatefulWidget {
 }
 
 class _AdminLokerComponentState extends State<AdminLokerComponent> {
+  @override
   void initState() {
     super.initState();
     Provider.of<AdminLokerProvider>(context, listen: false).getLokers();
@@ -28,7 +29,7 @@ class _AdminLokerComponentState extends State<AdminLokerComponent> {
     if (lokerEntity != null) {
       widget = Scaffold(
         appBar: AppBar(
-          title: Text('Admin Loker'),
+          title: const Text('Admin Loker'),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -77,7 +78,7 @@ class _AdminLokerComponentState extends State<AdminLokerComponent> {
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                child: Text("Tidak"),
+                                child: const Text("Tidak"),
                               ),
                               TextButton(
                                 onPressed: () async {
@@ -106,14 +107,14 @@ class _AdminLokerComponentState extends State<AdminLokerComponent> {
                                     );
                                   }
                                 },
-                                child: Text("Ya"),
+                                child: const Text("Ya"),
                               ),
                             ],
                           );
                         },
                       );
                     },
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                   ),
                   title: Text(
                       "Nama Perusahaan: ${lokerEntity[index].id!.toString()}"),
@@ -127,7 +128,7 @@ class _AdminLokerComponentState extends State<AdminLokerComponent> {
     } else if (failure != null) {
       widget = Scaffold(
         appBar: AppBar(
-          title: Text('Admin Loker'),
+          title: const Text('Admin Loker'),
         ),
         body: Center(
           child: Text(failure.errorMessage),
@@ -136,9 +137,9 @@ class _AdminLokerComponentState extends State<AdminLokerComponent> {
     } else {
       widget = Scaffold(
         appBar: AppBar(
-          title: Text('Admin Loker'),
+          title: const Text('Admin Loker'),
         ),
-        body: Center(
+        body: const Center(
           child: CircularProgressIndicator(),
         ),
       );

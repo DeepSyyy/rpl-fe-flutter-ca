@@ -31,7 +31,6 @@ class DetailLowonganRepositoryImpl extends DetailLowonganRepository {
           category: category);
       return Right(result);
     } catch (e) {
-      print(e);
       return Left(ServerFailure(errorMessage: "Gagal mengambil data"));
     }
   }

@@ -21,7 +21,7 @@ class ButtonCustom extends StatelessWidget {
       child: Stack(
         children: [
           Align(
-            //alignment: Alignment.center,
+            alignment: Alignment.center,
             child: Material(
               color: AppColor.primary,
               borderRadius: BorderRadius.circular(10),
@@ -31,7 +31,7 @@ class ButtonCustom extends StatelessWidget {
                 child: Container(
                   width: isExpand ? double.infinity : null,
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 36, vertical: 12),
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   child: Text(
                     label,
                     textAlign: TextAlign.center,

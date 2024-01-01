@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +10,8 @@ import 'package:flutter_fe_rpl/feature/home/presentation/widget/course_card.dart
 import 'package:flutter_fe_rpl/feature/home/presentation/widget/indicator_carousel.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/widget/my_course_card.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/widget/search_container.dart';
+import 'package:flutter_fe_rpl/feature/kelas_saya/business/entity/my_course_entity.dart';
+import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/provider/my_course_provider.dart';
 import 'package:flutter_fe_rpl/feature/wishlist/presentation/page/wishlist_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +41,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  @override
   void initState() {
     super.initState();
     Provider.of<CourseUserProvider>(context, listen: false).getCourses();
@@ -50,10 +52,14 @@ class _HomePageState extends State<HomePage> {
   final CarouselController _controller = CarouselController();
   @override
   Widget build(BuildContext context) {
+    List<MyCourseEntity>? myCourse =
+        Provider.of<MyCourseProvider>(context).myCourse;
     List<CourseEntity>? courses =
         Provider.of<CourseUserProvider>(context).courses;
     String? role = Provider.of<AuthUserProvider>(context).role;
     String? name = Provider.of<AuthUserProvider>(context).name;
+    String? uid = Provider.of<AuthUserProvider>(context).uid;
+    Provider.of<MyCourseProvider>(context).getMyCourse(idUser: uid);
     Failure? failure = Provider.of<CourseUserProvider>(context).failure;
     late Widget component;
     if (courses != null) {
@@ -79,14 +85,20 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(
                           width: 12,
                         ),
-                        Container(
+                        SizedBox(
+                          width: 200,
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Hi, $name",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700)),
+                                Text(
+                                  "Hi, $name",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColor.textPrimary,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                                 const SizedBox(
                                   height: 6,
                                 ),
@@ -101,12 +113,17 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     IconButton(
-                        icon: const Icon(Icons.favorite),
+                        icon: const Icon(
+                          Icons.favorite,
+                          color: AppColor.textSecondary,
+                        ),
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const WishlistPage(),
+                              builder: (context) => WishlistPage(
+                                idUser: uid!,
+                              ),
                             ),
                           );
                         })
@@ -119,7 +136,7 @@ class _HomePageState extends State<HomePage> {
               CarouselAds(),
               IndicatorCarousel(controller: _controller, current: _current),
               const SizedBox(
-                height: 20,
+                height: 16,
               ),
               SearchContainer(
                 textController: _textController,
@@ -153,24 +170,28 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 12,
               ),
-              SizedBox(
-                height: 250,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: courses.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: CourseCard(
-                        id: courses[index].id!,
-                        imageUrl: courses[index].imageUrl,
-                        courseName: courses[index].name,
-                        mentorName: courses[index].mentor,
-                        price: courses[index].price,
-                      ),
-                    );
-                  },
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SizedBox(
+                  height: 250,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: courses.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: CourseCard(
+                          idUser: uid!,
+                          id: courses[index].id!,
+                          imageUrl: courses[index].imageUrl,
+                          courseName: courses[index].name,
+                          mentorName: courses[index].mentor,
+                          price: courses[index].price,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
               const SizedBox(
@@ -203,14 +224,17 @@ class _HomePageState extends State<HomePage> {
                 height: 12,
               ),
               SizedBox(
-                height: 300,
+                height: 200,
                 child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: 5,
+                  itemCount: myCourse!.length,
                   itemBuilder: (context, index) {
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8),
-                      child: MyCourseCard(),
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: MyCourseCard(
+                        imageUrl: myCourse[index].imageUrl,
+                        courseName: myCourse[index].name,
+                        mentorName: myCourse[index].mentor,
+                      ),
                     );
                   },
                 ),
@@ -241,24 +265,28 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 12,
               ),
-              SizedBox(
-                height: 250,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: courses.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: CourseCard(
-                        id: courses[index].id!,
-                        imageUrl: courses[index].imageUrl,
-                        courseName: courses[index].name,
-                        mentorName: courses[index].mentor,
-                        price: courses[index].price,
-                      ),
-                    );
-                  },
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SizedBox(
+                  height: 250,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: courses.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: CourseCard(
+                          idUser: uid!,
+                          id: courses[index].id!,
+                          imageUrl: courses[index].imageUrl,
+                          courseName: courses[index].name,
+                          mentorName: courses[index].mentor,
+                          price: courses[index].price,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
               const SizedBox(
@@ -290,24 +318,28 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 12,
               ),
-              SizedBox(
-                height: 250,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: courses.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: CourseCard(
-                        id: courses[index].id!,
-                        imageUrl: courses[index].imageUrl,
-                        courseName: courses[index].name,
-                        mentorName: courses[index].mentor,
-                        price: courses[index].price,
-                      ),
-                    );
-                  },
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SizedBox(
+                  height: 250,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: courses.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: CourseCard(
+                          idUser: uid!,
+                          id: courses[index].id!,
+                          imageUrl: courses[index].imageUrl,
+                          courseName: courses[index].name,
+                          mentorName: courses[index].mentor,
+                          price: courses[index].price,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
@@ -332,7 +364,11 @@ class _HomePageState extends State<HomePage> {
 
   CarouselSlider CarouselAds() {
     return CarouselSlider(
-      items: [1, 2, 3, 4]
+      items: [
+        "assets/images/Ads_1.png",
+        "assets/images/Ads_2.png",
+        "assets/images/Ads_3.png",
+      ]
           .map((i) => Builder(builder: (BuildContext context) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(
@@ -344,9 +380,9 @@ class _HomePageState extends State<HomePage> {
                     decoration: BoxDecoration(
                         color: AppColor.primary,
                         borderRadius: BorderRadius.circular(16)),
-                    child: Text(
-                      "text $i",
-                      style: const TextStyle(fontSize: 16),
+                    child: Image.asset(
+                      i,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 );

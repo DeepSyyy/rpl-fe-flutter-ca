@@ -22,17 +22,18 @@ class _IndicatorCarouselState extends State<IndicatorCarousel> {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [1, 2, 3, 4].map((entry) {
+      children: [1, 2, 3].map((entry) {
         return GestureDetector(
           onTap: () => widget._controller.animateToPage(entry - 1),
           child: widget._current == entry - 1
               ? AnimatedContainer(
-                  duration: Duration(seconds: 1),
+                  duration: const Duration(seconds: 1),
                   curve: widget._current == entry - 1
                       ? Curves.easeOut
                       : Curves.easeIn,
                   width: 28,
-                  margin: EdgeInsets.symmetric(vertical: 12, horizontal: 4.0),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 4.0),
                   height: 6,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -40,12 +41,13 @@ class _IndicatorCarouselState extends State<IndicatorCarousel> {
                   ),
                 )
               : AnimatedContainer(
-                  duration: Duration(seconds: 1),
+                  duration: const Duration(seconds: 1),
                   curve: widget._current == entry - 1
                       ? Curves.easeOut
                       : Curves.easeIn,
                   width: 6,
-                  margin: EdgeInsets.symmetric(vertical: 12, horizontal: 4.0),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 4.0),
                   height: 6,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),

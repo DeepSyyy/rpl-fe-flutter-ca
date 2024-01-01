@@ -10,12 +10,15 @@ import 'package:flutter_fe_rpl/feature/detail_kelas/presentation/widget/key_poin
 import 'package:flutter_fe_rpl/feature/detail_kelas/presentation/widget/point_course_component.dart';
 import 'package:flutter_fe_rpl/feature/detail_kelas/presentation/widget/price_detail_component.dart';
 import 'package:flutter_fe_rpl/feature/detail_kelas/presentation/widget/rating_component.dart';
+import 'package:flutter_fe_rpl/feature/wishlist/presentation/provider/wishlist_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class DetailKelasComponent extends StatefulWidget {
-  const DetailKelasComponent({super.key, required this.id});
+  const DetailKelasComponent(
+      {super.key, required this.id, required this.idUser});
   final String id;
+  final String idUser;
 
   @override
   State<DetailKelasComponent> createState() => _DetailKelasComponentState();
@@ -23,10 +26,13 @@ class DetailKelasComponent extends StatefulWidget {
 
 class _DetailKelasComponentState extends State<DetailKelasComponent> {
   bool isFavorite = false;
+  @override
   void initState() {
     super.initState();
     Provider.of<DetailCourseProvider>(context, listen: false)
         .getCourseDetail(id: widget.id);
+    Provider.of<WishlistProvider>(context, listen: false)
+        .checkWishlist(idCourse: widget.id, idUser: widget.idUser);
   }
 
   @override
@@ -34,9 +40,9 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
     CourseEntityDetailCourse? course =
         Provider.of<DetailCourseProvider>(context).course;
     Failure? failure = Provider.of<DetailCourseProvider>(context).failure;
-    late Widget widget;
+    late Widget component;
     if (course != null) {
-      widget = Scaffold(
+      component = Scaffold(
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
@@ -78,25 +84,42 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
                     const SizedBox(
                       height: 16,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          course.name,
-                          style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 20,
-                              color: Colors.black),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isFavorite = !isFavorite;
-                            });
-                          },
-                          icon: Icon(
-                            Icons.favorite,
-                            color: isFavorite ? Colors.red : Colors.grey,
+                        Flexible(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  course.name,
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  bool? isWishlist =
+                                      Provider.of<WishlistProvider>(context,
+                                              listen: false)
+                                          .isWishlist;
+                                  setState(() {
+                                    isFavorite = isWishlist!;
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.favorite,
+                                  color: isFavorite ? Colors.red : Colors.grey,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -148,16 +171,8 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
                     const SizedBox(
                       height: 8,
                     ),
-                    const Divider(
-                      color: Colors.grey,
-                      height: 1,
-                    ),
                     const SizedBox(
                       height: 8,
-                    ),
-                    const Divider(
-                      color: Colors.grey,
-                      height: 1,
                     ),
                     const SizedBox(
                       height: 8,
@@ -184,10 +199,6 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
                     ),
                     const SizedBox(
                       height: 8,
-                    ),
-                    const Divider(
-                      color: Colors.grey,
-                      height: 1,
                     ),
                     const SizedBox(
                       height: 8,
@@ -232,24 +243,27 @@ class _DetailKelasComponentState extends State<DetailKelasComponent> {
               ),
               PriceComponent(
                 price: course.price,
+                imageUrl: course.imageUrl,
+                courseName: course.name,
+                mentorName: course.mentor,
+                idUser: widget.idUser,
+                idCourse: widget.id,
               ),
             ],
           ),
         ),
       );
     } else if (failure != null) {
-      print(failure.errorMessage);
-      widget = Scaffold(
+      component = Scaffold(
         body: Center(
           child: Text(failure.errorMessage),
         ),
       );
     } else {
-      widget = const Center(
+      component = const Center(
         child: CircularProgressIndicator(),
       );
     }
-    print("failure: $failure, course: $course");
-    return widget;
+    return component;
   }
 }

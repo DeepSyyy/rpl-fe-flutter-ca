@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fe_rpl/core/auth/users.dart';
+import 'package:flutter_fe_rpl/core/config/app_asset.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/widget/home_page_component.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/page/my_class_page.dart';
 import 'package:flutter_fe_rpl/feature/lowongan/presentation/page/lowongan_page.dart';
 import 'package:flutter_fe_rpl/feature/profile/feature/user_profile/presentation/page/profile_page.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class NavigationBarComponent extends StatefulWidget {
   const NavigationBarComponent({super.key, this.name});
@@ -24,17 +27,31 @@ class _NavigationBarComponentState extends State<NavigationBarComponent> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    Provider.of<AuthUserProvider>(context, listen: false).getUser();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    String? idUser = Provider.of<AuthUserProvider>(context).uid;
     return Scaffold(
       body: [
         HomePage(
           name: widget.name,
         ),
-        LowonganPage(),
-        MyClassPage(),
-        ProfilePage(),
+        const LowonganPage(),
+        MyClassPage(
+          idUser: idUser,
+        ),
+        ProfilePage(
+          idUser: idUser,
+        ),
       ].elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
               icon: SvgPicture.asset(
@@ -46,10 +63,10 @@ class _NavigationBarComponentState extends State<NavigationBarComponent> {
               tooltip: "Beranda",
               label: 'Beranda'),
           BottomNavigationBarItem(
-              icon: SvgPicture.asset("assets/svg/bot-icon.svg"),
-              activeIcon: SvgPicture.asset("assets/svg/bot-icon-filled.svg"),
-              tooltip: "Ze AI",
-              label: 'Ze AI'),
+              icon: SvgPicture.asset(AppAsset.iconLoker),
+              activeIcon: SvgPicture.asset(AppAsset.iconLokerFilled),
+              tooltip: "Lowongan",
+              label: 'Lowongan'),
           BottomNavigationBarItem(
               icon: SvgPicture.asset("assets/svg/book-icon.svg"),
               activeIcon: SvgPicture.asset("assets/svg/book-icon-filled.svg"),

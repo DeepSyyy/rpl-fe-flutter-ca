@@ -13,7 +13,7 @@ class LokerAdminRepositoryImpl extends LokerRepository {
   Future<Either<Failure, void>> addLoker({required LokerParams loker}) async {
     try {
       await lokerRemoteDataSource.addLoker(lokerParams: loker);
-      return Right(null);
+      return const Right(null);
     } catch (e) {
       return Left(
           ServerFailure(errorMessage: 'Gagal ditambahkan di repo impl, $e'));

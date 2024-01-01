@@ -53,9 +53,10 @@ class CourseAdminRepositoryImpl implements CourseRepository {
 
   @override
   Future<Either<Failure, void>> updateCourse(
-      {required CourseParams course}) async {
+      {required CourseParams course, required String? id}) async {
     try {
       return await courseRemoteDataSource.updateCourse(
+        id: id,
         course: course,
       );
     } catch (e) {

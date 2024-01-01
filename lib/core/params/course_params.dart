@@ -9,7 +9,7 @@ class CourseParams {
   final String price;
   final String videoUrl;
   List<String>? keyPoints;
-  final String createAt;
+  String? createAt;
   final String updateAt;
   final String mentorName;
 
@@ -25,7 +25,7 @@ class CourseParams {
     required this.price,
     required this.videoUrl,
     this.keyPoints,
-    required this.createAt,
+    this.createAt,
     required this.updateAt,
   });
 

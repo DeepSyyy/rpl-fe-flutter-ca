@@ -9,7 +9,8 @@ abstract class CourseRemoteDataSource {
   Future<Either<Failure, CourseModel>> getCourse({required String id});
   Future<void> addCourse({required CourseParams course});
   Future<Either<Failure, void>> deleteCourse({required String id});
-  Future<Either<Failure, void>> updateCourse({required CourseParams course});
+  Future<Either<Failure, void>> updateCourse(
+      {required CourseParams course, required String? id});
 }
 
 class CourseRemoteDataSourceImpl implements CourseRemoteDataSource {
@@ -58,20 +59,21 @@ class CourseRemoteDataSourceImpl implements CourseRemoteDataSource {
         FirebaseFirestore.instance.collection('course');
     try {
       await courses.doc(id).delete();
-      return Right(null);
+      return const Right(null);
     } catch (e) {
       return Left(ServerFailure(errorMessage: 'Data gagal dihapus, $e'));
     }
   }
 
   @override
-  Future<Either<Failure, void>> updateCourse({required CourseParams course}) {
+  Future<Either<Failure, void>> updateCourse(
+      {required CourseParams course, required String? id}) {
     CollectionReference courses =
         FirebaseFirestore.instance.collection('course');
     try {
       CourseModel c = CourseModel.fromJson(course.toJson());
-      courses.doc(c.id).update(c.toJson());
-      return Future.value(Right(null));
+      courses.doc(id).update(c.toJson());
+      return Future.value(const Right(null));
     } catch (e) {
       return Future.value(
           Left(ServerFailure(errorMessage: 'Data gagal diupdate, $e')));

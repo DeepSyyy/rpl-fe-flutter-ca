@@ -13,6 +13,7 @@ class LokerAdminDetail extends StatefulWidget {
 }
 
 class _LokerAdminDetailState extends State<LokerAdminDetail> {
+  @override
   void initState() {
     super.initState();
     Provider.of<AdminLokerProvider>(context, listen: false).getLoker(widget.id);
@@ -75,7 +76,7 @@ class _LokerAdminDetailState extends State<LokerAdminDetail> {
     } else if (failure != null) {
       widget = Scaffold(
         appBar: AppBar(
-          title: Text('Admin Loker'),
+          title: const Text('Admin Loker'),
         ),
         body: Center(
           child: Text(failure.errorMessage),
@@ -84,9 +85,9 @@ class _LokerAdminDetailState extends State<LokerAdminDetail> {
     } else {
       widget = Scaffold(
         appBar: AppBar(
-          title: Text('Admin Loker'),
+          title: const Text('Admin Loker'),
         ),
-        body: Center(
+        body: const Center(
           child: CircularProgressIndicator(),
         ),
       );

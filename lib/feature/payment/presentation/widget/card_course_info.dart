@@ -3,9 +3,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CardCourseInfo extends StatelessWidget {
   const CardCourseInfo(
-      {super.key, required this.judulCourse, required this.namaAuthor});
+      {super.key,
+      required this.judulCourse,
+      required this.namaAuthor,
+      required this.imageUrl});
   final String judulCourse;
   final String namaAuthor;
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +18,7 @@ class CardCourseInfo extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Color(0xFFE5E5E5)),
+          border: Border.all(color: const Color(0xFFE5E5E5)),
         ),
         padding: const EdgeInsets.all(8),
         child: Row(
@@ -25,34 +29,51 @@ class CardCourseInfo extends StatelessWidget {
               height: 70,
               margin: const EdgeInsets.only(right: 12),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Colors.deepPurple),
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.deepPurple,
+              ),
+              child: Image.network(
+                imageUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Center(
+                    child: Icon(
+                      Icons.error_outline,
+                      color: Colors.red,
+                      size: 48,
+                    ),
+                  );
+                },
+              ),
             ),
             const SizedBox(
               width: 8,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  judulCourse,
-                  style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    judulCourse,
+                    overflow: TextOverflow.clip,
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
-                Text(
-                  namaAuthor,
-                  style: GoogleFonts.poppins(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: const Color(0xFF7B8CB5),
+                  const SizedBox(
+                    height: 4,
                   ),
-                ),
-              ],
+                  Text(
+                    namaAuthor,
+                    style: GoogleFonts.poppins(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xFF7B8CB5),
+                    ),
+                  ),
+                ],
+              ),
             )
           ],
         ),

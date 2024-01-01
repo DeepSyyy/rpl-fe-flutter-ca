@@ -14,7 +14,6 @@ class CourseRepositoryUserImpl implements CourseRepositoryUser {
       final remoteData = await courseUserRemoteDataSource.getCourses();
       return Right(remoteData);
     } catch (e) {
-      print(e);
       return Left(ServerFailure(errorMessage: 'Gagal mengambil data'));
     }
   }
@@ -27,7 +26,6 @@ class CourseRepositoryUserImpl implements CourseRepositoryUser {
           category: category);
       return Right(remoteData);
     } catch (e) {
-      print(e);
       return Left(ServerFailure(errorMessage: 'Gagal mengambil data'));
     }
   }
@@ -40,7 +38,6 @@ class CourseRepositoryUserImpl implements CourseRepositoryUser {
           await courseUserRemoteDataSource.getCourseByName(nama: nama);
       return Right(remoteData);
     } catch (e) {
-      print(e);
       return Left(ServerFailure(errorMessage: 'Gagal mengambil data'));
     }
   }

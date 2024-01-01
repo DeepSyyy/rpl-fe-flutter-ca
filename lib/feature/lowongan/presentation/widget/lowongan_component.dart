@@ -17,6 +17,7 @@ class LowonganComponent extends StatefulWidget {
 }
 
 class _LowonganComponentState extends State<LowonganComponent> {
+  @override
   void initState() {
     super.initState();
     Provider.of<LowonganProvider>(context, listen: false).getLowongans();
