@@ -36,7 +36,6 @@ class _MyClassComponentState extends State<MyClassComponent> {
         body: Column(
           children: [
             AppBar(
-              leading: null,
               toolbarHeight: 80,
               elevation: 0,
               backgroundColor: Colors.white,

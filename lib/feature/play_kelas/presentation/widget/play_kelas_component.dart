@@ -29,11 +29,6 @@ class _PlayKelasComponentState extends State<PlayKelasComponent> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        shape: Border(
-            bottom: BorderSide(
-          color: Colors.grey.shade300,
-          width: 1,
-        )),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -44,15 +39,6 @@ class _PlayKelasComponentState extends State<PlayKelasComponent> {
             color: Colors.black,
           ),
         ),
-        title: Text(
-          p!.name,
-          overflow: TextOverflow.clip,
-          style: GoogleFonts.poppins(
-            fontWeight: FontWeight.w700,
-            fontSize: 16,
-            color: Colors.black,
-          ),
-        ),
       ),
       body: ListView(
         children: [
@@ -60,6 +46,18 @@ class _PlayKelasComponentState extends State<PlayKelasComponent> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const SizedBox(
+                height: 16,
+              ),
+              Text(
+                p!.name,
+                overflow: TextOverflow.clip,
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16,
+                  color: Colors.black,
+                ),
+              ),
               const SizedBox(
                 height: 16,
               ),
@@ -78,7 +76,7 @@ class _PlayKelasComponentState extends State<PlayKelasComponent> {
                 height: 24,
               ),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ButtonCustom(label: "Assets", onTap: () {}, isExpand: false),
                   const SizedBox(

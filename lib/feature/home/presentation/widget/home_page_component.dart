@@ -240,6 +240,9 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
+              const SizedBox(
+                height: 20,
+              ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Row(

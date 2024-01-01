@@ -200,14 +200,17 @@ class _DetaiLowonganWidgetState extends State<DetaiLowonganWidget> {
                   scrollDirection: Axis.horizontal,
                   itemCount: courseEntityLowongan!.length,
                   itemBuilder: (context, index) {
-                    return CourseCard(
-                      idUser: idUser!,
-                      id: courseEntityLowongan[index].id!,
-                      courseName: courseEntityLowongan[index].name,
-                      mentorName: courseEntityLowongan[index].mentor,
-                      price: courseEntityLowongan[index].price,
-                      rating: courseEntityLowongan[index].rating,
-                      imageUrl: courseEntityLowongan[index].imageUrl,
+                    return Padding(
+                      padding: EdgeInsets.only(right: 12),
+                      child: CourseCard(
+                        idUser: idUser!,
+                        id: courseEntityLowongan[index].id!,
+                        courseName: courseEntityLowongan[index].name,
+                        mentorName: courseEntityLowongan[index].mentor,
+                        price: courseEntityLowongan[index].price,
+                        rating: courseEntityLowongan[index].rating,
+                        imageUrl: courseEntityLowongan[index].imageUrl,
+                      ),
                     );
                   }),
             )
