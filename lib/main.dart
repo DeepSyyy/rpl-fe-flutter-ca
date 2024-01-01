@@ -102,6 +102,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (context) => EditProfileProvider(
                 editProfileUserRepositoryImpl: editProfileRepositryImpl)),
+        ChangeNotifierProvider(create: (context) => TransactionProvider()),
       ],
       child: SafeArea(
         child: MaterialApp(
