@@ -4,7 +4,8 @@ import 'package:flutter_fe_rpl/feature/payment/presentation/widget/detail_paymen
 import 'package:google_fonts/google_fonts.dart';
 
 class CardPaymentDetail extends StatelessWidget {
-  const CardPaymentDetail({super.key});
+  const CardPaymentDetail({super.key, required this.price});
+  final String price;
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +32,9 @@ class CardPaymentDetail extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            const DetailPayment(
+            DetailPayment(
               title: "Harga Kelas",
-              data: "Rp. 100.000",
+              data: "Rp. $price",
               colorData: AppColor.primary,
             ),
             const SizedBox(
@@ -41,19 +42,19 @@ class CardPaymentDetail extends StatelessWidget {
             ),
             const DetailPayment(
               title: "Kode Unik",
-              data: "Rp. 100.000",
+              data: "Rp. 0",
               colorData: AppColor.primary,
             ),
             const SizedBox(height: 16),
             const DetailPayment(
               title: "Service Fee",
-              data: "Rp. 100.000",
+              data: "Rp. 0",
               colorData: AppColor.primary,
             ),
             const SizedBox(height: 16),
-            const DetailPayment(
+            DetailPayment(
               title: "Total Pembayaran",
-              data: "Rp. 100.000",
+              data: "Rp. $price",
               colorData: AppColor.primary,
             ),
           ],

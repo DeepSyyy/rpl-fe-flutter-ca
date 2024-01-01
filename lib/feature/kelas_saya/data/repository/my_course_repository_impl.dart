@@ -27,10 +27,10 @@ class MyCourseRepositoryImpl implements MyCourseRepository {
 
   @override
   Future<Either<Failure, List<MyCourseModel>>> getMyCourse(
-      {required String idUser}) async {
+      {required String? idUser}) async {
     try {
       final result = await myCourseRemoteDataSource.getMyCourse(
-        idUser: idUser,
+        idUser: idUser!,
       );
       return Right(result);
     } catch (e) {

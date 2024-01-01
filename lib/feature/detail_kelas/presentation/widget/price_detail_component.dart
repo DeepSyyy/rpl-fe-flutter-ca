@@ -45,6 +45,7 @@ class PriceComponent extends StatelessWidget {
                           mentorName: mentorName,
                           idUser: idUser,
                           idCourse: idCourse,
+                          price: price,
                         ),
                         settings: RouteSettings(arguments: {
                           "imageUrl": imageUrl,

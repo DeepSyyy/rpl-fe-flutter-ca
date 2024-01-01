@@ -16,11 +16,11 @@ import 'package:flutter_fe_rpl/feature/detail_lowongan/presentation/widget/detai
 import 'package:flutter_fe_rpl/feature/edit_profile/data/datasource/edit_user_profile_remote_data_source.dart';
 import 'package:flutter_fe_rpl/feature/edit_profile/data/repository/edit_profile_user_repository_impl.dart';
 import 'package:flutter_fe_rpl/feature/edit_profile/presentation/provider/edit_profile_provider.dart';
-import 'package:flutter_fe_rpl/feature/history_transaction/presentation/provider/transaction_provider.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/provider/course_user_provider.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/widget/home_page_component.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/provider/my_course_provider.dart';
 import 'package:flutter_fe_rpl/feature/lowongan/presentation/provider/lowongan_provider.dart';
+import 'package:flutter_fe_rpl/feature/play_kelas/presentation/provider/play_kelas_provider.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/data/datasource/user_remote_data_source.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/data/repository/user_repository_impl.dart';
 import 'package:flutter_fe_rpl/feature/sign_in/presentation/provider/user_sigIn_provider.dart';
@@ -30,6 +30,7 @@ import 'package:flutter_fe_rpl/feature/sign_up/presentation/page/sign_up_page.da
 import 'package:flutter_fe_rpl/feature/sign_up/presentation/provider/sign_up_user_provider.dart';
 import 'package:flutter_fe_rpl/feature/sign_up/presentation/widget/sign_up_component.dart';
 import 'package:flutter_fe_rpl/feature/sign_up/data/datasource/sign_up_remote_datasource.dart';
+import 'package:flutter_fe_rpl/feature/transaksi/presentation/provider/transaksi_provider.dart';
 import 'package:flutter_fe_rpl/feature/wishlist/presentation/provider/wishlist_provider.dart';
 import 'package:flutter_fe_rpl/firebase_options.dart';
 import 'package:provider/provider.dart';
@@ -96,6 +97,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AuthUserProvider()),
         ChangeNotifierProvider(create: (context) => WishlistProvider()),
         ChangeNotifierProvider(create: (context) => MyCourseProvider()),
+        ChangeNotifierProvider(create: (context) => TransactionProvider()),
+        ChangeNotifierProvider(create: (context) => PlayKelasProvider()),
         ChangeNotifierProvider(
             create: (context) => EditProfileProvider(
                 editProfileUserRepositoryImpl: editProfileRepositryImpl)),
@@ -103,6 +106,7 @@ class MyApp extends StatelessWidget {
       ],
       child: SafeArea(
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           home: StreamBuilder<User?>(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, AsyncSnapshot<User?> snapshot) {

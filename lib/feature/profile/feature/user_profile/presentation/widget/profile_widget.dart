@@ -9,7 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class ProfileComponent extends StatelessWidget {
-  const ProfileComponent({super.key});
+  const ProfileComponent({super.key, required this.userId});
+  final String? userId;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,9 @@ class ProfileComponent extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
-          ListingFeature(),
+          ListingFeature(
+            idUser: userId!,
+          ),
           const SizedBox(
             height: 32,
           ),

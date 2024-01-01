@@ -26,7 +26,7 @@ class MyCourseProvider extends ChangeNotifier {
     });
   }
 
-  Future<void> getMyCourse({required String idUser}) async {
+  Future<void> getMyCourse({required String? idUser}) async {
     MyCourseRepositoryImpl repo = MyCourseRepositoryImpl(
         myCourseRemoteDataSource: MyCourseRemoteDataSourceImpl());
 

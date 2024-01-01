@@ -1,6 +1,6 @@
 import 'package:flutter_fe_rpl/feature/detail_kelas/business/entity/course_entity_detail_course.dart';
 
-class CourseModelDetailCourse extends CourseEntityDetailCourse {
+class PlayKelasModel extends CourseEntityDetailCourse {
   String? id;
   final String name;
   final String rating;
@@ -15,7 +15,7 @@ class CourseModelDetailCourse extends CourseEntityDetailCourse {
   final String updateAt;
   final String mentor;
 
-  CourseModelDetailCourse({
+  PlayKelasModel({
     this.id,
     required this.name,
     required this.description,
@@ -45,8 +45,8 @@ class CourseModelDetailCourse extends CourseEntityDetailCourse {
           updateAt: updateAt,
         );
 
-  factory CourseModelDetailCourse.fromJson(Map<String, dynamic> json) {
-    return CourseModelDetailCourse(
+  factory PlayKelasModel.fromJson(Map<String, dynamic> json) {
+    return PlayKelasModel(
       id: json['id'],
       name: json['name'],
       description: json['description'],

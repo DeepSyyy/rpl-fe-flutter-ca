@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/utils/button_customs.dart';
-import 'package:flutter_fe_rpl/feature/history_transaction/presentation/provider/transaction_provider.dart';
-import 'package:flutter_fe_rpl/feature/home/presentation/page/home_page_view.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/provider/my_course_provider.dart';
 import 'package:flutter_fe_rpl/feature/payment/presentation/widget/card_course_info.dart';
 import 'package:flutter_fe_rpl/feature/payment/presentation/widget/card_payment_detail.dart';
 import 'package:flutter_fe_rpl/feature/payment/presentation/widget/payment_choice_card.dart';
+import 'package:flutter_fe_rpl/feature/payment_success/presentation/page/payment_succes_page.dart';
+import 'package:flutter_fe_rpl/feature/transaksi/presentation/provider/transaksi_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -16,12 +16,14 @@ class PaymentComponent extends StatelessWidget {
       required this.courseName,
       required this.mentorName,
       required this.idCourse,
+      required this.price,
       this.idUser});
   final String imageUrl;
   final String courseName;
   final String mentorName;
   final String? idUser;
   final String idCourse;
+  final String price;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,9 @@ class PaymentComponent extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                CardPaymentDetail(),
+                CardPaymentDetail(
+                  price: price,
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -65,18 +69,22 @@ class PaymentComponent extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Consumer2<MyCourseProvider, TransactionProvider>(
-                builder: (context, myCourseProvider, transactionProvider, _) {
+                builder: (context, myCourse, myTransaction, _) {
               return ButtonCustom(
                   isExpand: true,
                   label: "Bayar",
                   onTap: () async {
-                    await myCourseProvider.addMyCourse(
+                    await myCourse.addMyCourse(
                         idUser: idUser, idCourse: idCourse);
-                    await transactionProvider.addTransaction(
-                        idUser: idUser!, idCourse: idCourse);
+                    await myTransaction.addTransaction(
+                        idCourse: idCourse, idUser: idUser!);
                     Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePageView()),
+                        MaterialPageRoute(
+                            builder: (context) => PaymentSuccesPage(
+                                  idUser: idUser!,
+                                  imageUrl: imageUrl,
+                                )),
                         (route) => false);
                   });
             }),

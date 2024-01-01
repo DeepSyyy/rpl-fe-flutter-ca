@@ -8,7 +8,7 @@ class CourseDetailRepositoryImpl implements CourseRepositoryDetailCourse {
   final CourseDetailRemoteDataSource courseRemoteDataSource;
   CourseDetailRepositoryImpl({required this.courseRemoteDataSource});
   @override
-  Future<Either<Failure, CourseModelDetailCourse>> getCourseDetail(
+  Future<Either<Failure, PlayKelasModel>> getCourseDetail(
       {required String id}) async {
     try {
       return await courseRemoteDataSource.getCourseDetail(id: id);

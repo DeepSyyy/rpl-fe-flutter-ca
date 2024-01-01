@@ -11,6 +11,8 @@ import 'package:flutter_fe_rpl/feature/home/presentation/widget/course_card.dart
 import 'package:flutter_fe_rpl/feature/home/presentation/widget/indicator_carousel.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/widget/my_course_card.dart';
 import 'package:flutter_fe_rpl/feature/home/presentation/widget/search_container.dart';
+import 'package:flutter_fe_rpl/feature/kelas_saya/business/entity/my_course_entity.dart';
+import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/provider/my_course_provider.dart';
 import 'package:flutter_fe_rpl/feature/wishlist/presentation/page/wishlist_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -50,11 +52,14 @@ class _HomePageState extends State<HomePage> {
   final CarouselController _controller = CarouselController();
   @override
   Widget build(BuildContext context) {
+    List<MyCourseEntity>? myCourse =
+        Provider.of<MyCourseProvider>(context).myCourse;
     List<CourseEntity>? courses =
         Provider.of<CourseUserProvider>(context).courses;
     String? role = Provider.of<AuthUserProvider>(context).role;
     String? name = Provider.of<AuthUserProvider>(context).name;
     String? uid = Provider.of<AuthUserProvider>(context).uid;
+    Provider.of<MyCourseProvider>(context).getMyCourse(idUser: uid);
     Failure? failure = Provider.of<CourseUserProvider>(context).failure;
     late Widget component;
     print(uid);
@@ -220,20 +225,20 @@ class _HomePageState extends State<HomePage> {
                 height: 12,
               ),
               SizedBox(
-                height: 300,
+                height: 200,
                 child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: 5,
+                  itemCount: myCourse!.length,
                   itemBuilder: (context, index) {
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8),
-                      child: MyCourseCard(),
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: MyCourseCard(
+                        imageUrl: myCourse[index].imageUrl,
+                        courseName: myCourse[index].name,
+                        mentorName: myCourse[index].mentor,
+                      ),
                     );
                   },
                 ),
-              ),
-              const SizedBox(
-                height: 20,
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 24),

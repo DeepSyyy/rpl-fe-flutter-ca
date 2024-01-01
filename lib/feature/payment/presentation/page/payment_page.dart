@@ -8,20 +8,24 @@ class PaymentPage extends StatelessWidget {
       required this.courseName,
       required this.mentorName,
       required this.idCourse,
+      required this.price,
       this.idUser});
   final String imageUrl;
   final String courseName;
   final String mentorName;
   final String? idUser;
   final String idCourse;
+  final String price;
 
   @override
   Widget build(BuildContext context) {
     return PaymentComponent(
-        imageUrl: imageUrl,
-        courseName: courseName,
-        mentorName: mentorName,
-        idCourse: idCourse,
-        idUser: idUser);
+      imageUrl: imageUrl,
+      courseName: courseName,
+      mentorName: mentorName,
+      idCourse: idCourse,
+      idUser: idUser,
+      price: price,
+    );
   }
 }

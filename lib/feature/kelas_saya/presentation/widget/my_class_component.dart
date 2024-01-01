@@ -6,6 +6,7 @@ import 'package:flutter_fe_rpl/feature/kelas_saya/business/entity/my_course_enti
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/provider/my_course_provider.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/widget/categories_component.dart';
 import 'package:flutter_fe_rpl/feature/kelas_saya/presentation/widget/courze_card_my_class.dart';
+import 'package:flutter_fe_rpl/feature/play_kelas/presentation/page/play_kelas_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -57,16 +58,29 @@ class _MyClassComponentState extends State<MyClassComponent> {
               height: 20,
             ),
             ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                itemCount: myCourse.length,
-                itemBuilder: (context, index) {
-                  return CourzeCardMyClass(
-                    imageUrl: myCourse[index].imageUrl,
-                    courseName: myCourse[index].name,
-                    mentorName: myCourse[index].mentor,
-                  );
-                })
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              itemCount: myCourse.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PlayKelasPage()),
+                      );
+                    },
+                    child: CourzeCardMyClass(
+                      imageUrl: myCourse[index].imageUrl,
+                      courseName: myCourse[index].name,
+                      mentorName: myCourse[index].mentor,
+                    ),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       );

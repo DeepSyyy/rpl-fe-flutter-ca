@@ -32,33 +32,48 @@ class CardCourseInfo extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 color: Colors.deepPurple,
               ),
-              child: Image.asset(imageUrl),
+              child: Image.network(
+                imageUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Center(
+                    child: Icon(
+                      Icons.error_outline,
+                      color: Colors.red,
+                      size: 48,
+                    ),
+                  );
+                },
+              ),
             ),
             const SizedBox(
               width: 8,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  judulCourse,
-                  style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    judulCourse,
+                    overflow: TextOverflow.clip,
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
-                Text(
-                  namaAuthor,
-                  style: GoogleFonts.poppins(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: const Color(0xFF7B8CB5),
+                  const SizedBox(
+                    height: 4,
                   ),
-                ),
-              ],
+                  Text(
+                    namaAuthor,
+                    style: GoogleFonts.poppins(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xFF7B8CB5),
+                    ),
+                  ),
+                ],
+              ),
             )
           ],
         ),
