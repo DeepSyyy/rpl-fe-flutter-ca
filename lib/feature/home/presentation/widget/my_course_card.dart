@@ -8,20 +8,26 @@ class MyCourseCard extends StatelessWidget {
       {super.key,
       required this.courseName,
       required this.mentorName,
+      required this.id,
       required this.imageUrl});
 
   final String courseName;
   final String mentorName;
   final String imageUrl;
+  final String id;
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: InkWell(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const PlayKelasComponent();
-          }));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) {
+                    return PlayKelasComponent(id: id);
+                  },
+                  settings: RouteSettings(arguments: id)));
         },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,

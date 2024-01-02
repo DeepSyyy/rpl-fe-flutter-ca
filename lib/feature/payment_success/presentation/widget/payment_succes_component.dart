@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fe_rpl/core/config/app_color.dart';
 import 'package:flutter_fe_rpl/core/utils/button_customs.dart';
-import 'package:flutter_fe_rpl/feature/transaksi/presentation/page/transaksi_page.dart';
+import 'package:flutter_fe_rpl/feature/home/presentation/page/home_page_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PaymentSuccessComponent extends StatelessWidget {
@@ -79,17 +79,14 @@ class PaymentSuccessComponent extends StatelessWidget {
               horizontal: 24,
             ),
             child: ButtonCustom(
-              label: "Lihat trasnsaksi",
+              label: "Kembali ke beranda",
               //Sementara aja
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => TransaksiPage(
-                      idUser: idUser,
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => HomePageView(),
                     ),
-                  ),
-                );
+                    (route) => false);
               },
               isExpand: true,
             ),
