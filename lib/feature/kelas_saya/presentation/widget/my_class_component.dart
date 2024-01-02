@@ -70,7 +70,11 @@ class _MyClassComponentState extends State<MyClassComponent> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const PlayKelasPage()),
+                          builder: (context) =>
+                              PlayKelasPage(id: myCourse[index].id!),
+                          settings:
+                              RouteSettings(arguments: myCourse[index].id),
+                        ),
                       );
                     },
                     child: CourzeCardMyClass(

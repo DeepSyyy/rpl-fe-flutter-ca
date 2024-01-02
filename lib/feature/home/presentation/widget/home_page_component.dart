@@ -234,6 +234,7 @@ class _HomePageState extends State<HomePage> {
                         imageUrl: myCourse[index].imageUrl,
                         courseName: myCourse[index].name,
                         mentorName: myCourse[index].mentor,
+                        id: myCourse[index].id!,
                       ),
                     );
                   },

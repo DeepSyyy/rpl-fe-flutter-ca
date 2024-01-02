@@ -9,7 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class PlayKelasComponent extends StatefulWidget {
-  const PlayKelasComponent({super.key});
+  const PlayKelasComponent({super.key, required this.id});
+  final String id;
 
   @override
   State<PlayKelasComponent> createState() => _PlayKelasComponentState();
@@ -20,7 +21,7 @@ class _PlayKelasComponentState extends State<PlayKelasComponent> {
   void initState() {
     super.initState();
     Provider.of<PlayKelasProvider>(context, listen: false)
-        .getPlayCourse(id: "IeuVocZnbyv8FWtswPW9");
+        .getPlayCourse(id: widget.id);
   }
 
   @override

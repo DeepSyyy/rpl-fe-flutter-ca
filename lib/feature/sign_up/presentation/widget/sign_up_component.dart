@@ -94,6 +94,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 TextFormField(
                   controller: controllerEmail,
+                  keyboardType: TextInputType.emailAddress,
                   validator: (value) =>
                       value == "" ? "Masukan, jangan kosong!" : null,
                   decoration: InputDecoration(

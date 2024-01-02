@@ -11,6 +11,7 @@ class InputEmailField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controllerEmail,
+      keyboardType: TextInputType.emailAddress,
       validator: (value) => value == "" ? "Masukan, jangan kosong!" : null,
       decoration: InputDecoration(
           isDense: true,
