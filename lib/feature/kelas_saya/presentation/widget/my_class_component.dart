@@ -58,33 +58,35 @@ class _MyClassComponentState extends State<MyClassComponent> {
             const SizedBox(
               height: 20,
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              itemCount: myCourse.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 16.0),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              PlayKelasPage(id: myCourse[index].id!),
-                          settings:
-                              RouteSettings(arguments: myCourse[index].id),
-                        ),
-                      );
-                    },
-                    child: CourzeCardMyClass(
-                      imageUrl: myCourse[index].imageUrl,
-                      courseName: myCourse[index].name,
-                      mentorName: myCourse[index].mentor,
+            SingleChildScrollView(
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                itemCount: myCourse.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                PlayKelasPage(id: myCourse[index].id!),
+                            settings:
+                                RouteSettings(arguments: myCourse[index].id),
+                          ),
+                        );
+                      },
+                      child: CourzeCardMyClass(
+                        imageUrl: myCourse[index].imageUrl,
+                        courseName: myCourse[index].name,
+                        mentorName: myCourse[index].mentor,
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ],
         ),
